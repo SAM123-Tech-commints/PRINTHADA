@@ -409,7 +409,7 @@
             background: none;
             border: none;
             color: var(--text-dark);
-            z-index: 1002;
+            z-index: 10001;
             padding: 5px;
             font-family: var(--font-main);
             transition: color 0.3s ease;
@@ -805,6 +805,7 @@
             opacity: 1;
         }
 
+        /* ==================== CTA STYLES ==================== */
         .cta-section {
             position: relative;
             height: 556px;
@@ -813,7 +814,6 @@
             justify-content: center;
             overflow: hidden;
             margin-bottom: 120px;
-            /* Spacing above footer */
         }
 
         .cta-background {
@@ -839,6 +839,41 @@
             flex-direction: column;
             align-items: center;
             gap: 50px;
+        }
+
+        .cta-title {
+            font-family: var(--font-main);
+            font-size: 64px;
+            font-weight: 700;
+            color: #ffffff;
+            line-height: 1.2;
+        }
+
+        .cta-logo {
+            width: 120px;
+            height: auto;
+            margin-bottom: -30px;
+        }
+
+        .cta-title .highlight {
+            color: #ffd700;
+        }
+
+        .cta-btn {
+            background-color: #ffffff;
+            color: #1a1a1a;
+            font-size: 16px;
+            font-weight: 700;
+            padding: 12px 40px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s;
+            font-family: var(--font-main);
+        }
+
+        .cta-btn:hover {
+            transform: scale(1.05);
         }
 
         /* History Section */
@@ -1131,6 +1166,20 @@
             .main-nav.active {
                 opacity: 1;
                 visibility: visible;
+            }
+
+            #section-cta {
+                min-height: 400px;
+                padding: 60px 20px;
+                margin-bottom: 50px;
+            }
+
+            .cta-title {
+                font-size: 32px;
+            }
+
+            .cta-content {
+                gap: 30px;
             }
 
             .main-nav ul {
@@ -1577,6 +1626,7 @@
         </div>
     </section>
 
+    <!-- ==================== CTA SECTION ==================== -->
     <section id="section-cta" class="section cta-section">
         <div class="cta-background">
             <img src="IMAGES/ad4e5bb138141a5095f7caf9193f0c0f0d0b794f.png" alt="CTA Background" />
