@@ -1,0 +1,2928 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services - Printhada</title>
+    <link rel="icon" href="IMAGES/5db1c76c09bd4716a7ddbc483a6afc6e11d7ef70.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700;900&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #d9bb28;
+            --text-dark: #333333;
+            --text-light: #ffffff;
+            --text-gray: #bdbdbd;
+            --bg-dark: #2c2c2c;
+            --border-color: #022a3a;
+            --font-main: 'Roboto', sans-serif;
+            --error-color: #e74c3c;
+            --success-color: #27ae60;
+            --max-width: 1440px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: #ffffff;
+            color: var(--text-dark);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body.modal-open {
+            overflow: hidden;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0 20px;
+            width: 100%;
+        }
+
+        /* Prevent scrolling when loader is active */
+        html.loading,
+        html.loading body {
+            overflow: hidden !important;
+            height: 100%;
+            position: fixed;
+            width: 100%;
+        }
+
+        body.loading {
+            overflow: hidden !important;
+        }
+
+        /* ==================== PRINTHADA PROFESSIONAL LOADER ==================== */
+        .printhada-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 99999;
+            transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                visibility 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .printhada-loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .loader-logo-container {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .loader-ring {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            border-top-color: var(--primary-color);
+            animation: loaderSpin 1s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+        }
+
+        .loader-ring::before {
+            content: '';
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            right: 5px;
+            bottom: 5px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            border-top-color: var(--bg-dark);
+            animation: loaderSpin 1.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite reverse;
+        }
+
+        .loader-ring::after {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            right: 15px;
+            bottom: 15px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            border-top-color: var(--primary-color);
+            opacity: 0.5;
+            animation: loaderSpin 2s linear infinite;
+        }
+
+        .loader-logo {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            animation: logoPulse 1.5s ease-in-out infinite;
+            z-index: 2;
+        }
+
+        .loader-progress-container {
+            width: 200px;
+            height: 3px;
+            background: rgba(51, 51, 51, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .loader-progress-bar {
+            height: 100%;
+            width: 30%;
+            background: linear-gradient(90deg, var(--primary-color), #f5d547, var(--primary-color));
+            background-size: 200% 100%;
+            border-radius: 10px;
+            animation: progressMove 1.5s ease-in-out infinite, progressShimmer 1.5s linear infinite;
+        }
+
+        .loader-text {
+            font-family: var(--font-main);
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--text-dark);
+            opacity: 0.7;
+        }
+
+        .loader-text span {
+            display: inline-block;
+            animation: textFade 1.5s ease-in-out infinite;
+        }
+
+        .loader-text span:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .loader-text span:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+
+        .loader-text span:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+
+        .loader-text span:nth-child(4) {
+            animation-delay: 0.3s;
+        }
+
+        .loader-text span:nth-child(5) {
+            animation-delay: 0.4s;
+        }
+
+        .loader-text span:nth-child(6) {
+            animation-delay: 0.5s;
+        }
+
+        .loader-text span:nth-child(7) {
+            animation-delay: 0.6s;
+        }
+
+        .loader-text span:nth-child(8) {
+            animation-delay: 0.7s;
+        }
+
+        .loader-text span:nth-child(9) {
+            animation-delay: 0.8s;
+        }
+
+        .loader-dots {
+            display: flex;
+            gap: 8px;
+            margin-top: 5px;
+        }
+
+        .loader-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            animation: dotBounce 1.4s ease-in-out infinite;
+        }
+
+        .loader-dot:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .loader-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .loader-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes loaderSpin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes logoPulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            50% {
+                transform: scale(1.05);
+                opacity: 0.8;
+            }
+        }
+
+        @keyframes progressMove {
+            0% {
+                transform: translateX(-100%);
+                width: 30%;
+            }
+
+            50% {
+                width: 60%;
+            }
+
+            100% {
+                transform: translateX(400%);
+                width: 30%;
+            }
+        }
+
+        @keyframes progressShimmer {
+            0% {
+                background-position: 200% 0;
+            }
+
+            100% {
+                background-position: -200% 0;
+            }
+        }
+
+        @keyframes textFade {
+
+            0%,
+            100% {
+                opacity: 0.4;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes dotBounce {
+
+            0%,
+            80%,
+            100% {
+                transform: scale(0.8);
+                opacity: 0.5;
+            }
+
+            40% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+        }
+
+        .page-transition {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #ffffff;
+            z-index: 99998;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .page-transition.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* ==================== HEADER ==================== */
+        #header-section {
+            padding: 30px 0;
+            background: #fff;
+            position: relative;
+            z-index: 1000;
+        }
+
+        .site-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            flex: 0 0 auto;
+            z-index: 1002;
+        }
+
+        .logo img {
+            width: 83px;
+            height: auto;
+        }
+
+        .main-nav {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .main-nav ul {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .main-nav a {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-dark);
+            transition: color 0.3s ease;
+        }
+
+        .main-nav a:hover {
+            color: var(--primary-color);
+        }
+
+        .main-nav li.active {
+            position: relative;
+        }
+
+        .main-nav li.active .underline {
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--text-dark);
+        }
+
+        .hamburger {
+            display: none;
+            font-size: 28px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: var(--text-dark);
+            z-index: 1002;
+            padding: 5px;
+        }
+
+        /* ==================== SEARCH BAR ==================== */
+        .search-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s;
+            margin-left: 20px;
+            color: var(--text-dark);
+        }
+
+        @media (max-width: 768px) {
+            .search-btn {
+                margin-left: auto;
+                margin-right: 25px;
+                /* Increased gap from hamburger */
+            }
+        }
+
+        .search-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .search-btn svg {
+            width: 22px;
+            height: 22px;
+            stroke: var(--text-dark);
+        }
+
+        .search-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            align-items: flex-start;
+            justify-content: center;
+            z-index: 9999;
+            padding-top: 100px;
+        }
+
+        .search-modal.active {
+            display: flex;
+        }
+
+        .search-container {
+            background: white;
+            width: 90%;
+            max-width: 600px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .search-input-wrapper {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .search-input-wrapper svg {
+            width: 20px;
+            height: 20px;
+            stroke: #999;
+            margin-right: 15px;
+        }
+
+        .search-input {
+            flex: 1;
+            border: none;
+            outline: none;
+            font-size: 18px;
+            font-family: var(--font-main);
+            color: var(--text-dark);
+        }
+
+        .search-close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #999;
+            cursor: pointer;
+            padding: 0 10px;
+        }
+
+        .search-results {
+            max-height: 400px;
+            overflow-y: auto;
+            padding: 10px 0;
+        }
+
+        .search-result-item {
+            padding: 15px 20px;
+            cursor: pointer;
+            transition: background 0.2s;
+            border-left: 3px solid transparent;
+        }
+
+        .search-result-item:hover {
+            background: #f9f9f9;
+            border-left-color: var(--primary-color);
+        }
+
+        .result-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 5px;
+        }
+
+        .result-description {
+            font-size: 13px;
+            color: #666;
+        }
+
+        .no-results {
+            padding: 40px 20px;
+            text-align: center;
+            color: #999;
+        }
+
+        /* ==================== HERO SECTION ==================== */
+        #hero-section {
+            padding: 50px 0 60px;
+        }
+
+        .hero-container {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .hero-title {
+            font-size: 64px;
+            line-height: 1;
+        }
+
+        .hero-title .text-light {
+            font-weight: 300;
+            color: var(--text-gray);
+        }
+
+        .hero-title .text-bold {
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .title-divider {
+            height: 1px;
+            background-color: #f2f2f2;
+            width: 100%;
+            margin-top: 40px;
+        }
+
+        .hero-image-wrapper {
+            width: 100%;
+            overflow: hidden;
+            border-radius: 15px;
+        }
+
+        .hero-img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            max-height: 500px;
+        }
+
+        /* ==================== ABOUT SECTION ==================== */
+        #about-section {
+            padding: 60px 0;
+        }
+
+        .about-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 60px;
+            flex-wrap: wrap;
+        }
+
+        .about-content {
+            flex: 1;
+            min-width: 300px;
+            max-width: 650px;
+        }
+
+        .hours-content {
+            flex: 1;
+            min-width: 300px;
+            max-width: 500px;
+        }
+
+        .section-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 25px;
+        }
+
+        .about-text {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #555;
+            text-align: justify;
+        }
+
+        .hours-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 25px;
+        }
+
+        .hours-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .hours-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .day {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .time-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .icon-clock {
+            width: 22px;
+            height: 22px;
+        }
+
+        .time {
+            font-size: 15px;
+            color: #666;
+        }
+
+        .divider-line {
+            height: 1px;
+            background-color: #e5e5e5;
+            width: 100%;
+        }
+
+        /* ==================== SERVICES LIST ==================== */
+        #services-list-section {
+            padding: 80px 0 100px;
+            text-align: center;
+            background: #fafafa;
+        }
+
+        .services-section-title {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 60px;
+        }
+
+        .services-grid {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .service-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 25px;
+            flex: 1;
+        }
+
+        .service-icon {
+            width: 120px;
+            height: 120px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .service-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .service-name {
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--text-dark);
+            text-align: center;
+            line-height: 1.5;
+            max-width: 150px;
+        }
+
+        /* ==================== CTA BANNER ==================== */
+        #cta-banner {
+            position: relative;
+            background-color: #1a1a1a;
+            padding: 60px 0;
+            overflow: hidden;
+            min-height: 280px;
+            display: flex;
+            align-items: center;
+        }
+
+        .cta-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 0.3;
+        }
+
+        .cta-background .bg-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .cta-text {
+            color: #ffffff;
+            font-size: 36px;
+            font-weight: 700;
+            text-align: center;
+            max-width: 800px;
+            line-height: 1.4;
+            flex: 1;
+        }
+
+        .cta-icon-left img,
+        .cta-icon-right img {
+            max-height: 120px;
+            width: auto;
+        }
+
+        /* ==================== FORM SECTION ==================== */
+        #form-section {
+            padding: 80px 0 100px;
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .form-header h2 {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+
+        .form-header p {
+            font-size: 16px;
+            color: #666;
+        }
+
+        .contact-form {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            font-size: 16px;
+            color: var(--text-dark);
+        }
+
+        .form-group label .required {
+            color: var(--error-color);
+        }
+
+        .input-wrapper,
+        .textarea-wrapper {
+            border: 1.5px solid var(--border-color);
+            padding: 18px 25px;
+            background: #fff;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .input-wrapper:focus-within,
+        .textarea-wrapper:focus-within {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(217, 187, 40, 0.1);
+        }
+
+        .input-wrapper.error,
+        .textarea-wrapper.error {
+            border-color: var(--error-color);
+            box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.1);
+        }
+
+        .input-wrapper.success,
+        .textarea-wrapper.success {
+            border-color: var(--success-color);
+        }
+
+        input[type='text'],
+        input[type='email'],
+        input[type='tel'],
+        select,
+        textarea {
+            width: 100%;
+            border: none;
+            outline: none;
+            font-family: var(--font-main);
+            font-size: 15px;
+            color: var(--text-dark);
+            background: transparent;
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: #999;
+        }
+
+        .select-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .select-wrapper select {
+            appearance: none;
+            cursor: pointer;
+            padding-right: 30px;
+        }
+
+        .select-arrow {
+            position: absolute;
+            right: 0;
+            pointer-events: none;
+            width: 16px;
+            height: 16px;
+        }
+
+        .textarea-wrapper {
+            min-height: 150px;
+        }
+
+        textarea {
+            height: 100%;
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .error-message {
+            font-size: 13px;
+            color: var(--error-color);
+            display: none;
+            align-items: center;
+            gap: 5px;
+            margin-top: 5px;
+        }
+
+        .error-message.show {
+            display: flex;
+        }
+
+        .error-message::before {
+            content: "⚠";
+            font-size: 14px;
+        }
+
+        /* Checkboxes */
+        .checkbox-section {
+            display: flex;
+            gap: 80px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .checkbox-col-group {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .checkbox-title {
+            font-weight: 700;
+            font-size: 16px;
+            color: var(--text-dark);
+            margin-bottom: 5px;
+        }
+
+        .checkbox-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .checkbox-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px 30px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            font-size: 14px;
+            color: #555;
+            transition: color 0.2s ease;
+        }
+
+        .checkbox-item:hover {
+            color: var(--text-dark);
+        }
+
+        .checkbox-item input {
+            display: none;
+        }
+
+        .checkmark {
+            width: 18px;
+            height: 18px;
+            border: 2px solid #ccc;
+            border-radius: 3px;
+            display: inline-block;
+            position: relative;
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        .checkbox-item:hover .checkmark {
+            border-color: var(--primary-color);
+        }
+
+        .checkbox-item input:checked+.checkmark {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .checkbox-item input:checked+.checkmark::after {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 2px;
+            width: 4px;
+            height: 8px;
+            border: solid #fff;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+
+        /* Form Footer */
+        .form-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 30px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .file-upload {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .file-btn {
+            background-color: #f5f5f5;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 12px 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            color: #666;
+            transition: all 0.3s ease;
+        }
+
+        .file-btn:hover {
+            background-color: #eee;
+            border-color: var(--primary-color);
+            color: var(--text-dark);
+        }
+
+        .file-icon {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .file-icon img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .file-status {
+            font-size: 14px;
+            color: #888;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .file-clear-btn {
+            display: none;
+            background: #ff4444;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            font-size: 12px;
+            line-height: 1;
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        .file-clear-btn:hover {
+            background: #cc0000;
+            transform: scale(1.1);
+        }
+
+        .file-clear-btn.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .submit-btn {
+            background-color: var(--primary-color);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            padding: 16px 50px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .submit-btn:hover {
+            background-color: #c5a020;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(217, 187, 40, 0.4);
+        }
+
+        .submit-btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .submit-btn.loading {
+            color: transparent;
+        }
+
+        .submit-btn.loading::after {
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            top: 50%;
+            left: 50%;
+            margin-left: -10px;
+            margin-top: -10px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top-color: #fff;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* ==================== MODAL ==================== */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            padding: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-card {
+            position: relative;
+            width: 100%;
+            max-width: 520px;
+            background-color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 50px 45px 45px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            border-radius: 20px;
+            transform: scale(0.9) translateY(20px);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.active .modal-card {
+            transform: scale(1) translateY(0);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #f5f5f5;
+            border: none;
+            padding: 8px;
+            cursor: pointer;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+        }
+
+        .close-btn:hover {
+            background: #e8e8e8;
+            transform: scale(1.1);
+        }
+
+        .close-btn svg {
+            width: 12px;
+            height: 12px;
+        }
+
+        .icon-wrapper {
+            margin-bottom: 28px;
+        }
+
+        .success-icon-circle {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 35px rgba(39, 174, 96, 0.35);
+        }
+
+        .success-icon-circle svg {
+            width: 48px;
+            height: 48px;
+            stroke: #fff;
+            stroke-width: 3;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .success-icon-circle.animate svg {
+            stroke-dasharray: 60;
+            stroke-dashoffset: 60;
+            animation: drawCheck 0.6s ease forwards 0.2s;
+        }
+
+        @keyframes drawCheck {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        .error-icon-circle {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 35px rgba(231, 76, 60, 0.35);
+        }
+
+        .error-icon-circle svg {
+            width: 48px;
+            height: 48px;
+            stroke: #fff;
+            stroke-width: 3;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .modal-title {
+            margin: 0;
+            color: #333333;
+            font-size: 28px;
+            font-weight: 700;
+            line-height: 1.2;
+            text-align: center;
+            margin-bottom: 12px;
+        }
+
+        .modal-user-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-user-name {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 4px;
+        }
+
+        .modal-user-email {
+            font-size: 14px;
+            color: #666;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .modal-user-email svg {
+            width: 14px;
+            height: 14px;
+            stroke: #888;
+            fill: none;
+        }
+
+        .modal-description {
+            margin: 0;
+            max-width: 400px;
+            color: #555;
+            font-size: 15px;
+            line-height: 1.7;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .modal-email-note {
+            width: 100%;
+            background: linear-gradient(135deg, #f8f9fa 0%, #f0f2f5 100%);
+            border-left: 4px solid var(--primary-color);
+            padding: 18px 22px;
+            margin-bottom: 28px;
+            border-radius: 0 12px 12px 0;
+        }
+
+        .modal-email-note p {
+            font-size: 14px;
+            color: #555;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .modal-email-note .email-icon {
+            display: inline-block;
+            margin-right: 8px;
+        }
+
+        .modal-email-note strong {
+            color: #333;
+        }
+
+        .action-btn {
+            width: 100%;
+            max-width: 280px;
+            height: 50px;
+            background-color: var(--primary-color);
+            color: #ffffff;
+            border: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(217, 187, 40, 0.3);
+        }
+
+        .action-btn:hover {
+            background-color: #c5a020;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(217, 187, 40, 0.4);
+        }
+
+        .secondary-btn {
+            margin-top: 15px;
+            background: none;
+            border: none;
+            color: #888;
+            font-size: 14px;
+            cursor: pointer;
+            padding: 10px 20px;
+            transition: color 0.2s ease;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        .secondary-btn:hover {
+            color: var(--primary-color);
+        }
+
+        /* ==================== FOOTER ==================== */
+        .site-footer {
+            background-color: var(--bg-dark);
+            color: #fff;
+            padding-top: 60px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: auto 1fr 1fr 1fr;
+            gap: 60px;
+            padding-bottom: 60px;
+        }
+
+        .footer-col h3 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 25px;
+        }
+
+        .logo-col {
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .footer-logo {
+            width: 100px;
+            height: auto;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            font-size: 14px;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+        }
+
+        .contact-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .contact-list img {
+            margin-top: 4px;
+            flex-shrink: 0;
+            width: 16px;
+            height: 16px;
+        }
+
+        .contact-list span {
+            word-break: break-word;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 35px;
+            height: 35px;
+        }
+
+        .social-icons a img {
+            transition: opacity 0.3s;
+            width: 20px;
+            height: 20px;
+        }
+
+        .social-icons a:hover img {
+            opacity: 0.7;
+        }
+
+        .copyright-bar {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .copyright-bar p {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* ==================== BACK TO TOP ==================== */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--primary-color);
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            transition: background 0.3s;
+        }
+
+        .back-to-top:hover {
+            background: #c5a020;
+        }
+
+        .back-to-top.show {
+            display: flex;
+        }
+
+        /* ==================== RESPONSIVE ==================== */
+        @media (max-width: 1200px) {
+            .services-grid {
+                gap: 60px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .about-container {
+                flex-direction: column;
+            }
+
+            .about-content,
+            .hours-content {
+                max-width: 100%;
+            }
+
+            .cta-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .cta-icon-left,
+            .cta-icon-right {
+                display: none;
+            }
+
+            .cta-text {
+                font-size: 28px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+                gap: 40px;
+            }
+
+            .logo-col {
+                justify-content: flex-start;
+            }
+
+            .checkbox-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .main-nav {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                width: 100%;
+                height: 100vh;
+                background: #fff;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                opacity: 0;
+                visibility: hidden;
+                transition: opacity 0.3s ease, visibility 0.3s ease;
+                z-index: 1001;
+            }
+
+            .main-nav.active {
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .main-nav ul {
+                flex-direction: column;
+                gap: 30px;
+                text-align: center;
+            }
+
+            .main-nav a {
+                font-size: 24px;
+            }
+
+            .main-nav li.active .underline {
+                bottom: -8px;
+            }
+
+            .hero-title {
+                font-size: 42px;
+            }
+
+            .section-title {
+                font-size: 26px;
+            }
+
+            .services-section-title {
+                font-size: 28px;
+                margin-bottom: 40px;
+            }
+
+            .services-grid {
+                gap: 50px;
+            }
+
+            .service-icon {
+                width: 70px;
+                height: 70px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .checkbox-section {
+                flex-direction: column;
+                gap: 30px;
+            }
+
+            .checkbox-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-footer {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .file-upload {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .submit-btn {
+                width: 100%;
+            }
+
+            .form-header h2 {
+                font-size: 28px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+                gap: 30px;
+            }
+
+            .logo-col {
+                justify-content: flex-start;
+            }
+
+            .footer-col h3 {
+                margin-bottom: 20px;
+                font-size: 14px;
+            }
+
+            .footer-links a {
+                font-size: 13px;
+            }
+
+            .contact-list li {
+                font-size: 12px;
+            }
+
+            .social-icons {
+                justify-content: flex-start;
+            }
+
+            .social-icons a {
+                width: 30px;
+                height: 30px;
+            }
+
+            .social-icons a img {
+                width: 18px;
+                height: 18px;
+            }
+
+            .back-to-top {
+                width: 45px;
+                height: 45px;
+                font-size: 20px;
+                bottom: 20px;
+                right: 20px;
+            }
+
+            .modal-card {
+                padding: 40px 30px 35px;
+                max-width: 100%;
+                border-radius: 16px;
+            }
+
+            .success-icon-circle,
+            .error-icon-circle {
+                width: 95px;
+                height: 95px;
+            }
+
+            .success-icon-circle svg,
+            .error-icon-circle svg {
+                width: 42px;
+                height: 42px;
+            }
+
+            .modal-title {
+                font-size: 24px;
+            }
+
+            .modal-user-name {
+                font-size: 18px;
+            }
+
+            .modal-description {
+                font-size: 14px;
+            }
+
+            .action-btn {
+                max-width: 100%;
+            }
+
+            .loader-logo-container {
+                width: 100px;
+                height: 100px;
+            }
+
+            .loader-logo {
+                width: 50px;
+                height: 50px;
+            }
+
+            .loader-progress-container {
+                width: 160px;
+            }
+
+            .loader-text {
+                font-size: 10px;
+                letter-spacing: 2px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 36px;
+            }
+
+            .section-title {
+                font-size: 24px;
+            }
+
+            .about-text {
+                font-size: 14px;
+            }
+
+            .hours-title {
+                font-size: 20px;
+            }
+
+            .day {
+                font-size: 14px;
+            }
+
+            .time {
+                font-size: 13px;
+            }
+
+            .services-section-title {
+                font-size: 24px;
+            }
+
+            .services-grid {
+                flex-direction: column;
+                gap: 30px;
+                align-items: center;
+            }
+
+            .service-item {
+                flex-direction: row;
+                gap: 20px;
+                max-width: 300px;
+                width: 100%;
+            }
+
+            .service-icon {
+                width: 60px;
+                height: 60px;
+                flex-shrink: 0;
+            }
+
+            .service-name {
+                text-align: left;
+                max-width: none;
+            }
+
+            .cta-text {
+                font-size: 22px;
+            }
+
+            #cta-banner {
+                padding: 50px 0;
+                min-height: auto;
+            }
+
+            #form-section {
+                padding: 60px 0 80px;
+            }
+
+            .form-header h2 {
+                font-size: 24px;
+            }
+
+            .form-header p {
+                font-size: 14px;
+            }
+
+            .form-group label {
+                font-size: 14px;
+            }
+
+            .input-wrapper,
+            .textarea-wrapper {
+                padding: 14px 18px;
+            }
+
+            input[type='text'],
+            input[type='email'],
+            input[type='tel'],
+            select,
+            textarea {
+                font-size: 14px;
+            }
+
+            .checkbox-title {
+                font-size: 14px;
+            }
+
+            .checkbox-item {
+                font-size: 13px;
+            }
+
+            .file-btn {
+                padding: 10px 20px;
+                font-size: 13px;
+            }
+
+            .submit-btn {
+                padding: 14px 40px;
+                font-size: 15px;
+            }
+
+            .site-footer {
+                padding-top: 40px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+                gap: 25px;
+                padding-bottom: 40px;
+            }
+
+            .footer-logo {
+                width: 70px;
+            }
+
+            .footer-col h3 {
+                margin-bottom: 15px;
+                font-size: 12px;
+            }
+
+            .footer-links li {
+                margin-bottom: 8px;
+            }
+
+            .footer-links a {
+                font-size: 11px;
+            }
+
+            .contact-list li {
+                font-size: 10px;
+                margin-bottom: 10px;
+                gap: 6px;
+            }
+
+            .contact-list img {
+                width: 12px;
+                height: 12px;
+            }
+
+            .social-icons {
+                gap: 8px;
+            }
+
+            .social-icons a {
+                width: 26px;
+                height: 26px;
+            }
+
+            .social-icons a img {
+                width: 14px;
+                height: 14px;
+            }
+
+            .copyright-bar p {
+                font-size: 10px;
+            }
+
+            .modal-card {
+                padding: 35px 22px 30px;
+                border-radius: 14px;
+            }
+
+            .close-btn {
+                top: 15px;
+                right: 15px;
+                width: 28px;
+                height: 28px;
+            }
+
+            .success-icon-circle,
+            .error-icon-circle {
+                width: 85px;
+                height: 85px;
+            }
+
+            .success-icon-circle svg,
+            .error-icon-circle svg {
+                width: 38px;
+                height: 38px;
+            }
+
+            .icon-wrapper {
+                margin-bottom: 22px;
+            }
+
+            .modal-title {
+                font-size: 22px;
+                margin-bottom: 10px;
+            }
+
+            .modal-user-name {
+                font-size: 17px;
+            }
+
+            .modal-user-email {
+                font-size: 13px;
+            }
+
+            .modal-user-info {
+                margin-bottom: 16px;
+            }
+
+            .modal-description {
+                font-size: 13px;
+                margin-bottom: 20px;
+                line-height: 1.6;
+            }
+
+            .modal-email-note {
+                padding: 14px 16px;
+                margin-bottom: 22px;
+                border-radius: 0 10px 10px 0;
+            }
+
+            .modal-email-note p {
+                font-size: 12px;
+            }
+
+            .action-btn {
+                height: 46px;
+                font-size: 13px;
+                border-radius: 23px;
+            }
+
+            .secondary-btn {
+                font-size: 13px;
+                margin-top: 12px;
+            }
+
+            .loader-logo-container {
+                width: 80px;
+                height: 80px;
+            }
+
+            .loader-logo {
+                width: 40px;
+                height: 40px;
+            }
+
+            .loader-content {
+                gap: 20px;
+            }
+
+            .loader-progress-container {
+                width: 140px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ==================== PRINTHADA PROFESSIONAL LOADER ==================== -->
+    <div class="printhada-loader" id="pageLoader">
+        <div class="loader-content">
+            <div class="loader-logo-container">
+                <div class="loader-ring"></div>
+                <img src="IMAGES/5db1c76c09bd4716a7ddbc483a6afc6e11d7ef70.png" alt="Printhada" class="loader-logo">
+            </div>
+            <div class="loader-progress-container">
+                <div class="loader-progress-bar"></div>
+            </div>
+            <div class="loader-text">
+                <span>P</span><span>R</span><span>I</span><span>N</span><span>T</span><span>H</span><span>A</span><span>D</span><span>A</span>
+            </div>
+            <div class="loader-dots">
+                <div class="loader-dot"></div>
+                <div class="loader-dot"></div>
+                <div class="loader-dot"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page Transition Overlay -->
+    <div class="page-transition" id="pageTransition">
+        <div class="loader-content">
+            <div class="loader-logo-container">
+                <div class="loader-ring"></div>
+                <img src="IMAGES/5db1c76c09bd4716a7ddbc483a6afc6e11d7ef70.png" alt="Printhada" class="loader-logo">
+            </div>
+            <div class="loader-dots">
+                <div class="loader-dot"></div>
+                <div class="loader-dot"></div>
+                <div class="loader-dot"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success/Error Modal -->
+    <div class="modal-overlay" id="responseModal">
+        <div class="modal-card">
+            <button class="close-btn" id="closeModalBtn" aria-label="Close">
+                <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 1L13 13M1 13L13 1" stroke="#333333" stroke-width="2" stroke-linecap="round" />
+                </svg>
+            </button>
+            <div class="icon-wrapper" id="iconWrapper">
+                <div class="success-icon-circle animate" id="successIcon">
+                    <svg viewBox="0 0 24 24">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                </div>
+            </div>
+            <h2 class="modal-title" id="modalTitle">Order Request Received!</h2>
+            <div class="modal-user-info" id="modalUserInfo">
+                <span class="modal-user-name" id="modalUserName">John Doe</span>
+                <span class="modal-user-email" id="modalUserEmail">
+                    <svg viewBox="0 0 24 24" stroke-width="2">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                    johndoe@email.com
+                </span>
+            </div>
+            <p class="modal-description" id="modalDescription">
+                Your service request has been submitted successfully. We appreciate you choosing Printhada!
+            </p>
+            <div class="modal-email-note" id="modalNote">
+                <p>
+                    <span class="email-icon">📧</span>
+                    We will review your request and send you a quote within <strong>24-48 hours</strong>. Please check
+                    your inbox for our response.
+                </p>
+            </div>
+            <button class="action-btn" id="btnDone">DONE</button>
+            <button class="secondary-btn" id="btnSendAnother">Submit another request</button>
+        </div>
+    </div>
+
+    <!-- ==================== HEADER ==================== -->
+    <section id="header-section">
+        <header class="site-header container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="IMAGES/5db1c76c09bd4716a7ddbc483a6afc6e11d7ef70.png" alt="Printhada Logo" />
+                </a>
+            </div>
+            <nav class="main-nav" id="mainNav">
+                <ul>
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="ABOUT.html">ABOUT</a></li>
+                    <li class="active">
+                        <a href="SERVICES.html">SERVICES</a>
+                        <div class="underline"></div>
+                    </li>
+                    <li><a href="PRICING.html">PRICING</a></li>
+                    <li><a href="CONTACTS.html">CONTACTS</a></li>
+                </ul>
+            </nav>
+            <button class="search-btn" id="searchBtn" aria-label="Search">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.35-4.35"></path>
+                </svg>
+            </button>
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu">☰</button>
+        </header>
+    </section>
+
+    <!-- Search Modal -->
+    <div class="search-modal" id="searchModal">
+        <div class="search-container">
+            <div class="search-input-wrapper">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.35-4.35"></path>
+                </svg>
+                <input type="text" class="search-input" id="searchInput"
+                    placeholder="Search pages, services, pricing..." />
+                <button class="search-close" id="searchClose">✕</button>
+            </div>
+            <div class="search-results" id="searchResults"></div>
+        </div>
+    </div>
+
+    <!-- ==================== HERO SECTION ==================== -->
+    <section id="hero-section">
+        <div class="container hero-container">
+            <div class="hero-title">
+                <span class="text-light">Our</span><br />
+                <span class="text-bold">Services</span>
+                <div class="title-divider"></div>
+            </div>
+            <div class="hero-image-wrapper">
+                <img src="IMAGES/9093af1ae8524a66c1a8a8e79f4347617a3da579.png" alt="Printing Services"
+                    class="hero-img" />
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== ABOUT SECTION ==================== -->
+    <section id="about-section">
+        <div class="container about-container">
+            <div class="about-content">
+                <h2 class="section-title">What Printhada Offers?</h2>
+                <p class="about-text">
+                    Printhada offers professional document printing services designed to meet the high standards of both
+                    corporate and personal requirements. We specialize in the production of essential business
+                    materials, including official receipts, forms, and marketing booklets, ensuring every print is clear
+                    and professional. Our capabilities also extend to sensitive documentation such as school records and
+                    employment credentials, where accuracy is a top priority.
+                </p>
+            </div>
+            <div class="hours-content">
+                <h3 class="hours-title">Available Hours*</h3>
+                <div class="hours-list">
+                    <div class="hours-row">
+                        <span class="day">Monday - Friday</span>
+                        <div class="time-wrapper">
+                            <img src="IMAGES/553_1194.svg" alt="Clock" class="icon-clock" />
+                            <span class="time">8:00 AM - 6:00 PM</span>
+                        </div>
+                    </div>
+                    <div class="divider-line"></div>
+                    <div class="hours-row">
+                        <span class="day">Saturday</span>
+                        <div class="time-wrapper">
+                            <img src="IMAGES/553_1203.svg" alt="Clock" class="icon-clock" />
+                            <span class="time">9:00 AM - 4:00 PM</span>
+                        </div>
+                    </div>
+                    <div class="divider-line"></div>
+                    <div class="hours-row">
+                        <span class="day">Sunday</span>
+                        <div class="time-wrapper">
+                            <span class="time" style="color: #e74c3c; font-weight: 500;">Closed</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SERVICES LIST ==================== -->
+    <section id="services-list-section">
+        <div class="container">
+            <h2 class="services-section-title">Services Provided</h2>
+            <div class="services-grid">
+                <!-- Service 1 -->
+                <div class="service-item">
+                    <div class="service-icon">
+                        <img src="IMAGES/553_1141.svg" alt="Document Photocopy" />
+                    </div>
+                    <p class="service-name">Document<br />Photocopy</p>
+                </div>
+                <!-- Service 2 -->
+                <div class="service-item">
+                    <div class="service-icon">
+                        <img src="IMAGES/553_1148.svg" alt="Making Stamps And Seals" />
+                    </div>
+                    <p class="service-name">Making Stamps<br />And Seals</p>
+                </div>
+                <!-- Service 3 -->
+                <div class="service-item">
+                    <div class="service-icon">
+                        <img src="IMAGES/553_1156.svg" alt="Document Binding" />
+                    </div>
+                    <p class="service-name">Document<br />Binding</p>
+                </div>
+                <!-- Service 4 -->
+                <div class="service-item">
+                    <div class="service-icon">
+                        <img src="IMAGES/553_1176.svg" alt="Document Lamination" />
+                    </div>
+                    <p class="service-name">Document<br />Lamination</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== CTA BANNER ==================== -->
+    <section id="cta-banner">
+        <div class="cta-background">
+            <img src="IMAGES/Banner2.png" alt="Background" class="bg-img" />
+        </div>
+        <div class="container cta-content">
+            <div class="cta-icon-left">
+                <img src="IMAGES/9e7aaa994ebaa9005cd542907bf9162be91c98f7.png" alt="Printer Icon" />
+            </div>
+            <h2 class="cta-text">
+                One Stop Shop for All Your Printing Needs<br />Let Us Help You Today!
+            </h2>
+            <div class="cta-icon-right">
+                <img src="IMAGES/09faa0bde9f68637f89a814f2e0e28476878dfa6.png" alt="Flower Icon" />
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FORM SECTION ==================== -->
+    <section id="form-section">
+        <div class="container">
+            <div class="form-header">
+                <h2>Request a Service</h2>
+                <p>Fill out the form below and we'll get back to you with a quote</p>
+            </div>
+            <form class="contact-form" id="serviceForm" action="https://getform.io/f/agdvllkb" method="POST"
+                enctype="multipart/form-data">
+                <!-- Row 1: Name & Email -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name">Your Name <span class="required">*</span></label>
+                        <div class="input-wrapper" id="name-wrapper">
+                            <input type="text" id="name" name="name" placeholder="Enter your full name" required />
+                        </div>
+                        <span class="error-message" id="name-error">Please enter your name</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Your Email <span class="required">*</span></label>
+                        <div class="input-wrapper" id="email-wrapper">
+                            <input type="email" id="email" name="email" placeholder="youremail@domain.com" required />
+                        </div>
+                        <span class="error-message" id="email-error">Please enter a valid email address</span>
+                    </div>
+                </div>
+
+                <!-- Row 2: Phone & Services -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="phone">Your Phone <span class="required">*</span></label>
+                        <div class="input-wrapper" id="phone-wrapper">
+                            <input type="tel" id="phone" name="phone" placeholder="09XX XXX XXXX" required />
+                        </div>
+                        <span class="error-message" id="phone-error">Please enter a valid phone number</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="services">Service Package <span class="required">*</span></label>
+                        <div class="input-wrapper select-wrapper" id="services-wrapper">
+                            <select id="services" name="services" required>
+                                <option value="" disabled selected>Choose a Service Package</option>
+                                <option value="Standard Prints - ₱250/Starting">Standard Prints (₱250/Starting)</option>
+                                <option value="Corporate Package - ₱2,500/Starting">Corporate Package (₱2,500/Starting)
+                                </option>
+                                <option value="Premium Fabrication - ₱7,500/Starting">Premium Fabrication
+                                    (₱7,500/Starting)</option>
+                            </select>
+                            <svg class="select-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </div>
+                        <span class="error-message" id="services-error">Please select a service package</span>
+                    </div>
+                </div>
+
+                <!-- Row 3: Checkboxes -->
+                <div class="checkbox-section">
+                    <div class="checkbox-col-group">
+                        <h4 class="checkbox-title">I would like to:</h4>
+                        <div class="checkbox-list">
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="request_type" value="Request a Quote" />
+                                <span class="checkmark"></span>
+                                Request a Quote
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="request_type" value="General Inquiry" />
+                                <span class="checkmark"></span>
+                                General Inquiry
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="request_type" value="Rush Order" />
+                                <span class="checkmark"></span>
+                                Rush Order
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="checkbox-col-group wide-group">
+                        <h4 class="checkbox-title">Print Type:</h4>
+                        <div class="checkbox-grid">
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="print_type" value="Document Print" />
+                                <span class="checkmark"></span>
+                                Document Print
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="print_type" value="Large Format/Display" />
+                                <span class="checkmark"></span>
+                                Large Format/Display
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="print_type" value="Sticker/Decal Print" />
+                                <span class="checkmark"></span>
+                                Sticker/Decal Print
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="print_type" value="Promotional/Souvenirs" />
+                                <span class="checkmark"></span>
+                                Promotional/Souvenirs
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="print_type" value="Apparel/Uniform" />
+                                <span class="checkmark"></span>
+                                Apparel/Uniform
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="print_type" value="Awards/Trophies" />
+                                <span class="checkmark"></span>
+                                Awards/Trophies
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Row 4: Message -->
+                <div class="form-group full-width">
+                    <label for="message">Message (optional)</label>
+                    <div class="textarea-wrapper" id="message-wrapper">
+                    </div>
+
+                    <!-- Row 5: File Upload & Button -->
+                    <div class="form-footer">
+                        <div class="file-upload">
+                            <label for="file-upload" class="file-btn">
+                                Choose File
+                                <div class="file-icon">
+                                    <img src="IMAGES/553_1130.svg" alt="doc" />
+                                </div>
+                            </label>
+                            <input type="file" id="file-upload" name="file"
+                                accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.ai,.psd" style="display:none;" />
+                            <div class="file-status" id="file-status">
+                                <span id="file-name">No file chosen</span>
+                                <button type="button" class="file-clear-btn" id="file-clear-btn"
+                                    title="Remove file">✕</button>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="submit-btn" id="submitBtn">Request Order</button>
+                    </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <section id="footer-section">
+        <footer class="site-footer">
+            <div class="container footer-content">
+                <div class="footer-col logo-col">
+                    <a href="index.html">
+                        <img src="IMAGES/5db1c76c09bd4716a7ddbc483a6afc6e11d7ef70.png" alt="Printhada Logo"
+                            class="footer-logo" />
+                    </a>
+                </div>
+                <div class="footer-col">
+                    <h3>Information</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="ABOUT.html">About</a></li>
+                        <li><a href="SERVICES.html">Services</a></li>
+                        <li><a href="PRICING.html">Pricing</a></li>
+                        <li><a href="CONTACTS.html">Contacts</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col contact-col">
+                    <h3>Contacts</h3>
+                    <ul class="contact-list">
+                        <li>
+                            <img src="IMAGES/1_641.svg" alt="Location" />
+                            <span>3486 Varona, Makati City, 1204 Metro Manila</span>
+                        </li>
+                        <li>
+                            <img src="IMAGES/1_643.svg" alt="Phone" />
+                            <span>09174704724 / 09302819063</span>
+                        </li>
+                        <li>
+                            <img src="IMAGES/1_645.svg" alt="Email" />
+                            <span>printhada.2009@gmail.com</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer-col social-col">
+                    <h3>Social Media</h3>
+                    <div class="social-icons">
+                        <a href="https://www.facebook.com" target="_blank"><img src="IMAGES/1_614.svg"
+                                alt="Facebook" /></a>
+                        <a href="https://www.twitter.com" target="_blank"><img src="IMAGES/1_616.svg"
+                                alt="Twitter" /></a>
+                        <a href="https://www.linkedin.com" target="_blank"><img src="IMAGES/1_619.svg"
+                                alt="LinkedIn" /></a>
+                        <a href="https://www.pinterest.com" target="_blank"><img src="IMAGES/1_625.svg"
+                                alt="Pinterest" /></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright-bar">
+                <div class="container">
+                    <p>© 2025 All Rights Reserved</p>
+                </div>
+            </div>
+        </footer>
+    </section>
+
+    <!-- ==================== BACK TO TOP ==================== -->
+    <button class="back-to-top" aria-label="Back to top">↑</button>
+
+    <script>
+        // ==================== PAGE LOADER ====================
+        var pageLoader = document.getElementById('pageLoader');
+        var pageTransition = document.getElementById('pageTransition');
+        var htmlElement = document.documentElement;
+        var bodyElement = document.body;
+
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+
+        htmlElement.classList.add('loading');
+        bodyElement.classList.add('loading');
+
+        window.addEventListener('load', function () {
+            setTimeout(function () {
+                pageLoader.classList.add('hidden');
+                htmlElement.classList.remove('loading');
+                bodyElement.classList.remove('loading');
+                window.scrollTo(0, 0);
+            }, 800);
+        });
+
+        document.querySelectorAll('a[href]').forEach(function (link) {
+            link.addEventListener('click', function (e) {
+                var href = this.getAttribute('href');
+
+                if (href &&
+                    !href.startsWith('#') &&
+                    !href.startsWith('http') &&
+                    !href.startsWith('mailto') &&
+                    !href.startsWith('tel') &&
+                    href !== window.location.pathname.split('/').pop()) {
+
+                    e.preventDefault();
+                    htmlElement.classList.add('loading');
+                    bodyElement.classList.add('loading');
+                    pageTransition.classList.add('active');
+
+                    setTimeout(function () {
+                        window.location.href = href;
+                    }, 400);
+                }
+            });
+        });
+
+        window.addEventListener('pageshow', function (event) {
+            if (event.persisted) {
+                pageTransition.classList.remove('active');
+                pageLoader.classList.add('hidden');
+                htmlElement.classList.remove('loading');
+                bodyElement.classList.remove('loading');
+            }
+        });
+
+        // ==================== HAMBURGER MENU ====================
+        var hamburger = document.getElementById('hamburger');
+        var nav = document.getElementById('mainNav');
+        var body = document.body;
+
+        hamburger.addEventListener('click', function () {
+            nav.classList.toggle('active');
+            if (nav.classList.contains('active')) {
+                hamburger.textContent = '✕';
+                body.style.overflow = 'hidden';
+            } else {
+                hamburger.textContent = '☰';
+                body.style.overflow = '';
+            }
+        });
+
+        var navLinks = nav.querySelectorAll('a');
+        navLinks.forEach(function (link) {
+            link.addEventListener('click', function () {
+                nav.classList.remove('active');
+                hamburger.textContent = '☰';
+                body.style.overflow = '';
+            });
+        });
+
+        // ==================== BACK TO TOP ====================
+        var backToTop = document.querySelector('.back-to-top');
+        window.addEventListener('scroll', function () {
+            if (window.pageYOffset > 300) {
+                backToTop.classList.add('show');
+            } else {
+                backToTop.classList.remove('show');
+            }
+        });
+
+        backToTop.addEventListener('click', function () {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // ==================== FILE UPLOAD ====================
+        var fileInput = document.getElementById('file-upload');
+        var fileName = document.getElementById('file-name');
+        var fileClearBtn = document.getElementById('file-clear-btn');
+
+        fileInput.addEventListener('change', function () {
+            if (this.files.length > 0) {
+                fileName.textContent = this.files[0].name;
+                fileName.style.color = 'var(--success-color)';
+                fileClearBtn.classList.add('show');
+            } else {
+                fileName.textContent = 'No file chosen';
+                fileName.style.color = '#888';
+                fileClearBtn.classList.remove('show');
+            }
+        });
+
+        fileClearBtn.addEventListener('click', function () {
+            fileInput.value = '';
+            fileName.textContent = 'No file chosen';
+            fileName.style.color = '#888';
+            fileClearBtn.classList.remove('show');
+        });
+
+        // ==================== FORM HANDLING ====================
+        var form = document.getElementById('serviceForm');
+        var nameInput = document.getElementById('name');
+        var emailInput = document.getElementById('email');
+        var phoneInput = document.getElementById('phone');
+        var servicesInput = document.getElementById('services');
+        var submitBtn = document.getElementById('submitBtn');
+
+        var modal = document.getElementById('responseModal');
+        var iconWrapper = document.getElementById('iconWrapper');
+        var modalTitle = document.getElementById('modalTitle');
+        var modalUserInfo = document.getElementById('modalUserInfo');
+        var modalUserName = document.getElementById('modalUserName');
+        var modalUserEmail = document.getElementById('modalUserEmail');
+        var modalDescription = document.getElementById('modalDescription');
+        var modalNote = document.getElementById('modalNote');
+        var closeModalBtn = document.getElementById('closeModalBtn');
+        var btnDone = document.getElementById('btnDone');
+        var btnSendAnother = document.getElementById('btnSendAnother');
+
+        function validateEmail(email) {
+            var re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email.toLowerCase());
+        }
+
+        function validatePhone(phone) {
+            var cleaned = phone.replace(/\D/g, '');
+            return cleaned.length >= 10 && cleaned.length <= 11;
+        }
+
+        function showError(wrapperId, errorId) {
+            document.getElementById(wrapperId).classList.add('error');
+            document.getElementById(wrapperId).classList.remove('success');
+            document.getElementById(errorId).classList.add('show');
+        }
+
+        function showSuccess(wrapperId, errorId) {
+            document.getElementById(wrapperId).classList.remove('error');
+            document.getElementById(wrapperId).classList.add('success');
+            document.getElementById(errorId).classList.remove('show');
+        }
+
+        function clearValidation(wrapperId, errorId) {
+            document.getElementById(wrapperId).classList.remove('error', 'success');
+            document.getElementById(errorId).classList.remove('show');
+        }
+
+        function openModal(type, title, userName, userEmail, description, noteHtml) {
+            if (type === 'success') {
+                iconWrapper.innerHTML = '<div class="success-icon-circle animate"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></div>';
+                modalUserInfo.style.display = 'flex';
+                modalUserName.textContent = userName;
+                modalUserEmail.innerHTML = '<svg viewBox="0 0 24 24" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg> ' + userEmail;
+            } else {
+                iconWrapper.innerHTML = '<div class="error-icon-circle"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></div>';
+                modalUserInfo.style.display = 'none';
+            }
+
+            modalTitle.textContent = title;
+            modalDescription.textContent = description;
+            modalNote.innerHTML = '<p>' + noteHtml + '</p>';
+
+            modal.classList.add('active');
+            body.classList.add('modal-open');
+        }
+
+        function closeModal() {
+            modal.classList.remove('active');
+            body.classList.remove('modal-open');
+        }
+
+        function resetForm() {
+            form.reset();
+            fileInput.value = '';
+            fileName.textContent = 'No file chosen';
+            fileName.style.color = '#888';
+            fileClearBtn.classList.remove('show');
+            ['name-wrapper', 'email-wrapper', 'phone-wrapper', 'services-wrapper', 'message-wrapper'].forEach(function (id) {
+                var el = document.getElementById(id);
+                if (el) el.classList.remove('success', 'error');
+            });
+            document.querySelectorAll('.error-message').forEach(function (error) {
+                error.classList.remove('show');
+            });
+        }
+
+        closeModalBtn.addEventListener('click', closeModal);
+        btnDone.addEventListener('click', closeModal);
+
+        btnSendAnother.addEventListener('click', function () {
+            closeModal();
+            resetForm();
+            nameInput.focus();
+        });
+
+        modal.addEventListener('click', function (e) {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                closeModal();
+            }
+        });
+
+        // Input validation on blur
+        nameInput.addEventListener('blur', function () {
+            if (this.value.trim() === '') {
+                showError('name-wrapper', 'name-error');
+            } else {
+                showSuccess('name-wrapper', 'name-error');
+            }
+        });
+
+        nameInput.addEventListener('input', function () {
+            if (this.value.trim() !== '') {
+                showSuccess('name-wrapper', 'name-error');
+            }
+        });
+
+        emailInput.addEventListener('blur', function () {
+            if (!validateEmail(this.value)) {
+                showError('email-wrapper', 'email-error');
+            } else {
+                showSuccess('email-wrapper', 'email-error');
+            }
+        });
+
+        emailInput.addEventListener('input', function () {
+            if (validateEmail(this.value)) {
+                showSuccess('email-wrapper', 'email-error');
+            }
+        });
+
+        phoneInput.addEventListener('blur', function () {
+            if (!validatePhone(this.value)) {
+                showError('phone-wrapper', 'phone-error');
+            } else {
+                showSuccess('phone-wrapper', 'phone-error');
+            }
+        });
+
+        phoneInput.addEventListener('input', function () {
+            if (validatePhone(this.value)) {
+                showSuccess('phone-wrapper', 'phone-error');
+            }
+        });
+
+        servicesInput.addEventListener('change', function () {
+            if (this.value !== '') {
+                showSuccess('services-wrapper', 'services-error');
+            }
+        });
+
+        // Form submission
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            var isValid = true;
+
+            if (nameInput.value.trim() === '') {
+                showError('name-wrapper', 'name-error');
+                isValid = false;
+            }
+
+            if (!validateEmail(emailInput.value)) {
+                showError('email-wrapper', 'email-error');
+                isValid = false;
+            }
+
+            if (!validatePhone(phoneInput.value)) {
+                showError('phone-wrapper', 'phone-error');
+                isValid = false;
+            }
+
+            if (servicesInput.value === '') {
+                showError('services-wrapper', 'services-error');
+                isValid = false;
+            }
+
+            if (!isValid) {
+                return;
+            }
+
+            submitBtn.classList.add('loading');
+            submitBtn.disabled = true;
+
+            var formData = new FormData(form);
+            var fullName = nameInput.value.trim();
+            var userEmail = emailInput.value.trim();
+
+            fetch('https://getform.io/f/agdvllkb', {
+                method: 'POST',
+                body: formData
+            })
+                .then(function (response) {
+                    submitBtn.classList.remove('loading');
+                    submitBtn.disabled = false;
+
+                    if (response.ok) {
+                        openModal(
+                            'success',
+                            'Order Request Received!',
+                            fullName,
+                            userEmail,
+                            'Your service request has been submitted successfully. We appreciate you choosing Printhada!',
+                            '<span class="email-icon">📧</span> We will review your request and send you a quote within <strong>24-48 hours</strong>. Please check your inbox for our response.'
+                        );
+                        resetForm();
+                    } else {
+                        response.json().then(function (data) {
+                            var errorMsg = 'Something went wrong. Please try again.';
+                            if (data.errors) {
+                                errorMsg = data.errors.map(function (error) { return error.message; }).join(' ');
+                            }
+                            openModal(
+                                'error',
+                                'Oops! Something Went Wrong',
+                                '',
+                                '',
+                                errorMsg,
+                                '<span class="email-icon">📞</span> You can also reach us directly at <strong>09174704724</strong> or email <strong>printhada.2009@gmail.com</strong>'
+                            );
+                        });
+                    }
+                })
+                .catch(function (error) {
+                    submitBtn.classList.remove('loading');
+                    submitBtn.disabled = false;
+                    openModal(
+                        'error',
+                        'Connection Error',
+                        '',
+                        '',
+                        'Unable to send your request. Please check your internet connection and try again.',
+                        '<span class="email-icon">📞</span> You can also reach us directly at <strong>09174704724</strong> or email <strong>printhada.2009@gmail.com</strong>'
+                    );
+                });
+        });
+        // ==================== SEARCH FUNCTIONALITY ====================
+        var searchBtn = document.getElementById('searchBtn');
+        var searchModal = document.getElementById('searchModal');
+        var searchInput = document.getElementById('searchInput');
+        var searchClose = document.getElementById('searchClose');
+        var searchResults = document.getElementById('searchResults');
+
+        // Page data for search
+        var pageData = [
+            { title: 'Home - Printhada', page: 'HOME.html', description: 'Welcome to Printhada, your one-stop printing solution', keywords: ['home', 'main', 'start', 'welcome'] },
+            { title: 'About Us', page: 'ABOUT.html', description: 'Learn about our company, mission, and team', keywords: ['about', 'company', 'team', 'mission', 'who we are'] },
+            { title: 'Our Services', page: 'SERVICES.html', description: 'Professional printing services including document printing, binding, and lamination', keywords: ['services', 'printing', 'binding', 'lamination', 'stamps', 'seals', 'photocopy'] },
+            { title: 'Pricing Packages', page: 'PRICING.html', description: 'Standard Prints (₱250), Corporate Package (₱2,500), Premium Fabrication (₱7,500)', keywords: ['pricing', 'price', 'cost', 'packages', 'standard', 'corporate', 'premium', 'cheap', 'affordable'] },
+            { title: 'Contact Us', page: 'CONTACTS.html', description: 'Get in touch - Location, phone, email, and business hours', keywords: ['contact', 'location', 'address', 'phone', 'email', 'hours', 'reach us'] },
+            { title: 'Standard Prints Package', page: 'PRICING.html#standard', description: 'Starting at ₱250 - High-quality sticker & document printing', keywords: ['standard', 'cheap', 'basic', 'sticker', 'document'] },
+            { title: 'Corporate Package', page: 'PRICING.html#corporate', description: 'Starting at ₱2,500 - Corporate apparel, tumblers, and gifts', keywords: ['corporate', 'business', 'bulk', 'shirts', 'apparel', 'uniforms'] },
+            { title: 'Premium Fabrication', page: 'PRICING.html#premium', description: 'Starting at ₱7,500 - Trophies, awards, exhibition booths', keywords: ['premium', 'trophies', 'awards', 'booth', 'exhibition'] }
+        ];
+
+        searchBtn.addEventListener('click', function () {
+            searchModal.classList.add('active');
+            searchInput.focus();
+        });
+
+        searchClose.addEventListener('click', function () {
+            searchModal.classList.remove('active');
+            searchInput.value = '';
+            searchResults.innerHTML = '';
+        });
+
+        searchModal.addEventListener('click', function (e) {
+            if (e.target === searchModal) {
+                searchModal.classList.remove('active');
+                searchInput.value = '';
+                searchResults.innerHTML = '';
+            }
+        });
+
+        searchInput.addEventListener('input', function () {
+            var query = this.value.toLowerCase().trim();
+
+            if (query.length < 2) {
+                searchResults.innerHTML = '';
+                return;
+            }
+
+            var results = pageData.filter(function (item) {
+                return item.title.toLowerCase().includes(query) ||
+                    item.description.toLowerCase().includes(query) ||
+                    item.keywords.some(function (keyword) { return keyword.includes(query); });
+            });
+
+            if (results.length === 0) {
+                searchResults.innerHTML = '<div class="no-results">No results found for "' + query + '"</div>';
+                return;
+            }
+
+            searchResults.innerHTML = results.map(function (result) {
+                return '<div class="search-result-item" data-page="' + result.page + '">' +
+                    '<div class="result-title">' + result.title + '</div>' +
+                    '<div class="result-description">' + result.description + '</div>' +
+                    '</div>';
+            }).join('');
+
+            // Add click handlers
+            document.querySelectorAll('.search-result-item').forEach(function (item) {
+                item.addEventListener('click', function () {
+                    window.location.href = this.getAttribute('data-page');
+                });
+            });
+        });
+
+        // ==================== TAWK.TO AI CHATBOT ====================
+        var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+        (function () {
+            var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+            s1.async = true;
+            s1.src = 'https://embed.tawk.to/694f513a5585f019809e7c75/1jdetajrp';
+            s1.charset = 'UTF-8';
+            s1.setAttribute('crossorigin', '*');
+            s0.parentNode.insertBefore(s1, s0);
+        })();
+
+        // Keep chat bubble visible even when closed
+        Tawk_API.onLoad = function () {
+            Tawk_API.showWidget();
+        };
+
+        Tawk_API.onChatMinimized = function () {
+            Tawk_API.showWidget();
+        };
+
+        Tawk_API.onChatHidden = function () {
+            Tawk_API.showWidget();
+        };
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,2849 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Printhada</title>
+    <link rel="icon" href="IMAGES/5db1c76c09bd4716a7ddbc483a6afc6e11d7ef70.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700;900&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #d9bb28;
+            --text-dark: #333333;
+            --text-light: #ffffff;
+            --text-gray: #bdbdbd;
+            --bg-dark: #2c2c2c;
+            --border-color: #022a3a;
+            --font-main: 'Roboto', sans-serif;
+            --error-color: #e74c3c;
+            --success-color: #27ae60;
+            --max-width: 1440px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: #ffffff;
+            color: var(--text-dark);
+            -webkit-font-smoothing: antialiased;
+            line-height: 1.5;
+            overflow-x: hidden;
+        }
+
+        body.modal-open {
+            overflow: hidden;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        p {
+            margin: 0;
+        }
+
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 20px;
+            width: 100%;
+        }
+
+        /* Prevent scrolling when loader is active */
+        html.loading,
+        html.loading body {
+            overflow: hidden !important;
+            height: 100%;
+            position: fixed;
+            width: 100%;
+        }
+
+        body.loading {
+            overflow: hidden !important;
+        }
+
+        /* ==================== PRINTHADA PROFESSIONAL LOADER ==================== */
+        .printhada-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 99999;
+            transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                visibility 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .printhada-loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .loader-logo-container {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .loader-ring {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            border-top-color: var(--primary-color);
+            animation: loaderSpin 1s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+        }
+
+        .loader-ring::before {
+            content: '';
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            right: 5px;
+            bottom: 5px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            border-top-color: var(--bg-dark);
+            animation: loaderSpin 1.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite reverse;
+        }
+
+        .loader-ring::after {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            right: 15px;
+            bottom: 15px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            border-top-color: var(--primary-color);
+            opacity: 0.5;
+            animation: loaderSpin 2s linear infinite;
+        }
+
+        .loader-logo {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            animation: logoPulse 1.5s ease-in-out infinite;
+            z-index: 2;
+        }
+
+        .loader-progress-container {
+            width: 200px;
+            height: 3px;
+            background: rgba(51, 51, 51, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .loader-progress-bar {
+            height: 100%;
+            width: 30%;
+            background: linear-gradient(90deg, var(--primary-color), #f5d547, var(--primary-color));
+            background-size: 200% 100%;
+            border-radius: 10px;
+            animation: progressMove 1.5s ease-in-out infinite, progressShimmer 1.5s linear infinite;
+        }
+
+        .loader-text {
+            font-family: var(--font-main);
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--text-dark);
+            opacity: 0.7;
+        }
+
+        .loader-text span {
+            display: inline-block;
+            animation: textFade 1.5s ease-in-out infinite;
+        }
+
+        .loader-text span:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .loader-text span:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+
+        .loader-text span:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+
+        .loader-text span:nth-child(4) {
+            animation-delay: 0.3s;
+        }
+
+        .loader-text span:nth-child(5) {
+            animation-delay: 0.4s;
+        }
+
+        .loader-text span:nth-child(6) {
+            animation-delay: 0.5s;
+        }
+
+        .loader-text span:nth-child(7) {
+            animation-delay: 0.6s;
+        }
+
+        .loader-text span:nth-child(8) {
+            animation-delay: 0.7s;
+        }
+
+        .loader-text span:nth-child(9) {
+            animation-delay: 0.8s;
+        }
+
+        .loader-dots {
+            display: flex;
+            gap: 8px;
+            margin-top: 5px;
+        }
+
+        .loader-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            animation: dotBounce 1.4s ease-in-out infinite;
+        }
+
+        .loader-dot:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .loader-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .loader-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes loaderSpin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes logoPulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            50% {
+                transform: scale(1.05);
+                opacity: 0.8;
+            }
+        }
+
+        @keyframes progressMove {
+            0% {
+                transform: translateX(-100%);
+                width: 30%;
+            }
+
+            50% {
+                width: 60%;
+            }
+
+            100% {
+                transform: translateX(400%);
+                width: 30%;
+            }
+        }
+
+        @keyframes progressShimmer {
+            0% {
+                background-position: 200% 0;
+            }
+
+            100% {
+                background-position: -200% 0;
+            }
+        }
+
+        @keyframes textFade {
+
+            0%,
+            100% {
+                opacity: 0.4;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes dotBounce {
+
+            0%,
+            80%,
+            100% {
+                transform: scale(0.8);
+                opacity: 0.5;
+            }
+
+            40% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+        }
+
+        .page-transition {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #ffffff;
+            z-index: 99998;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .page-transition.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* ==================== HEADER ==================== */
+        #header-section {
+            padding: 30px 0;
+            background: #fff;
+            position: relative;
+            z-index: 1000;
+        }
+
+        .site-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            flex: 0 0 auto;
+            z-index: 1002;
+        }
+
+        .logo img {
+            width: 83px;
+            height: auto;
+        }
+
+        .main-nav {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .main-nav ul {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .main-nav a {
+            font-family: var(--font-main);
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-dark);
+            transition: color 0.3s ease;
+        }
+
+        .main-nav a:hover {
+            color: var(--primary-color);
+        }
+
+        .main-nav li.active {
+            position: relative;
+        }
+
+        .main-nav li.active .underline {
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--text-dark);
+        }
+
+        .hamburger {
+            display: none;
+            font-size: 28px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: var(--text-dark);
+            z-index: 1002;
+            padding: 5px;
+            font-family: var(--font-main);
+        }
+
+        /* ==================== SEARCH BAR ==================== */
+        .search-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s;
+            margin-left: 20px;
+            color: var(--text-dark);
+        }
+
+        .search-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .search-btn svg {
+            width: 22px;
+            height: 22px;
+            stroke: currentColor;
+        }
+
+        .search-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            align-items: flex-start;
+            justify-content: center;
+            z-index: 9999;
+            padding-top: 100px;
+        }
+
+        .search-modal.active {
+            display: flex;
+        }
+
+        .search-container {
+            background: white;
+            width: 90%;
+            max-width: 600px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .search-input-wrapper {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .search-input-wrapper svg {
+            width: 20px;
+            height: 20px;
+            stroke: #999;
+            margin-right: 15px;
+        }
+
+        .search-input {
+            flex: 1;
+            border: none;
+            outline: none;
+            font-size: 18px;
+            font-family: var(--font-main);
+            color: var(--text-dark);
+        }
+
+        .search-close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #999;
+            cursor: pointer;
+            padding: 0 10px;
+        }
+
+        .search-results {
+            max-height: 400px;
+            overflow-y: auto;
+            padding: 10px 0;
+        }
+
+        .search-result-item {
+            padding: 15px 20px;
+            cursor: pointer;
+            transition: background 0.2s;
+            border-left: 3px solid transparent;
+        }
+
+        .search-result-item:hover {
+            background: #f9f9f9;
+            border-left-color: var(--primary-color);
+        }
+
+        .result-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 5px;
+        }
+
+        .result-description {
+            font-size: 13px;
+            color: #666;
+        }
+
+        .no-results {
+            padding: 40px 20px;
+            text-align: center;
+            color: #999;
+        }
+
+        /* ==================== HERO SECTION ==================== */
+        #hero-section {
+            padding: 50px 0 60px;
+        }
+
+        .hero-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+            max-width: 1170px;
+            margin: 0 auto;
+        }
+
+        .hero-content {
+            flex: 0 0 35%;
+            max-width: 400px;
+        }
+
+        .hero-title {
+            margin-bottom: 60px;
+        }
+
+        .hero-title .text-light {
+            display: block;
+            font-size: 64px;
+            font-weight: 300;
+            line-height: 1;
+            color: var(--text-gray);
+        }
+
+        .hero-title .text-bold {
+            display: block;
+            font-size: 64px;
+            font-weight: 700;
+            line-height: 1;
+            color: var(--text-dark);
+        }
+
+        .hero-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .control-group {
+            display: flex;
+            gap: 20px;
+        }
+
+        .control-btn {
+            width: 53px;
+            height: 53px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #f2f2f2;
+            background: #fff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .control-btn:hover {
+            border-color: var(--primary-color);
+            background: rgba(217, 187, 40, 0.05);
+        }
+
+        .control-btn.next {
+            background: #f8f8f8;
+        }
+
+        .control-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .slide-numbers {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .slide-numbers .current,
+        .slide-numbers .total {
+            font-size: 24px;
+            font-weight: 400;
+            color: var(--text-gray);
+        }
+
+        .progress-line {
+            position: relative;
+            width: 271px;
+            height: 1px;
+            background: #e0e0e0;
+        }
+
+        .progress-line::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 50%;
+            background: var(--text-dark);
+            transition: width 0.3s ease;
+        }
+
+        .hero-image-wrapper {
+            flex: 1;
+            position: relative;
+            max-width: 770px;
+        }
+
+        .hero-img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+
+        .view-project-btn {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            background: #fff;
+            padding: 24px 40px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .view-project-btn:hover {
+            background: var(--primary-color);
+        }
+
+        .view-project-btn:hover .btn-text,
+        .view-project-btn:hover svg {
+            color: #fff;
+            stroke: #fff;
+        }
+
+        .btn-content {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .btn-text {
+            font-size: 12px;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 2.4px;
+            color: var(--text-dark);
+            transition: color 0.3s ease;
+        }
+
+        .btn-content svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--text-dark);
+            transition: stroke 0.3s ease;
+        }
+
+        /* ==================== ABOUT SECTION ==================== */
+        #about-section {
+            padding: 100px 0;
+            background-color: #fafafa;
+        }
+
+        .about-container {
+            display: flex;
+            align-items: flex-start;
+            gap: 60px;
+            max-width: 1170px;
+            margin: 0 auto;
+        }
+
+        .about-images {
+            flex: 0 0 570px;
+            position: relative;
+            height: 465px;
+        }
+
+        .collage-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .collage-img {
+            position: absolute;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .img-1 {
+            width: 270px;
+            height: 265px;
+            top: 0;
+            left: 0;
+            object-fit: cover;
+        }
+
+        .img-2 {
+            width: 270px;
+            height: 345px;
+            top: 30px;
+            left: 300px;
+            object-fit: cover;
+        }
+
+        .img-3 {
+            width: 270px;
+            height: 140px;
+            bottom: 0;
+            left: 0;
+            object-fit: cover;
+        }
+
+        .about-text {
+            flex: 1;
+            padding-top: 0;
+        }
+
+        .section-title {
+            font-size: 64px;
+            font-weight: 300;
+            line-height: 1;
+            color: var(--text-gray);
+            margin-bottom: 25px;
+        }
+
+        .section-title strong {
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .description {
+            color: #000;
+            font-size: 16px;
+            font-weight: 300;
+            line-height: 25px;
+            text-align: justify;
+            margin-bottom: 40px;
+            max-width: 431px;
+        }
+
+        .read-more-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            background: #fff;
+            padding: 24px 35px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .read-more-btn:hover {
+            background: var(--primary-color);
+        }
+
+        .read-more-btn:hover span,
+        .read-more-btn:hover svg {
+            color: #fff;
+            stroke: #fff;
+        }
+
+        .read-more-btn span {
+            font-size: 12px;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 2.4px;
+            color: var(--text-dark);
+            transition: color 0.3s ease;
+        }
+
+        .read-more-btn svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--text-dark);
+            transition: stroke 0.3s ease;
+        }
+
+        /* ==================== MISSION SECTION ==================== */
+        #mission-section {
+            padding: 80px 0;
+        }
+
+        .mission-container {
+            max-width: 1170px;
+            margin: 0 auto;
+        }
+
+        .mission-title {
+            font-size: 64px;
+            font-weight: 300;
+            line-height: 1;
+            color: var(--text-gray);
+            margin-bottom: 60px;
+        }
+
+        .mission-title strong {
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .mission-grid {
+            display: flex;
+            gap: 150px;
+        }
+
+        .mission-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 30px;
+            flex: 1;
+        }
+
+        .mission-number {
+            font-size: 200px;
+            font-weight: 900;
+            line-height: 0.7;
+            color: #f2f2f2;
+            flex-shrink: 0;
+        }
+
+        .mission-text {
+            padding-top: 0;
+            font-size: 22px;
+            font-weight: 400;
+            line-height: 36px;
+            color: var(--text-dark);
+            max-width: 420px;
+        }
+
+        /* ==================== PROJECTS SECTION ==================== */
+        #projects-section {
+            padding: 60px 0;
+        }
+
+        .projects-container {
+            max-width: 1170px;
+            margin: 0 auto;
+        }
+
+        .projects-title {
+            font-size: 64px;
+            font-weight: 300;
+            line-height: 1;
+            color: var(--text-gray);
+            margin-bottom: 60px;
+        }
+
+        .projects-title strong {
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .projects-row-1 {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .project-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .title-card {
+            width: 570px;
+            height: 255px;
+            position: relative;
+            background: url('IMAGES/0124225594babf151b206d3bd0b420b114c334a3.png') no-repeat center;
+            background-size: cover;
+        }
+
+        .title-card-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(51, 51, 51, 0.8);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 48px 79px;
+        }
+
+        .title-card h3 {
+            font-size: 64px;
+            font-weight: 700;
+            line-height: 1;
+            color: #fff;
+            margin-bottom: 30px;
+        }
+
+        .view-more {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 12px;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 2.4px;
+            color: #fff;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .view-more:hover {
+            color: var(--primary-color);
+        }
+
+        .view-more svg {
+            width: 24px;
+            height: 24px;
+            stroke: currentColor;
+        }
+
+        .wide-card {
+            width: 570px;
+            height: 255px;
+        }
+
+        .projects-row-2 {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .small-card {
+            width: 270px;
+            height: 255px;
+        }
+
+        .medium-card {
+            width: 470px;
+            height: 255px;
+        }
+
+        .large-card {
+            width: 370px;
+            height: 255px;
+        }
+
+        .all-projects-btn {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 30px;
+        }
+
+        .btn-dark {
+            background: var(--text-dark);
+            padding: 24px 39px;
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-dark:hover {
+            background: var(--primary-color);
+        }
+
+        .btn-dark span {
+            font-size: 12px;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 2.4px;
+            color: #fff;
+        }
+
+        .btn-dark svg {
+            width: 24px;
+            height: 24px;
+            stroke: #fff;
+        }
+
+        /* ==================== SERVICES SECTION ==================== */
+        #services-section {
+            background-color: var(--bg-dark);
+            padding: 100px 0;
+            color: #fff;
+        }
+
+        .services-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .services-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 80px;
+        }
+
+        .services-title {
+            font-size: 54px;
+            font-weight: 700;
+            line-height: 1.15;
+            max-width: 800px;
+            text-transform: capitalize;
+        }
+
+        .learn-more-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 16px;
+            font-weight: 500;
+            color: #fff;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            margin-top: 20px;
+        }
+
+        .learn-more-link:hover {
+            color: var(--primary-color);
+            transform: translateX(5px);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            align-items: start;
+        }
+
+        .service-column {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .service-item-text {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .service-item-text h3 {
+            font-size: 44px;
+            font-weight: 500;
+            line-height: 1;
+            color: #fff;
+            margin: 0;
+        }
+
+        .service-item-text .arrow {
+            font-size: 32px;
+            line-height: 1;
+            font-weight: 300;
+        }
+
+        .service-item-image {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 250px;
+        }
+
+        .service-item-image img {
+            max-width: 100%;
+            height: auto;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+
+        .service-item-image:hover img {
+            transform: scale(1.05);
+        }
+
+        /* ==================== TEAM SECTION ==================== */
+        #team-section {
+            padding: 80px 0;
+            background: #fff;
+        }
+
+        .team-container {
+            max-width: 1170px;
+            margin: 0 auto;
+        }
+
+        .team-wrapper {
+            display: flex;
+            gap: 60px;
+        }
+
+        .team-left {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .team-member-card {
+            display: flex;
+            overflow: hidden;
+        }
+
+        .team-member-card img {
+            width: 50%;
+            height: 560px;
+            object-fit: cover;
+            object-position: top center;
+            filter: grayscale(100%);
+        }
+
+        .team-member-info {
+            width: 50%;
+            background: var(--primary-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 40px;
+        }
+
+        .team-member-info h3 {
+            font-size: 48px;
+            font-weight: 500;
+            line-height: 55px;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .team-member-info p {
+            font-size: 18px;
+            color: #fff;
+        }
+
+        .testimonial-section {
+            margin-top: 40px;
+            padding-left: 50px;
+            position: relative;
+        }
+
+        .testimonial-section .quote-icon {
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .testimonial-section p {
+            font-size: 18px;
+            line-height: 28px;
+            color: #1a1a1a;
+            font-style: italic;
+        }
+
+        .team-right {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .team-header {
+            margin-bottom: 60px;
+            padding-top: 40px;
+        }
+
+        .team-header span {
+            font-size: 24px;
+            font-weight: 600;
+            color: #1a1a1a;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .team-header h2 {
+            font-size: 48px;
+            font-weight: 700;
+            line-height: 56px;
+            color: #1a1a1a;
+        }
+
+        .team-member-card-2 {
+            display: flex;
+            overflow: hidden;
+        }
+
+        .team-member-card-2 img {
+            width: 50%;
+            height: 440px;
+            object-fit: cover;
+            object-position: top center;
+            filter: grayscale(100%);
+        }
+
+        .team-member-card-2 .team-member-info {
+            width: 50%;
+            height: 440px;
+        }
+
+        /* ==================== FOOTER ==================== */
+        .site-footer {
+            background-color: var(--bg-dark);
+            color: #fff;
+            padding-top: 60px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: auto 1fr 1fr 1fr;
+            gap: 60px;
+            padding-bottom: 60px;
+        }
+
+        .footer-col h3 {
+            font-family: var(--font-main);
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 25px;
+        }
+
+        .logo-col {
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .footer-logo {
+            width: 100px;
+            height: auto;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            font-family: var(--font-main);
+            font-size: 14px;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+        }
+
+        .contact-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 15px;
+            font-family: var(--font-main);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .contact-list img {
+            margin-top: 4px;
+            flex-shrink: 0;
+            width: 16px;
+            height: 16px;
+        }
+
+        .contact-list span {
+            word-break: break-word;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 35px;
+            height: 35px;
+        }
+
+        .social-icons a img {
+            transition: opacity 0.3s;
+            width: 20px;
+            height: 20px;
+        }
+
+        .social-icons a:hover img {
+            opacity: 0.7;
+        }
+
+        .copyright-bar {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .copyright-bar p {
+            font-family: var(--font-main);
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* ==================== BACK TO TOP ==================== */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--primary-color);
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            transition: background 0.3s, transform 0.3s;
+            font-family: var(--font-main);
+        }
+
+        .back-to-top:hover {
+            background: #c5a020;
+            transform: translateY(-3px);
+        }
+
+        .back-to-top.show {
+            display: flex;
+        }
+
+        /* ==================== RESPONSIVE - 1200px ==================== */
+        @media (max-width: 1200px) {
+
+            .hero-title .text-light,
+            .hero-title .text-bold {
+                font-size: 48px;
+            }
+
+            .about-images {
+                flex: 0 0 450px;
+            }
+
+            .mission-grid {
+                gap: 80px;
+            }
+
+            .mission-number {
+                font-size: 140px;
+            }
+
+            .services-title {
+                font-size: 42px;
+            }
+
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 50px;
+            }
+        }
+
+        /* ==================== RESPONSIVE - 992px ==================== */
+        @media (max-width: 992px) {
+            .hero-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero-content {
+                flex: none;
+                width: 100%;
+                max-width: none;
+            }
+
+            .hero-controls {
+                align-items: center;
+            }
+
+            .hero-image-wrapper {
+                max-width: 100%;
+            }
+
+            .view-project-btn {
+                position: relative;
+                width: 100%;
+                justify-content: center;
+            }
+
+            /* ABOUT */
+            .about-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .about-images {
+                flex: none;
+                width: 100%;
+                max-width: 500px;
+                height: 320px;
+            }
+
+            .collage-wrapper {
+                display: flex;
+                gap: 10px;
+                justify-content: center;
+            }
+
+            .collage-img {
+                position: relative;
+                top: auto !important;
+                left: auto !important;
+                bottom: auto !important;
+                right: auto !important;
+                width: 32%;
+                height: 100%;
+            }
+
+            .img-1,
+            .img-2,
+            .img-3 {
+                position: relative;
+                width: 32%;
+                height: 100%;
+            }
+
+            .about-text {
+                width: 100%;
+                text-align: center;
+            }
+
+            .description {
+                max-width: 600px;
+                margin-left: auto;
+                margin-right: auto;
+                text-align: center;
+            }
+
+            .read-more-btn {
+                margin: 0 auto;
+            }
+
+            /* MISSION */
+            .mission-title {
+                text-align: center;
+            }
+
+            .mission-grid {
+                flex-direction: column;
+                gap: 50px;
+                align-items: center;
+            }
+
+            .mission-item {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                max-width: 500px;
+            }
+
+            .mission-text {
+                max-width: 100%;
+            }
+
+            /* PROJECTS */
+            .projects-title {
+                text-align: center;
+            }
+
+            .projects-row-1,
+            .projects-row-2 {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .title-card,
+            .wide-card,
+            .small-card,
+            .medium-card,
+            .large-card {
+                width: 100%;
+                max-width: 570px;
+            }
+
+            .all-projects-btn {
+                justify-content: center;
+            }
+
+            /* SERVICES */
+            .services-header {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+                align-items: center;
+            }
+
+            .services-title {
+                text-align: center;
+            }
+
+            .learn-more-link {
+                justify-content: center;
+            }
+
+            /* TEAM */
+            .team-wrapper {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .team-left,
+            .team-right {
+                width: 100%;
+                max-width: 600px;
+            }
+
+            .team-member-card img {
+                width: 50%;
+            }
+
+            .team-member-info {
+                width: 50%;
+            }
+
+            .testimonial-section {
+                text-align: center;
+                padding-left: 0;
+            }
+
+            .testimonial-section .quote-icon {
+                position: relative;
+                margin: 0 auto 15px;
+            }
+
+            .team-header {
+                text-align: center;
+                padding-top: 0;
+            }
+
+            /* FOOTER */
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+                gap: 40px;
+            }
+
+            .logo-col {
+                justify-content: flex-start;
+            }
+        }
+
+        /* ==================== RESPONSIVE - 768px ==================== */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .main-nav {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                width: 100%;
+                height: 100vh;
+                background: #fff;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                opacity: 0;
+                visibility: hidden;
+                transition: opacity 0.3s ease, visibility 0.3s ease;
+                z-index: 1001;
+            }
+
+            .main-nav.active {
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .main-nav ul {
+                flex-direction: column;
+                gap: 30px;
+                text-align: center;
+            }
+
+            .main-nav a {
+                font-size: 24px;
+            }
+
+            .main-nav li.active .underline {
+                bottom: -8px;
+            }
+
+            .search-btn {
+                margin-left: auto;
+                margin-right: 25px;
+            }
+
+            /* HERO */
+            .hero-title .text-light,
+            .hero-title .text-bold {
+                font-size: 36px;
+            }
+
+            .hero-title {
+                margin-bottom: 40px;
+            }
+
+            .control-btn {
+                width: 45px;
+                height: 45px;
+            }
+
+            .slide-numbers .current,
+            .slide-numbers .total {
+                font-size: 18px;
+            }
+
+            .progress-line {
+                width: 100px;
+            }
+
+            /* ABOUT */
+            #about-section {
+                padding: 60px 0;
+            }
+
+            .about-images {
+                height: 220px;
+                max-width: 100%;
+            }
+
+            .section-title {
+                font-size: 32px;
+            }
+
+            .description {
+                font-size: 14px;
+                line-height: 24px;
+            }
+
+            .read-more-btn {
+                padding: 18px 28px;
+            }
+
+            /* MISSION */
+            #mission-section {
+                padding: 60px 0;
+            }
+
+            .mission-title {
+                font-size: 26px;
+                line-height: 1.3;
+            }
+
+            .mission-number {
+                font-size: 80px;
+            }
+
+            .mission-text {
+                font-size: 16px;
+                line-height: 26px;
+            }
+
+            /* PROJECTS */
+            #projects-section {
+                padding: 50px 0;
+            }
+
+            .projects-title {
+                font-size: 26px;
+                margin-bottom: 30px;
+            }
+
+            .projects-row-1,
+            .projects-row-2 {
+                gap: 15px;
+            }
+
+            .title-card {
+                height: 200px;
+            }
+
+            .title-card-overlay {
+                padding: 25px;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+            }
+
+            .title-card h3 {
+                font-size: 28px;
+                margin-bottom: 15px;
+            }
+
+            .view-more {
+                justify-content: center;
+                font-size: 11px;
+            }
+
+            .wide-card,
+            .small-card,
+            .medium-card,
+            .large-card {
+                height: 180px;
+            }
+
+            .btn-dark {
+                padding: 18px 30px;
+            }
+
+            /* SERVICES */
+            #services-section {
+                padding: 60px 0;
+            }
+
+            .services-title {
+                font-size: 24px;
+            }
+
+            .services-title br {
+                display: none;
+            }
+
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 30px;
+            }
+
+            .service-item-image {
+                min-height: 140px;
+            }
+
+            .service-item-text h3 {
+                font-size: 22px;
+            }
+
+            .service-item-text .arrow {
+                font-size: 20px;
+            }
+
+            /* TEAM */
+            #team-section {
+                padding: 60px 0;
+            }
+
+            .team-member-card {
+                flex-direction: column;
+            }
+
+            .team-member-card img {
+                width: 100%;
+                height: 350px;
+                object-position: top center;
+            }
+
+            .team-member-info {
+                width: 100%;
+                padding: 30px;
+            }
+
+            .team-member-info h3 {
+                font-size: 32px;
+                line-height: 1.2;
+            }
+
+            .team-member-info p {
+                font-size: 14px;
+            }
+
+            .testimonial-section p {
+                font-size: 14px;
+                line-height: 24px;
+            }
+
+            .team-header span {
+                font-size: 18px;
+            }
+
+            .team-header h2 {
+                font-size: 28px;
+                line-height: 1.3;
+            }
+
+            .team-header h2 br {
+                display: none;
+            }
+
+            .team-member-card-2 {
+                flex-direction: column;
+            }
+
+            .team-member-card-2 img {
+                width: 100%;
+                height: 350px;
+                object-position: top center;
+            }
+
+            .team-member-card-2 .team-member-info {
+                width: 100%;
+                height: auto;
+            }
+
+            /* FOOTER */
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+                gap: 30px;
+            }
+
+            .footer-col h3 {
+                margin-bottom: 20px;
+                font-size: 14px;
+            }
+
+            .footer-links a {
+                font-size: 13px;
+            }
+
+            .contact-list li {
+                font-size: 12px;
+            }
+
+            .social-icons a {
+                width: 30px;
+                height: 30px;
+            }
+
+            .social-icons a img {
+                width: 18px;
+                height: 18px;
+            }
+
+            .back-to-top {
+                width: 45px;
+                height: 45px;
+                font-size: 20px;
+                bottom: 20px;
+                right: 20px;
+            }
+
+            .loader-logo-container {
+                width: 100px;
+                height: 100px;
+            }
+
+            .loader-logo {
+                width: 50px;
+                height: 50px;
+            }
+
+            .loader-progress-container {
+                width: 160px;
+            }
+
+            .loader-text {
+                font-size: 10px;
+                letter-spacing: 2px;
+            }
+        }
+
+        /* ==================== RESPONSIVE - 480px ==================== */
+        @media (max-width: 480px) {
+            #header-section {
+                padding: 20px 0;
+            }
+
+            .logo img {
+                width: 60px;
+            }
+
+            /* HERO */
+            .hero-title .text-light,
+            .hero-title .text-bold {
+                font-size: 28px;
+            }
+
+            .progress-line {
+                width: 80px;
+            }
+
+            .view-project-btn {
+                padding: 18px 25px;
+            }
+
+            .btn-text {
+                font-size: 11px;
+                letter-spacing: 1.5px;
+            }
+
+            /* ABOUT */
+            #about-section {
+                padding: 40px 0;
+            }
+
+            .about-images {
+                height: 160px;
+            }
+
+            .collage-wrapper {
+                gap: 8px;
+            }
+
+            .section-title {
+                font-size: 26px;
+            }
+
+            .description {
+                font-size: 13px;
+                line-height: 22px;
+            }
+
+            .read-more-btn {
+                padding: 15px 22px;
+            }
+
+            .read-more-btn span {
+                font-size: 10px;
+                letter-spacing: 1.5px;
+            }
+
+            /* MISSION */
+            #mission-section {
+                padding: 40px 0;
+            }
+
+            .mission-title {
+                font-size: 22px;
+                margin-bottom: 40px;
+            }
+
+            .mission-number {
+                font-size: 60px;
+            }
+
+            .mission-text {
+                font-size: 14px;
+                line-height: 24px;
+            }
+
+            /* PROJECTS */
+            #projects-section {
+                padding: 40px 0;
+            }
+
+            .projects-title {
+                font-size: 22px;
+                margin-bottom: 25px;
+            }
+
+            .title-card {
+                height: 180px;
+            }
+
+            .title-card h3 {
+                font-size: 24px;
+            }
+
+            .view-more {
+                font-size: 10px;
+            }
+
+            .wide-card,
+            .small-card,
+            .medium-card,
+            .large-card {
+                height: 150px;
+            }
+
+            .btn-dark {
+                padding: 15px 25px;
+                width: 100%;
+                justify-content: center;
+            }
+
+            .btn-dark span {
+                font-size: 11px;
+            }
+
+            /* SERVICES */
+            #services-section {
+                padding: 40px 0;
+            }
+
+            .services-header {
+                margin-bottom: 40px;
+            }
+
+            .services-title {
+                font-size: 20px;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 25px;
+            }
+
+            .service-item-image {
+                min-height: 120px;
+            }
+
+            .service-item-image img {
+                max-height: 120px;
+            }
+
+            .service-item-text h3 {
+                font-size: 18px;
+            }
+
+            .service-item-text .arrow {
+                font-size: 18px;
+            }
+
+            /* TEAM */
+            #team-section {
+                padding: 40px 0;
+            }
+
+            .team-member-card img,
+            .team-member-card-2 img {
+                height: 300px;
+            }
+
+            .team-member-info {
+                padding: 25px;
+            }
+
+            .team-member-info h3 {
+                font-size: 26px;
+                line-height: 1.2;
+            }
+
+            .team-member-info p {
+                font-size: 13px;
+            }
+
+            .testimonial-section {
+                margin-top: 30px;
+            }
+
+            .testimonial-section p {
+                font-size: 13px;
+                line-height: 22px;
+            }
+
+            .team-header {
+                margin-bottom: 30px;
+            }
+
+            .team-header span {
+                font-size: 16px;
+            }
+
+            .team-header h2 {
+                font-size: 24px;
+                line-height: 1.3;
+            }
+
+            /* FOOTER */
+            .site-footer {
+                padding-top: 40px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+                gap: 25px;
+                padding-bottom: 40px;
+            }
+
+            .footer-logo {
+                width: 70px;
+            }
+
+            .footer-col h3 {
+                margin-bottom: 15px;
+                font-size: 12px;
+            }
+
+            .footer-links li {
+                margin-bottom: 8px;
+            }
+
+            .footer-links a {
+                font-size: 11px;
+            }
+
+            .contact-list li {
+                font-size: 10px;
+                margin-bottom: 10px;
+                gap: 6px;
+            }
+
+            .contact-list img {
+                width: 12px;
+                height: 12px;
+            }
+
+            .social-icons {
+                gap: 8px;
+            }
+
+            .social-icons a {
+                width: 26px;
+                height: 26px;
+            }
+
+            .social-icons a img {
+                width: 14px;
+                height: 14px;
+            }
+
+            .copyright-bar p {
+                font-size: 10px;
+            }
+
+            .loader-logo-container {
+                width: 80px;
+                height: 80px;
+            }
+
+            .loader-logo {
+                width: 40px;
+                height: 40px;
+            }
+
+            .loader-content {
+                gap: 20px;
+            }
+
+            .loader-progress-container {
+                width: 140px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ==================== PRINTHADA PROFESSIONAL LOADER ==================== -->
+    <div class="printhada-loader" id="pageLoader">
+        <div class="loader-content">
+            <div class="loader-logo-container">
+                <div class="loader-ring"></div>
+                <img src="IMAGES/5db1c76c09bd4716a7ddbc483a6afc6e11d7ef70.png" alt="Printhada" class="loader-logo">
+            </div>
+            <div class="loader-progress-container">
+                <div class="loader-progress-bar"></div>
+            </div>
+            <div class="loader-text">
+                <span>P</span><span>R</span><span>I</span><span>N</span><span>T</span><span>H</span><span>A</span><span>D</span><span>A</span>
+            </div>
+            <div class="loader-dots">
+                <div class="loader-dot"></div>
+                <div class="loader-dot"></div>
+                <div class="loader-dot"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page Transition Overlay -->
+    <div class="page-transition" id="pageTransition">
+        <div class="loader-content">
+            <div class="loader-logo-container">
+                <div class="loader-ring"></div>
+                <img src="IMAGES/5db1c76c09bd4716a7ddbc483a6afc6e11d7ef70.png" alt="Printhada" class="loader-logo">
+            </div>
+            <div class="loader-dots">
+                <div class="loader-dot"></div>
+                <div class="loader-dot"></div>
+                <div class="loader-dot"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== HEADER ==================== -->
+    <section id="header-section">
+        <header class="site-header container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="IMAGES/5db1c76c09bd4716a7ddbc483a6afc6e11d7ef70.png" alt="Printhada Logo" />
+                </a>
+            </div>
+            <nav class="main-nav" id="mainNav">
+                <ul>
+                    <li class="active">
+                        <a href="index.html">HOME</a>
+                        <div class="underline"></div>
+                    </li>
+                    <li><a href="ABOUT.html">ABOUT</a></li>
+                    <li><a href="SERVICES.html">SERVICES</a></li>
+                    <li><a href="PRICING.html">PRICING</a></li>
+                    <li><a href="CONTACTS.html">CONTACTS</a></li>
+                </ul>
+            </nav>
+            <button class="search-btn" id="searchBtn" aria-label="Search">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.35-4.35"></path>
+                </svg>
+            </button>
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu">☰</button>
+        </header>
+    </section>
+
+    <!-- Search Modal -->
+    <div class="search-modal" id="searchModal">
+        <div class="search-container">
+            <div class="search-input-wrapper">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.35-4.35"></path>
+                </svg>
+                <input type="text" class="search-input" id="searchInput"
+                    placeholder="Search pages, services, pricing..." />
+                <button class="search-close" id="searchClose">✕</button>
+            </div>
+            <div class="search-results" id="searchResults"></div>
+        </div>
+    </div>
+
+    <!-- ==================== HERO SECTION ==================== -->
+    <section id="hero-section">
+        <div class="container hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <span class="text-light">PRINTHADA</span>
+                    <span class="text-bold">Products</span>
+                </h1>
+
+                <div class="hero-controls">
+                    <div class="control-group">
+                        <div class="control-btn prev" id="prevSlide">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M19 12H5"></path>
+                                <path d="m12 19-7-7 7-7"></path>
+                            </svg>
+                        </div>
+                        <div class="control-btn next" id="nextSlide">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14"></path>
+                                <path d="m12 5 7 7-7 7"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="slide-numbers">
+                        <span class="current" id="currentSlide">01</span>
+                        <div class="progress-line"></div>
+                        <span class="total">02</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-image-wrapper">
+                <img src="IMAGES/print1.png" alt="Hero Banner" class="hero-img" id="heroImage" />
+                <a href="SERVICES.html" class="view-project-btn">
+                    <div class="btn-content">
+                        <span class="btn-text">View Project</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14"></path>
+                            <path d="m12 5 7 7-7 7"></path>
+                        </svg>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== ABOUT SECTION ==================== -->
+    <section id="about-section">
+        <div class="container about-container">
+            <div class="about-images">
+                <div class="collage-wrapper">
+                    <img src="IMAGES/5db1c76c09bd4716a7ddbc483a6afc6e11d7ef70.png" class="collage-img img-1"
+                        alt="About 1" />
+                    <img src="IMAGES/copy.png" class="collage-img img-2" alt="About 2" />
+                    <img src="IMAGES/copy1.png" class="collage-img img-3" alt="About 3" />
+                </div>
+            </div>
+
+            <div class="about-text">
+                <h2 class="section-title">About</h2>
+                <p class="description">
+                    Rooted in 15 years of industry experience, Printhada specializes in high-quality advertising
+                    fabrication and printing at reasonable costs. We provide everything from corporate apparel and
+                    souvenirs to secure, QR-coded document printing designed to safeguard authenticity. By prioritizing
+                    realistic lead times and direct communication via Gmail and Messenger, we ensure a seamless and
+                    professional experience for every client.
+                </p>
+                <a href="ABOUT.html" class="read-more-btn">
+                    <span>Read More</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14"></path>
+                        <path d="m12 5 7 7-7 7"></path>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== MISSION SECTION ==================== -->
+    <section id="mission-section">
+        <div class="container mission-container">
+            <h2 class="mission-title">Main Focus/<strong>Mission Statement</strong></h2>
+
+            <div class="mission-grid">
+                <div class="mission-item">
+                    <div class="mission-number">1</div>
+                    <p class="mission-text">
+                        To provide cost-effective, high-quality printing and advertising fabrication by delivering
+                        realistic solutions and "possibilities, not promises" to every client.
+                    </p>
+                </div>
+
+                <div class="mission-item">
+                    <div class="mission-number">2</div>
+                    <p class="mission-text">
+                        To be the Philippines' premier choice for secure and high-quality digital printing, bridging the
+                        gap between creative concepts and professional physical execution.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== PROJECTS SECTION ==================== -->
+    <section id="projects-section">
+        <div class="container projects-container">
+            <h2 class="projects-title">Our <strong>Products</strong></h2>
+
+            <div class="projects-row-1">
+                <div class="project-card title-card">
+                    <div class="title-card-overlay">
+                        <h3>PRINTHADA<br>PROJECTS</h3>
+                        <a href="SERVICES.html" class="view-more">
+                            <span>View More</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14"></path>
+                                <path d="m12 5 7 7-7 7"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="project-card wide-card">
+                    <img src="IMAGES/617faf5f4a55838b96391b9aa7d37d78d8fcf6a2.png" alt="Project 1" />
+                </div>
+            </div>
+
+            <div class="projects-row-2">
+                <div class="project-card small-card">
+                    <img src="IMAGES/bde121af77d9f14a3e94fa3a897fd7bc5a1ebfb8.png" alt="Project 2" />
+                </div>
+                <div class="project-card medium-card">
+                    <img src="IMAGES/0ea7ddc46491e9fadf52137f7e6e3201033d6ad7.png" alt="Project 3" />
+                </div>
+                <div class="project-card large-card">
+                    <img src="IMAGES/6d3e920e9bce5134cf728227855a91b68dbb7b4b.png" alt="Project 4" />
+                </div>
+            </div>
+
+            <div class="all-projects-btn">
+                <a href="SERVICES.html" class="btn-dark">
+                    <span>All Projects</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14"></path>
+                        <path d="m12 5 7 7-7 7"></path>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SERVICES SECTION ==================== -->
+    <section id="services-section">
+        <div class="container services-container">
+            <div class="services-header">
+                <h2 class="services-title">Easy and Fast Print<br>Customization with Digital Print<br>Services</h2>
+                <a href="SERVICES.html" class="learn-more-link">
+                    Learn More
+                    <svg viewBox="0 0 17 8" fill="none" width="17" height="8">
+                        <path
+                            d="M16.3536 4.35355C16.5488 4.15829 16.5488 3.84171 16.3536 3.64645L13.1716 0.464466C12.9763 0.269204 12.6597 0.269204 12.4645 0.464466C12.2692 0.659728 12.2692 0.976311 12.4645 1.17157L15.2929 4L12.4645 6.82843C12.2692 7.02369 12.2692 7.34027 12.4645 7.53553C12.6597 7.7308 12.9763 7.7308 13.1716 7.53553L16.3536 4.35355ZM0 4.5H16V3.5H0V4.5Z"
+                            fill="white" />
+                    </svg>
+                </a>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-column">
+                    <div class="service-item-image">
+                        <img src="IMAGES/d93fffdd20e8cb2ceb140c32986a700e7c7bc322.png" alt="Printed Glass" />
+                    </div>
+                    <div class="service-item-text">
+                        <span class="arrow">↑</span>
+                        <h3>Printed<br>Glass</h3>
+                    </div>
+                </div>
+
+                <div class="service-column">
+                    <div class="service-item-text">
+                        <h3>Book<br>Print</h3>
+                        <span class="arrow">↓</span>
+                    </div>
+                    <div class="service-item-image">
+                        <img src="IMAGES/7d065f174dcf201e3a8d619097d4a0f9474e6f0a.png" alt="Book Print" />
+                    </div>
+                </div>
+
+                <div class="service-column">
+                    <div class="service-item-image">
+                        <img src="IMAGES/2baa0b8f1ea85d49cd9fa9848e8d6c67c470859c.png" alt="Shirt Print" />
+                    </div>
+                    <div class="service-item-text">
+                        <span class="arrow">↑</span>
+                        <h3>Shirt<br>Print</h3>
+                    </div>
+                </div>
+
+                <div class="service-column">
+                    <div class="service-item-text">
+                        <h3>Sticker/Mug<br>Print</h3>
+                        <span class="arrow">↓</span>
+                    </div>
+                    <div class="service-item-image">
+                        <img src="IMAGES/02b9c838809b34df307ecbd68a6176f347577a20.png" alt="Sticker/Mug Print" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== TEAM SECTION ==================== -->
+    <section id="team-section">
+        <div class="container team-container">
+            <div class="team-wrapper">
+                <div class="team-left">
+                    <div class="team-member-card">
+                        <img src="IMAGES/73a3958c9af05de4d21d4d3ee89e79e3de61d76f.png" alt="Gilbert Pascual" />
+                        <div class="team-member-info">
+                            <h3>Gilbert<br>Pascual</h3>
+                            <p>Ceo of Printhada</p>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-section">
+                        <div class="quote-icon">
+                            <svg width="40" height="30" viewBox="0 0 40 30" fill="none">
+                                <path
+                                    d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"
+                                    fill="#d9bb28" />
+                            </svg>
+                        </div>
+                        <p>
+                            "At Printhada, we believe that professional printing should be seamless and secure. We
+                            started this business with a simple goal: to make high-quality printing easy and accessible
+                            for everyone in our community. Whether you're a student needing school records, a small
+                            business owner looking for stickers, or a company needing full-scale event booths, we treat
+                            every project like it's our own."
+                        </p>
+                    </div>
+                </div>
+
+                <div class="team-right">
+                    <div class="team-header">
+                        <span>Our Team</span>
+                        <h2>Unlimited Creativity<br>With Our Professional<br>Team</h2>
+                    </div>
+
+                    <div class="team-member-card-2">
+                        <img src="IMAGES/c59f0df021f8d063677f731583aed862713a7243.png" alt="Rodel Pascual" />
+                        <div class="team-member-info">
+                            <h3>Rodel<br>Pascual</h3>
+                            <p>Ceo of Prysm Advertising</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <section id="footer-section">
+        <footer class="site-footer">
+            <div class="container footer-content">
+                <div class="footer-col logo-col">
+                    <a href="index.html">
+                        <img src="IMAGES/5db1c76c09bd4716a7ddbc483a6afc6e11d7ef70.png" alt="Printhada Logo"
+                            class="footer-logo" />
+                    </a>
+                </div>
+                <div class="footer-col">
+                    <h3>Information</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="ABOUT.html">About</a></li>
+                        <li><a href="SERVICES.html">Services</a></li>
+                        <li><a href="PRICING.html">Pricing</a></li>
+                        <li><a href="CONTACTS.html">Contacts</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col contact-col">
+                    <h3>Contacts</h3>
+                    <ul class="contact-list">
+                        <li>
+                            <img src="IMAGES/1_641.svg" alt="Location" />
+                            <span>3486 Varona, Makati City, 1204 Metro Manila</span>
+                        </li>
+                        <li>
+                            <img src="IMAGES/1_643.svg" alt="Phone" />
+                            <span>09174704724 / 09302819063</span>
+                        </li>
+                        <li>
+                            <img src="IMAGES/1_645.svg" alt="Email" />
+                            <span>printhada.2009@gmail.com</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer-col social-col">
+                    <h3>Social Media</h3>
+                    <div class="social-icons">
+                        <a href="https://www.facebook.com" target="_blank"><img src="IMAGES/1_614.svg"
+                                alt="Facebook" /></a>
+                        <a href="https://www.twitter.com" target="_blank"><img src="IMAGES/1_616.svg"
+                                alt="Twitter" /></a>
+                        <a href="https://www.linkedin.com" target="_blank"><img src="IMAGES/1_619.svg"
+                                alt="LinkedIn" /></a>
+                        <a href="https://www.pinterest.com" target="_blank"><img src="IMAGES/1_625.svg"
+                                alt="Pinterest" /></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright-bar">
+                <div class="container">
+                    <p>© 2025 All Rights Reserved</p>
+                </div>
+            </div>
+        </footer>
+    </section>
+
+    <!-- ==================== BACK TO TOP ==================== -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+    <script>
+        // ==================== PAGE LOADER ====================
+        var pageLoader = document.getElementById('pageLoader');
+        var pageTransition = document.getElementById('pageTransition');
+        var htmlElement = document.documentElement;
+        var bodyElement = document.body;
+
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+
+        htmlElement.classList.add('loading');
+        bodyElement.classList.add('loading');
+
+        window.addEventListener('load', function () {
+            setTimeout(function () {
+                pageLoader.classList.add('hidden');
+                htmlElement.classList.remove('loading');
+                bodyElement.classList.remove('loading');
+                window.scrollTo(0, 0);
+            }, 800);
+        });
+
+        document.querySelectorAll('a[href]').forEach(function (link) {
+            link.addEventListener('click', function (e) {
+                var href = this.getAttribute('href');
+
+                if (href &&
+                    !href.startsWith('#') &&
+                    !href.startsWith('http') &&
+                    !href.startsWith('mailto') &&
+                    !href.startsWith('tel') &&
+                    href !== window.location.pathname.split('/').pop()) {
+
+                    e.preventDefault();
+                    htmlElement.classList.add('loading');
+                    bodyElement.classList.add('loading');
+                    pageTransition.classList.add('active');
+
+                    setTimeout(function () {
+                        window.location.href = href;
+                    }, 400);
+                }
+            });
+        });
+
+        window.addEventListener('pageshow', function (event) {
+            if (event.persisted) {
+                pageTransition.classList.remove('active');
+                pageLoader.classList.add('hidden');
+                htmlElement.classList.remove('loading');
+                bodyElement.classList.remove('loading');
+            }
+        });
+
+        // ==================== HAMBURGER MENU ====================
+        var hamburger = document.getElementById('hamburger');
+        var nav = document.getElementById('mainNav');
+        var body = document.body;
+
+        hamburger.addEventListener('click', function () {
+            nav.classList.toggle('active');
+            if (nav.classList.contains('active')) {
+                hamburger.textContent = '✕';
+                body.style.overflow = 'hidden';
+            } else {
+                hamburger.textContent = '☰';
+                body.style.overflow = '';
+            }
+        });
+
+        var navLinks = nav.querySelectorAll('a');
+        navLinks.forEach(function (link) {
+            link.addEventListener('click', function () {
+                nav.classList.remove('active');
+                hamburger.textContent = '☰';
+                body.style.overflow = '';
+            });
+        });
+
+        // ==================== BACK TO TOP ====================
+        var backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', function () {
+            if (window.pageYOffset > 300) {
+                backToTop.classList.add('show');
+            } else {
+                backToTop.classList.remove('show');
+            }
+        });
+
+        backToTop.addEventListener('click', function () {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // ==================== HERO SLIDER ====================
+        var heroImages = [
+            'IMAGES/print3.png',
+            'IMAGES/print2.png'
+        ];
+        var currentSlideIndex = 0;
+        var heroImageEl = document.getElementById('heroImage');
+        var currentSlideEl = document.getElementById('currentSlide');
+        var prevBtn = document.getElementById('prevSlide');
+        var nextBtn = document.getElementById('nextSlide');
+
+        function updateSlide() {
+            heroImageEl.style.opacity = 0;
+            setTimeout(function () {
+                heroImageEl.src = heroImages[currentSlideIndex];
+                currentSlideEl.textContent = String(currentSlideIndex + 1).padStart(2, '0');
+                heroImageEl.style.opacity = 1;
+            }, 300);
+        }
+
+        heroImageEl.style.transition = 'opacity 0.3s ease';
+
+        prevBtn.addEventListener('click', function () {
+            currentSlideIndex = (currentSlideIndex - 1 + heroImages.length) % heroImages.length;
+            updateSlide();
+        });
+
+        nextBtn.addEventListener('click', function () {
+            currentSlideIndex = (currentSlideIndex + 1) % heroImages.length;
+            updateSlide();
+        });
+
+        setInterval(function () {
+            currentSlideIndex = (currentSlideIndex + 1) % heroImages.length;
+            updateSlide();
+        }, 5000);
+
+        // ==================== SEARCH FUNCTIONALITY ====================
+        var searchBtn = document.getElementById('searchBtn');
+        var searchModal = document.getElementById('searchModal');
+        var searchInput = document.getElementById('searchInput');
+        var searchClose = document.getElementById('searchClose');
+        var searchResults = document.getElementById('searchResults');
+
+        var pageData = [
+            { title: 'Home - Printhada', page: 'index.html', description: 'Welcome to Printhada, your one-stop printing solution', keywords: ['home', 'main', 'start', 'welcome'] },
+            { title: 'About Us', page: 'ABOUT.html', description: 'Learn about our company, mission, and team', keywords: ['about', 'company', 'team', 'mission', 'who we are'] },
+            { title: 'Our Services', page: 'SERVICES.html', description: 'Professional printing services including document printing, binding, and lamination', keywords: ['services', 'printing', 'binding', 'lamination', 'stamps', 'seals', 'photocopy'] },
+            { title: 'Pricing Packages', page: 'PRICING.html', description: 'Standard Prints (₱250), Corporate Package (₱2,500), Premium Fabrication (₱7,500)', keywords: ['pricing', 'price', 'cost', 'packages', 'standard', 'corporate', 'premium', 'cheap', 'affordable'] },
+            { title: 'Contact Us', page: 'CONTACTS.html', description: 'Get in touch - Location, phone, email, and business hours', keywords: ['contact', 'location', 'address', 'phone', 'email', 'hours', 'reach us'] },
+            { title: 'Standard Prints Package', page: 'PRICING.html#standard', description: 'Starting at ₱250 - High-quality sticker & document printing', keywords: ['standard', 'cheap', 'basic', 'sticker', 'document'] },
+            { title: 'Corporate Package', page: 'PRICING.html#corporate', description: 'Starting at ₱2,500 - Corporate apparel, tumblers, and gifts', keywords: ['corporate', 'business', 'bulk', 'shirts', 'apparel', 'uniforms'] },
+            { title: 'Premium Fabrication', page: 'PRICING.html#premium', description: 'Starting at ₱7,500 - Trophies, awards, exhibition booths', keywords: ['premium', 'trophies', 'awards', 'booth', 'exhibition'] }
+        ];
+
+        searchBtn.addEventListener('click', function () {
+            searchModal.classList.add('active');
+            searchInput.focus();
+        });
+
+        searchClose.addEventListener('click', function () {
+            searchModal.classList.remove('active');
+            searchInput.value = '';
+            searchResults.innerHTML = '';
+        });
+
+        searchModal.addEventListener('click', function (e) {
+            if (e.target === searchModal) {
+                searchModal.classList.remove('active');
+                searchInput.value = '';
+                searchResults.innerHTML = '';
+            }
+        });
+
+        searchInput.addEventListener('input', function () {
+            var query = this.value.toLowerCase().trim();
+
+            if (query.length < 2) {
+                searchResults.innerHTML = '';
+                return;
+            }
+
+            var results = pageData.filter(function (item) {
+                return item.title.toLowerCase().includes(query) ||
+                    item.description.toLowerCase().includes(query) ||
+                    item.keywords.some(function (keyword) { return keyword.includes(query); });
+            });
+
+            if (results.length === 0) {
+                searchResults.innerHTML = '<div class="no-results">No results found for "' + query + '"</div>';
+                return;
+            }
+
+            searchResults.innerHTML = results.map(function (result) {
+                return '<div class="search-result-item" data-page="' + result.page + '">' +
+                    '<div class="result-title">' + result.title + '</div>' +
+                    '<div class="result-description">' + result.description + '</div>' +
+                    '</div>';
+            }).join('');
+
+            document.querySelectorAll('.search-result-item').forEach(function (item) {
+                item.addEventListener('click', function () {
+                    window.location.href = this.getAttribute('data-page');
+                });
+            });
+        });
+
+        document.addEventListener('keydown', function (e) {
+            if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                e.preventDefault();
+                searchModal.classList.add('active');
+                searchInput.focus();
+            }
+            if (e.key === 'Escape' && searchModal.classList.contains('active')) {
+                searchModal.classList.remove('active');
+                searchInput.value = '';
+                searchResults.innerHTML = '';
+            }
+        });
+
+        // ==================== TAWK.TO AI CHATBOT ====================
+        var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+        (function () {
+            var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+            s1.async = true;
+            s1.src = 'https://embed.tawk.to/694f513a5585f019809e7c75/1jdetajrp';
+            s1.charset = 'UTF-8';
+            s1.setAttribute('crossorigin', '*');
+            s0.parentNode.insertBefore(s1, s0);
+        })();
+
+        Tawk_API.onLoad = function () {
+            Tawk_API.showWidget();
+        };
+
+        Tawk_API.onChatMinimized = function () {
+            Tawk_API.showWidget();
+        };
+
+        Tawk_API.onChatHidden = function () {
+            Tawk_API.showWidget();
+        };
+    </script>
+</body>
+
+</html>

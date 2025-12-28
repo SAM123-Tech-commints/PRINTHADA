@@ -1,0 +1,2403 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing - Printhada</title>
+    <link rel="icon" href="IMAGES/5db1c76c09bd4716a7ddbc483a6afc6e11d7ef70.png" type="image/png">
+    <!-- Google Fonts - Roboto -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700;900&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #d9bb28;
+            --text-dark: #333333;
+            --text-light: #ffffff;
+            --text-gray: #bdbdbd;
+            --bg-dark: #2c2c2c;
+            --border-color: #022a3a;
+            --font-main: 'Roboto', sans-serif;
+            --max-width: 1440px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: #ffffff;
+            color: var(--text-dark);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 20px;
+            width: 100%;
+        }
+
+        /* ==================== PRINTHADA PROFESSIONAL LOADER ==================== */
+        .printhada-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 99999;
+            transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                visibility 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .printhada-loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+        }
+
+        /* Logo Container with Spinner */
+        .loader-logo-container {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Rotating Ring - Outer */
+        .loader-ring {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            border-top-color: var(--primary-color);
+            animation: loaderSpin 1s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+        }
+
+        .loader-ring::before {
+            content: '';
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            right: 5px;
+            bottom: 5px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            border-top-color: var(--bg-dark);
+            animation: loaderSpin 1.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite reverse;
+        }
+
+        .loader-ring::after {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            right: 15px;
+            bottom: 15px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            border-top-color: var(--primary-color);
+            opacity: 0.5;
+            animation: loaderSpin 2s linear infinite;
+        }
+
+        /* Logo with Pulse Effect */
+        .loader-logo {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            animation: logoPulse 1.5s ease-in-out infinite;
+            z-index: 2;
+        }
+
+        /* Progress Bar Style */
+        .loader-progress-container {
+            width: 200px;
+            height: 3px;
+            background: rgba(51, 51, 51, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .loader-progress-bar {
+            height: 100%;
+            width: 30%;
+            background: linear-gradient(90deg, var(--primary-color), #f5d547, var(--primary-color));
+            background-size: 200% 100%;
+            border-radius: 10px;
+            animation: progressMove 1.5s ease-in-out infinite, progressShimmer 1.5s linear infinite;
+        }
+
+        /* Loading Text */
+        .loader-text {
+            font-family: var(--font-main);
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--text-dark);
+            opacity: 0.7;
+        }
+
+        .loader-text span {
+            display: inline-block;
+            animation: textFade 1.5s ease-in-out infinite;
+        }
+
+        .loader-text span:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .loader-text span:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+
+        .loader-text span:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+
+        .loader-text span:nth-child(4) {
+            animation-delay: 0.3s;
+        }
+
+        .loader-text span:nth-child(5) {
+            animation-delay: 0.4s;
+        }
+
+        .loader-text span:nth-child(6) {
+            animation-delay: 0.5s;
+        }
+
+        .loader-text span:nth-child(7) {
+            animation-delay: 0.6s;
+        }
+
+        .loader-text span:nth-child(8) {
+            animation-delay: 0.7s;
+        }
+
+        .loader-text span:nth-child(9) {
+            animation-delay: 0.8s;
+        }
+
+        /* Decorative Dots */
+        .loader-dots {
+            display: flex;
+            gap: 8px;
+            margin-top: 5px;
+        }
+
+        .loader-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            animation: dotBounce 1.4s ease-in-out infinite;
+        }
+
+        .loader-dot:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .loader-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .loader-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        /* Keyframe Animations */
+        @keyframes loaderSpin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes logoPulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            50% {
+                transform: scale(1.05);
+                opacity: 0.8;
+            }
+        }
+
+        @keyframes progressMove {
+            0% {
+                transform: translateX(-100%);
+                width: 30%;
+            }
+
+            50% {
+                width: 60%;
+            }
+
+            100% {
+                transform: translateX(400%);
+                width: 30%;
+            }
+        }
+
+        @keyframes progressShimmer {
+            0% {
+                background-position: 200% 0;
+            }
+
+            100% {
+                background-position: -200% 0;
+            }
+        }
+
+        @keyframes textFade {
+
+            0%,
+            100% {
+                opacity: 0.4;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes dotBounce {
+
+            0%,
+            80%,
+            100% {
+                transform: scale(0.8);
+                opacity: 0.5;
+            }
+
+            40% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+        }
+
+        /* Page transition overlay for navigation */
+        .page-transition {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #ffffff;
+            z-index: 99998;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .page-transition.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* ==================== HEADER ==================== */
+        #header-section {
+            padding: 30px 0;
+            background: #fff;
+            position: relative;
+            z-index: 1000;
+        }
+
+        .site-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            flex: 0 0 auto;
+            z-index: 1002;
+        }
+
+        .logo img {
+            width: 83px;
+            height: auto;
+        }
+
+        .main-nav {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .main-nav ul {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .main-nav a {
+            font-family: var(--font-main);
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-dark);
+            transition: color 0.3s ease;
+        }
+
+        .main-nav a:hover {
+            color: var(--primary-color);
+        }
+
+        .main-nav li.active {
+            position: relative;
+        }
+
+        .main-nav li.active .underline {
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--text-dark);
+        }
+
+        .hamburger {
+            display: none;
+            font-size: 28px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: var(--text-dark);
+            z-index: 1002;
+            padding: 5px;
+            font-family: var(--font-main);
+        }
+
+        /* ==================== SEARCH BAR ==================== */
+        .search-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s;
+            margin-left: 20px;
+            color: var(--text-dark);
+        }
+
+        @media (max-width: 768px) {
+            .search-btn {
+                margin-left: auto;
+                margin-right: 25px;
+                /* Increased gap from hamburger */
+            }
+        }
+
+        .search-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .search-btn svg {
+            width: 22px;
+            height: 22px;
+            stroke: currentColor;
+        }
+
+        .search-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            align-items: flex-start;
+            justify-content: center;
+            z-index: 9999;
+            padding-top: 100px;
+        }
+
+        .search-modal.active {
+            display: flex;
+        }
+
+        .search-container {
+            background: white;
+            width: 90%;
+            max-width: 600px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .search-input-wrapper {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .search-input-wrapper svg {
+            width: 20px;
+            height: 20px;
+            stroke: #999;
+            margin-right: 15px;
+        }
+
+        .search-input {
+            flex: 1;
+            border: none;
+            outline: none;
+            font-size: 18px;
+            font-family: var(--font-main);
+            color: var(--text-dark);
+        }
+
+        .search-close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #999;
+            cursor: pointer;
+            padding: 0 10px;
+        }
+
+        .search-results {
+            max-height: 400px;
+            overflow-y: auto;
+            padding: 10px 0;
+        }
+
+        .search-result-item {
+            padding: 15px 20px;
+            cursor: pointer;
+            transition: background 0.2s;
+            border-left: 3px solid transparent;
+        }
+
+        .search-result-item:hover {
+            background: #f9f9f9;
+            border-left-color: var(--primary-color);
+        }
+
+        .result-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 5px;
+        }
+
+        .result-description {
+            font-size: 13px;
+            color: #666;
+        }
+
+        .no-results {
+            padding: 40px 20px;
+            text-align: center;
+            color: #999;
+        }
+
+        /* ==================== PAGE TITLE ==================== */
+        #page-title {
+            padding: 50px 0 40px;
+        }
+
+        .title-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .projects-text {
+            font-family: var(--font-main);
+            font-size: 48px;
+            font-weight: 400;
+            color: var(--text-gray);
+            line-height: 1.2;
+        }
+
+        .pricing-text {
+            font-family: var(--font-main);
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--text-dark);
+            line-height: 1.2;
+        }
+
+        .title-divider {
+            height: 1px;
+            background-color: #f2f2f2;
+            width: 100%;
+            margin-top: 40px;
+        }
+
+        /* ==================== PRICING SECTION ==================== */
+        #pricing {
+            padding: 60px 0 100px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-container {
+            position: relative;
+        }
+
+        .pricing-intro {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .year-tag {
+            font-family: var(--font-main);
+            font-weight: 700;
+            font-size: 16px;
+            margin-bottom: 10px;
+            display: block;
+            color: var(--text-dark);
+        }
+
+        .section-title {
+            font-family: var(--font-main);
+            font-size: 48px;
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--text-dark);
+        }
+
+        .pricing-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .pricing-row {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .pricing-card {
+            border: 2px solid var(--text-dark);
+            padding: 50px;
+            width: 478px;
+            max-width: 100%;
+            display: flex;
+            flex-direction: column;
+            background: #fff;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .pricing-card.corporate {
+            background-color: var(--primary-color);
+            border: none;
+            color: #fff;
+        }
+
+        .pricing-card.corporate:hover {
+            box-shadow: 0 10px 40px rgba(217, 187, 40, 0.3);
+        }
+
+        .card-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .card-header h3 {
+            font-family: var(--font-main);
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .price-block {
+            display: flex;
+            justify-content: center;
+            align-items: baseline;
+        }
+
+        .currency {
+            font-family: var(--font-main);
+            font-size: 32px;
+            font-weight: 700;
+        }
+
+        .amount {
+            font-family: var(--font-main);
+            font-size: 48px;
+            font-weight: 700;
+            margin: 0 5px;
+        }
+
+        .period {
+            font-family: var(--font-main);
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .card-divider {
+            height: 1px;
+            background-color: var(--text-dark);
+            width: 100%;
+            margin-bottom: 30px;
+        }
+
+        .card-divider.white-divider {
+            background-color: #fff;
+        }
+
+        .feature-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .feature-list li {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-family: var(--font-main);
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .list-icon {
+            width: 10px;
+            height: 12px;
+            flex-shrink: 0;
+        }
+
+        /* Decorations - Fixed Positioning */
+        .decorations {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: visible;
+        }
+
+        .decor-coin {
+            position: absolute;
+            width: 45px;
+            height: 47px;
+            opacity: 0.9;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
+        }
+
+        .coin-1 {
+            top: 15%;
+            left: 3%;
+            animation: floatCoin 4s ease-in-out infinite;
+        }
+
+        .coin-2 {
+            top: 25%;
+            left: 8%;
+            animation: floatCoin 4.5s ease-in-out infinite 0.5s;
+        }
+
+        .coin-3 {
+            top: 15%;
+            right: 3%;
+            animation: floatCoin 4s ease-in-out infinite 0.3s;
+        }
+
+        .coin-4 {
+            top: 25%;
+            right: 8%;
+            animation: floatCoin 4.5s ease-in-out infinite 0.8s;
+        }
+
+        @keyframes floatCoin {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-10px) rotate(5deg);
+            }
+        }
+
+        .decor-circle {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            opacity: 0.7;
+        }
+
+        .circle-1 {
+            top: 50%;
+            left: 5%;
+            animation: pulseSlow 3s ease-in-out infinite;
+        }
+
+        .circle-2 {
+            top: 50%;
+            right: 5%;
+            animation: pulseSlow 3s ease-in-out infinite 1.5s;
+        }
+
+        @keyframes pulseSlow {
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 0.7;
+            }
+
+            50% {
+                transform: scale(1.1);
+                opacity: 1;
+            }
+        }
+
+        /* ==================== CTA STYLES ==================== */
+        .cta-section {
+            position: relative;
+            height: 556px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            margin-bottom: 120px;
+        }
+
+        .cta-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .cta-background img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .cta-title {
+            font-family: var(--font-main);
+            font-size: 64px;
+            font-weight: 700;
+            color: #ffffff;
+            line-height: 1.2;
+        }
+
+        .cta-logo {
+            width: 120px;
+            height: auto;
+            margin-bottom: -30px;
+        }
+
+        .cta-title .highlight {
+            color: #ffd700;
+        }
+
+        .cta-btn {
+            background-color: #ffffff;
+            color: #1a1a1a;
+            font-size: 16px;
+            font-weight: 700;
+            padding: 12px 40px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s;
+            font-family: var(--font-main);
+        }
+
+        .cta-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .decor-bars-container {
+            position: absolute;
+            bottom: 5%;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 30px;
+            opacity: 0.4;
+        }
+
+        .decor-bar {
+            width: 70px;
+            height: 70px;
+            object-fit: contain;
+        }
+
+        /* ==================== TESTIMONIALS SECTION ==================== */
+        #testimonials {
+            padding: 40px 0 80px 0;
+            background-color: #ffffff;
+        }
+
+        .testimonials-container {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        /* Star Rating */
+        .stars-rating {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 25px;
+        }
+
+        .star-icon {
+            width: 28px;
+            height: 28px;
+            color: #d1d5db;
+        }
+
+        .star-icon svg {
+            width: 100%;
+            height: 100%;
+            fill: currentColor;
+        }
+
+        .testimonial-slider {
+            position: relative;
+            overflow: hidden;
+            min-height: 220px;
+        }
+
+        .testimonial-track {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .testimonial-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            min-height: 100%;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .testimonial-slide.active {
+            opacity: 1;
+            z-index: 2;
+            position: relative;
+        }
+
+        /* Main Testimonial Text */
+        .testimonial-content {
+            font-family: var(--font-main);
+            font-size: 28px;
+            font-weight: 400;
+            line-height: 1.5;
+            margin-bottom: 30px;
+            letter-spacing: -0.5px;
+            color: var(--text-dark);
+        }
+
+        /* Author Name */
+        .author-name {
+            font-family: var(--font-main);
+            font-size: 18px;
+            font-weight: 600;
+            color: #555e6d;
+            display: block;
+        }
+
+        /* Slider Navigation Pills */
+        .slider-nav-pills {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 50px;
+        }
+
+        .pill {
+            width: 45px;
+            height: 6px;
+            background-color: #e5e7eb;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            border: none;
+            padding: 0;
+        }
+
+        .pill:hover {
+            background-color: #d1d5db;
+            transform: scaleY(1.2);
+        }
+
+        /* The active yellow indicator */
+        .pill.active {
+            background-color: var(--primary-color);
+        }
+
+        /* ==================== PROMOTION SECTION ==================== */
+        #promotion {
+            position: relative;
+            min-height: 575px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            margin-bottom: 80px;
+            background-image: url('IMAGES/BanerPromo.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: #1a1a1a;
+        }
+
+        .promo-bg {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 1800px;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .bg-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .bg-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.4) 100%);
+        }
+
+        .promo-content {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .promo-text-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 50px;
+            text-align: center;
+            max-width: 800px;
+        }
+
+        .promo-text-group h2 {
+            font-family: var(--font-main);
+            font-size: 64px;
+            font-weight: 700;
+            color: #fff;
+            line-height: 1.2;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .cta-button {
+            background-color: #fff;
+            padding: 15px 50px;
+            border-radius: 10px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .cta-button span {
+            font-family: var(--font-main);
+            color: var(--text-dark);
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        /* ==================== FOOTER ==================== */
+        .site-footer {
+            background-color: var(--bg-dark);
+            color: #fff;
+            padding-top: 60px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: auto 1fr 1fr 1fr;
+            gap: 60px;
+            padding-bottom: 60px;
+        }
+
+        .footer-col h3 {
+            font-family: var(--font-main);
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 25px;
+        }
+
+        .logo-col {
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .footer-logo {
+            width: 100px;
+            height: auto;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            font-family: var(--font-main);
+            font-size: 14px;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+        }
+
+        .contact-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 15px;
+            font-family: var(--font-main);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .contact-list img {
+            margin-top: 4px;
+            flex-shrink: 0;
+            width: 16px;
+            height: 16px;
+        }
+
+        .contact-list span {
+            word-break: break-word;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 35px;
+            height: 35px;
+        }
+
+        .social-icons a img {
+            transition: opacity 0.3s;
+            width: 20px;
+            height: 20px;
+        }
+
+        .social-icons a:hover img {
+            opacity: 0.7;
+        }
+
+        .copyright-bar {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .copyright-bar p {
+            font-family: var(--font-main);
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* ==================== BACK TO TOP ==================== */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--primary-color);
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            transition: background 0.3s;
+            font-family: var(--font-main);
+        }
+
+        .back-to-top:hover {
+            background: #c5a020;
+        }
+
+        .back-to-top.show {
+            display: flex;
+        }
+
+        /* ==================== RESPONSIVE ==================== */
+        @media (max-width: 1200px) {
+            .decorations {
+                opacity: 0.6;
+            }
+
+            .decor-coin {
+                width: 35px;
+                height: 37px;
+            }
+
+            .decor-circle {
+                width: 60px;
+                height: 60px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+                gap: 40px;
+            }
+
+            .logo-col {
+                justify-content: flex-start;
+            }
+
+            .section-title {
+                font-size: 36px;
+            }
+
+            .decorations {
+                display: none;
+            }
+
+            #section-cta {
+                margin-bottom: 60px;
+            }
+
+            .testimonial-content {
+                font-size: 24px;
+            }
+
+            #testimonials {
+                padding: 60px 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .main-nav {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                width: 100%;
+                height: 100vh;
+                background: #fff;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                opacity: 0;
+                visibility: hidden;
+                transition: opacity 0.3s ease, visibility 0.3s ease;
+                z-index: 1001;
+            }
+
+            .main-nav.active {
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .main-nav ul {
+                flex-direction: column;
+                gap: 30px;
+                text-align: center;
+            }
+
+            .main-nav a {
+                font-size: 24px;
+            }
+
+            .main-nav li.active .underline {
+                bottom: -8px;
+            }
+
+            #page-title {
+                padding: 30px 0;
+            }
+
+            .projects-text,
+            .pricing-text {
+                font-size: 32px;
+            }
+
+            .title-divider {
+                margin-top: 25px;
+            }
+
+            #pricing {
+                padding: 40px 0 60px;
+            }
+
+            .pricing-intro {
+                margin-bottom: 50px;
+            }
+
+            .section-title {
+                font-size: 28px;
+            }
+
+            .pricing-card {
+                padding: 30px;
+                width: 100%;
+            }
+
+            .amount {
+                font-size: 40px;
+            }
+
+            .currency {
+                font-size: 26px;
+            }
+
+            #testimonials {
+                padding: 50px 0;
+            }
+
+            .testimonials-container {
+                padding: 20px 15px;
+            }
+
+            .testimonial-content {
+                font-size: 20px;
+                line-height: 1.6;
+            }
+
+            .author-name {
+                font-size: 16px;
+            }
+
+            .stars-rating {
+                gap: 6px;
+                margin-bottom: 20px;
+            }
+
+            .star-icon {
+                width: 24px;
+                height: 24px;
+            }
+
+            .slider-nav-pills {
+                margin-top: 35px;
+                gap: 10px;
+            }
+
+            .pill {
+                width: 35px;
+                height: 5px;
+            }
+
+            #section-cta {
+                min-height: 400px;
+                padding: 60px 20px;
+                margin-bottom: 50px;
+            }
+
+            .cta-title {
+                font-size: 32px;
+            }
+
+            .cta-content {
+                gap: 30px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+                gap: 30px;
+            }
+
+            .logo-col {
+                justify-content: flex-start;
+            }
+
+            .footer-col h3 {
+                margin-bottom: 20px;
+                font-size: 14px;
+            }
+
+            .footer-links a {
+                font-size: 13px;
+            }
+
+            .contact-list li {
+                font-size: 12px;
+            }
+
+            .social-icons {
+                justify-content: flex-start;
+            }
+
+            .social-icons a {
+                width: 30px;
+                height: 30px;
+            }
+
+            .social-icons a img {
+                width: 18px;
+                height: 18px;
+            }
+
+            .back-to-top {
+                width: 45px;
+                height: 45px;
+                font-size: 20px;
+                bottom: 20px;
+                right: 20px;
+            }
+
+            /* Loader responsive */
+            .loader-logo-container {
+                width: 100px;
+                height: 100px;
+            }
+
+            .loader-logo {
+                width: 50px;
+                height: 50px;
+            }
+
+            .loader-progress-container {
+                width: 160px;
+            }
+
+            .loader-text {
+                font-size: 10px;
+                letter-spacing: 2px;
+            }
+        }
+
+        @media (max-width: 480px) {
+
+            .projects-text,
+            .pricing-text {
+                font-size: 28px;
+            }
+
+            .section-title {
+                font-size: 24px;
+            }
+
+            .year-tag {
+                font-size: 14px;
+            }
+
+            .pricing-intro {
+                margin-bottom: 40px;
+            }
+
+            .pricing-card {
+                padding: 25px;
+            }
+
+            .card-header h3 {
+                font-size: 18px;
+            }
+
+            .amount {
+                font-size: 36px;
+            }
+
+            .currency {
+                font-size: 22px;
+            }
+
+            .period {
+                font-size: 14px;
+            }
+
+            .feature-list li {
+                font-size: 13px;
+                gap: 12px;
+            }
+
+            #testimonials {
+                padding: 40px 0;
+            }
+
+            .testimonials-container {
+                padding: 15px 10px;
+            }
+
+            .testimonial-content {
+                font-size: 18px;
+            }
+
+            .author-name {
+                font-size: 15px;
+            }
+
+            .star-icon {
+                width: 22px;
+                height: 22px;
+            }
+
+            .slider-nav-pills {
+                margin-top: 30px;
+            }
+
+            .pill {
+                width: 30px;
+                height: 4px;
+            }
+
+            #section-cta {
+                min-height: 350px;
+                margin-bottom: 40px;
+            }
+
+            .cta-title {
+                font-size: 26px;
+            }
+
+            .cta-logo {
+                width: 70px;
+                /* Smaller for mobile */
+                margin-bottom: -15px;
+            }
+
+            .cta-btn {
+                padding: 12px 35px;
+            }
+
+            .cta-btn span {
+                font-size: 14px;
+            }
+
+            .cta-button span {
+                font-size: 14px;
+            }
+
+            .site-footer {
+                padding-top: 40px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+                gap: 25px;
+                padding-bottom: 40px;
+            }
+
+            .footer-logo {
+                width: 70px;
+            }
+
+            .footer-col h3 {
+                margin-bottom: 15px;
+                font-size: 12px;
+            }
+
+            .footer-links li {
+                margin-bottom: 8px;
+            }
+
+            .footer-links a {
+                font-size: 11px;
+            }
+
+            .contact-list li {
+                font-size: 10px;
+                margin-bottom: 10px;
+                gap: 6px;
+            }
+
+            .contact-list img {
+                width: 12px;
+                height: 12px;
+            }
+
+            .social-icons {
+                gap: 8px;
+            }
+
+            .social-icons a {
+                width: 26px;
+                height: 26px;
+            }
+
+            .social-icons a img {
+                width: 14px;
+                height: 14px;
+            }
+
+            .copyright-bar p {
+                font-size: 10px;
+            }
+
+            /* Loader responsive small */
+            .loader-logo-container {
+                width: 80px;
+                height: 80px;
+            }
+
+            .loader-logo {
+                width: 40px;
+                height: 40px;
+            }
+
+            .loader-content {
+                gap: 20px;
+            }
+
+            .loader-progress-container {
+                width: 140px;
+            }
+
+            html.loading,
+            html.loading body {
+                overflow: hidden !important;
+                height: 100%;
+                position: fixed;
+                width: 100%;
+            }
+
+            body.loading {
+                overflow: hidden !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ==================== PRINTHADA PROFESSIONAL LOADER ==================== -->
+    <div class="printhada-loader" id="pageLoader">
+        <div class="loader-content">
+            <!-- Logo with Spinning Ring -->
+            <div class="loader-logo-container">
+                <div class="loader-ring"></div>
+                <img src="IMAGES/5db1c76c09bd4716a7ddbc483a6afc6e11d7ef70.png" alt="Printhada" class="loader-logo">
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="loader-progress-container">
+                <div class="loader-progress-bar"></div>
+            </div>
+
+            <!-- Animated Text -->
+            <div class="loader-text">
+                <span>P</span><span>R</span><span>I</span><span>N</span><span>T</span><span>H</span><span>A</span><span>D</span><span>A</span>
+            </div>
+
+            <!-- Bouncing Dots -->
+            <div class="loader-dots">
+                <div class="loader-dot"></div>
+                <div class="loader-dot"></div>
+                <div class="loader-dot"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page Transition Overlay (for navigation) -->
+    <div class="page-transition" id="pageTransition">
+        <div class="loader-content">
+            <div class="loader-logo-container">
+                <div class="loader-ring"></div>
+                <img src="IMAGES/5db1c76c09bd4716a7ddbc483a6afc6e11d7ef70.png" alt="Printhada" class="loader-logo">
+            </div>
+            <div class="loader-dots">
+                <div class="loader-dot"></div>
+                <div class="loader-dot"></div>
+                <div class="loader-dot"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== HEADER ==================== -->
+    <section id="header-section">
+        <header class="site-header container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="IMAGES/5db1c76c09bd4716a7ddbc483a6afc6e11d7ef70.png" alt="Printhada Logo" />
+                </a>
+            </div>
+            <nav class="main-nav" id="mainNav">
+                <ul>
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="ABOUT.html">ABOUT</a></li>
+                    <li><a href="SERVICES.html">SERVICES</a></li>
+                    <li class="active">
+                        <a href="PRICING.html">PRICING</a>
+                        <div class="underline"></div>
+                    </li>
+                    <li><a href="CONTACTS.html">CONTACTS</a></li>
+                </ul>
+            </nav>
+            <button class="search-btn" id="searchBtn" aria-label="Search">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.35-4.35"></path>
+                </svg>
+            </button>
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu">☰</button>
+        </header>
+    </section>
+
+    <!-- Search Modal -->
+    <div class="search-modal" id="searchModal">
+        <div class="search-container">
+            <div class="search-input-wrapper">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.35-4.35"></path>
+                </svg>
+                <input type="text" class="search-input" id="searchInput"
+                    placeholder="Search pages, services, pricing..." />
+                <button class="search-close" id="searchClose">✕</button>
+            </div>
+            <div class="search-results" id="searchResults"></div>
+        </div>
+    </div>
+
+    <!-- ==================== PAGE TITLE ==================== -->
+    <section id="page-title">
+        <div class="container">
+            <div class="title-group">
+                <h2 class="projects-text">PROJECTS</h2>
+                <h1 class="pricing-text">Pricing</h1>
+            </div>
+            <div class="title-divider"></div>
+        </div>
+    </section>
+
+    <!-- ==================== PRICING SECTION ==================== -->
+    <section id="pricing">
+        <div class="container pricing-container">
+            <!-- Intro -->
+            <div class="pricing-intro">
+                <span class="year-tag">2025</span>
+                <h2 class="section-title">
+                    Price Transparency Knowing<br />How Much You Should Pay
+                </h2>
+            </div>
+
+            <!-- Cards Grid -->
+            <div class="pricing-grid">
+                <!-- Top Row -->
+                <div class="pricing-row top-row">
+                    <!-- Standard Prints -->
+                    <div class="pricing-card standard">
+                        <div class="card-header">
+                            <h3>Standard Prints</h3>
+                            <div class="price-block">
+                                <span class="currency">₱</span>
+                                <span class="amount">250</span>
+                                <span class="period">/Starting</span>
+                            </div>
+                        </div>
+                        <div class="card-divider"></div>
+                        <ul class="feature-list">
+                            <li>
+                                <img src="IMAGES/553_866.svg" alt="arrow" class="list-icon" />
+                                <span>High-quality sticker & document printing</span>
+                            </li>
+                            <li>
+                                <img src="IMAGES/553_872.svg" alt="arrow" class="list-icon" />
+                                <span>Clear silk screen or digital transfer (DTP)</span>
+                            </li>
+                            <li>
+                                <img src="IMAGES/553_878.svg" alt="arrow" class="list-icon" />
+                                <span>Secure documents with unique QR codes</span>
+                            </li>
+                            <li>
+                                <img src="IMAGES/553_884.svg" alt="arrow" class="list-icon" />
+                                <span>Professional layout & graphic design</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Premium Fabrication -->
+                    <div class="pricing-card premium">
+                        <div class="card-header">
+                            <h3>Premium Fabrication</h3>
+                            <div class="price-block">
+                                <span class="currency">₱</span>
+                                <span class="amount">7,500</span>
+                                <span class="period">/Starting</span>
+                            </div>
+                        </div>
+                        <div class="card-divider"></div>
+                        <ul class="feature-list">
+                            <li>
+                                <img src="IMAGES/553_798.svg" alt="arrow" class="list-icon" />
+                                <span>Custom trophies, plaques & awards</span>
+                            </li>
+                            <li>
+                                <img src="IMAGES/553_804.svg" alt="arrow" class="list-icon" />
+                                <span>Exhibition booth design & execution</span>
+                            </li>
+                            <li>
+                                <img src="IMAGES/553_810.svg" alt="arrow" class="list-icon" />
+                                <span>Showroom & display module fabrication</span>
+                            </li>
+                            <li>
+                                <img src="IMAGES/553_816.svg" alt="arrow" class="list-icon" />
+                                <span>Tradeshow booth design & setup</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Bottom Row -->
+                <div class="pricing-row bottom-row">
+                    <!-- Corporate -->
+                    <div class="pricing-card corporate">
+                        <div class="card-header">
+                            <h3>Best Value: Corporate</h3>
+                            <div class="price-block">
+                                <span class="currency">₱</span>
+                                <span class="amount">2,500</span>
+                                <span class="period">/Starting</span>
+                            </div>
+                        </div>
+                        <div class="card-divider white-divider"></div>
+                        <ul class="feature-list">
+                            <li>
+                                <img src="IMAGES/553_832.svg" alt="arrow" class="list-icon" />
+                                <span>Corporate polo shirts & t-shirt bundles</span>
+                            </li>
+                            <li>
+                                <img src="IMAGES/553_838.svg" alt="arrow" class="list-icon" />
+                                <span>Sublimation prints for uniforms & hoodies</span>
+                            </li>
+                            <li>
+                                <img src="IMAGES/553_844.svg" alt="arrow" class="list-icon" />
+                                <span>Branded tumblers, mugs & umbrellas</span>
+                            </li>
+                            <li>
+                                <img src="IMAGES/553_850.svg" alt="arrow" class="list-icon" />
+                                <span>Complete corporate gift packages</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Decorations -->
+            <div class="decorations">
+                <!-- Dollar Coins -->
+                <img src="IMAGES/acf46e339a0b43910db1532b0aa6464060c508cf.png" class="decor-coin coin-1" alt="coin" />
+                <img src="IMAGES/acf46e339a0b43910db1532b0aa6464060c508cf.png" class="decor-coin coin-2" alt="coin" />
+                <img src="IMAGES/acf46e339a0b43910db1532b0aa6464060c508cf.png" class="decor-coin coin-3" alt="coin" />
+                <img src="IMAGES/acf46e339a0b43910db1532b0aa6464060c508cf.png" class="decor-coin coin-4" alt="coin" />
+
+                <!-- Dollar Circles -->
+                <img src="IMAGES/9bc58673740d63630c0efaa8744acfc7889eac6b.png" class="decor-circle circle-1" alt="$" />
+                <img src="IMAGES/9bc58673740d63630c0efaa8744acfc7889eac6b.png" class="decor-circle circle-2" alt="$" />
+
+                <!-- Sales Bars -->
+                <div class="decor-bars-container">
+                    <img src="IMAGES/de928e16652610487afa75d7b14f62ffca0fa21e.png" class="decor-bar" alt="stats" />
+                    <img src="IMAGES/de928e16652610487afa75d7b14f62ffca0fa21e.png" class="decor-bar" alt="stats" />
+                    <img src="IMAGES/de928e16652610487afa75d7b14f62ffca0fa21e.png" class="decor-bar" alt="stats" />
+                    <img src="IMAGES/de928e16652610487afa75d7b14f62ffca0fa21e.png" class="decor-bar" alt="stats" />
+                    <img src="IMAGES/de928e16652610487afa75d7b14f62ffca0fa21e.png" class="decor-bar" alt="stats" />
+                    <img src="IMAGES/de928e16652610487afa75d7b14f62ffca0fa21e.png" class="decor-bar" alt="stats" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== TESTIMONIALS SECTION ==================== -->
+    <section id="testimonials">
+        <div class="testimonials-container">
+
+            <!-- Testimonial Slider -->
+            <div class="testimonial-slider" id="testimonialSlider">
+                <div class="testimonial-track" id="testimonialTrack">
+                    <!-- Slide 1 - 5 Stars -->
+                    <div class="testimonial-slide active" data-index="0">
+                        <!-- 5 Star Rating -->
+                        <div class="stars-rating">
+                            <span class="star-icon filled"><svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg></span>
+                            <span class="star-icon filled"><svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg></span>
+                            <span class="star-icon filled"><svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg></span>
+                            <span class="star-icon filled"><svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg></span>
+                            <span class="star-icon filled"><svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg></span>
+                        </div>
+                        <div class="testimonial-content">
+                            Printhada is the fastest provider of printing services I’ve ever used! From t-shirts,
+                            polo shirts, tarpaulins, to business cards — they deliver in record time. My order for 100
+                            corporate polos was ready in just 4 days. No delays, ever!
+                        </div>
+                        <span class="author-name">Mylene Santos</span>
+                    </div>
+
+                    <!-- Slide 2 - 4.9 Stars -->
+                    <div class="testimonial-slide" data-index="1">
+                        <!-- 4.9 Star Rating -->
+                        <div class="stars-rating" style="margin-bottom: 20px;">
+                            <span class="star-icon filled"><svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg></span>
+                            <span class="star-icon filled"><svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg></span>
+                            <span class="star-icon filled"><svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg></span>
+                            <span class="star-icon filled"><svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg></span>
+                            <span class="star-icon half" style="--fill-percent: 90%;"><svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg></span>
+                        </div>
+                        <div class="testimonial-content">
+                            The quality of materials they use is outstanding! You can feel the premium fabric on our
+                            uniforms — colors stay vibrant even after dozens of washes. They truly don’t cut
+                            corners; hindi tinitipid sa quality. Worth every peso!
+                        </div>
+                        <span class="author-name">Rafael Dela Cruz</span>
+                    </div>
+
+                    <!-- Slide 3 - 5 Stars -->
+                    <div class="testimonial-slide" data-index="2">
+                        <!-- 5 Star Rating -->
+                        <div class="stars-rating" style="margin-bottom: 20px;">
+                            <span class="star-icon filled"><svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg></span>
+                            <span class="star-icon filled"><svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg></span>
+                            <span class="star-icon filled"><svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg></span>
+                            <span class="star-icon filled"><svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg></span>
+                            <span class="star-icon filled"><svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg></span>
+                        </div>
+                        <div class="testimonial-content">
+                            Their trophy and tumbler designs are simply amazing! We ordered custom awards for our
+                            annual sales event — the engraving was flawless and the materials felt luxurious. Plus, they
+                            worked overtime "pinag-puyatan nila ang orde" just to meet our tight deadline.
+                        </div>
+                        <span class="author-name">Cristina Reyes Jr.</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation Pills -->
+            <div class="slider-nav-pills">
+                <button class="pill active" data-index="0" aria-label="Go to testimonial 1"></button>
+                <button class="pill" data-index="1" aria-label="Go to testimonial 2"></button>
+                <button class="pill" data-index="2" aria-label="Go to testimonial 3"></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== CTA SECTION ==================== -->
+    <section id="section-cta" class="section cta-section">
+        <div class="cta-background">
+            <img src="IMAGES/ad4e5bb138141a5095f7caf9193f0c0f0d0b794f.png" alt="CTA Background" />
+        </div>
+        <div class="container cta-content">
+            <img src="IMAGES/5db1c76c09bd4716a7ddbc483a6afc6e11d7ef70.png" alt="Printhada Logo" class="cta-logo" />
+            <h2 class="cta-title">
+                Get <span class="highlight">Special Offer</span> For Today<br />With
+                Printhada
+            </h2>
+            <div class="cta-button-wrapper">
+                <a href="SERVICES.html"><button class="cta-btn">Let’s Try Printhada</button></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <section id="footer-section">
+        <footer class="site-footer">
+            <div class="container footer-content">
+                <div class="footer-col logo-col">
+                    <a href="index.html">
+                        <img src="IMAGES/5db1c76c09bd4716a7ddbc483a6afc6e11d7ef70.png" alt="Printhada Logo"
+                            class="footer-logo" />
+                    </a>
+                </div>
+                <div class="footer-col">
+                    <h3>Information</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="ABOUT.html">About</a></li>
+                        <li><a href="SERVICES.html">Services</a></li>
+                        <li><a href="PRICING.html">Pricing</a></li>
+                        <li><a href="CONTACTS.html">Contacts</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col contact-col">
+                    <h3>Contacts</h3>
+                    <ul class="contact-list">
+                        <li>
+                            <img src="IMAGES/1_641.svg" alt="Location" />
+                            <span>3486 Varona, Makati City, 1204 Metro Manila</span>
+                        </li>
+                        <li>
+                            <img src="IMAGES/1_643.svg" alt="Phone" />
+                            <span>09174704724 / 09302819063</span>
+                        </li>
+                        <li>
+                            <img src="IMAGES/1_645.svg" alt="Email" />
+                            <span>printhada.2009@gmail.com</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer-col social-col">
+                    <h3>Social Media</h3>
+                    <div class="social-icons">
+                        <a href="https://www.facebook.com" target="_blank"><img src="IMAGES/1_614.svg"
+                                alt="Facebook" /></a>
+                        <a href="https://www.twitter.com" target="_blank"><img src="IMAGES/1_616.svg"
+                                alt="Twitter" /></a>
+                        <a href="https://www.linkedin.com" target="_blank"><img src="IMAGES/1_619.svg"
+                                alt="LinkedIn" /></a>
+                        <a href="https://www.pinterest.com" target="_blank"><img src="IMAGES/1_625.svg"
+                                alt="Pinterest" /></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright-bar">
+                <div class="container">
+                    <p>© 2025 All Rights Reserved</p>
+                </div>
+            </div>
+        </footer>
+    </section>
+
+    <!-- ==================== BACK TO TOP ==================== -->
+    <button class="back-to-top" aria-label="Back to top">↑</button>
+
+    <script>
+        // ==================== PAGE LOADER ====================
+        var pageLoader = document.getElementById('pageLoader');
+        var pageTransition = document.getElementById('pageTransition');
+        var htmlElement = document.documentElement;
+        var bodyElement = document.body;
+
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+
+        // Add loading class immediately to prevent scroll
+        htmlElement.classList.add('loading');
+        bodyElement.classList.add('loading');
+
+        // Hide loader when page is fully loaded
+        window.addEventListener('load', function () {
+            setTimeout(function () {
+                pageLoader.classList.add('hidden');
+                // Remove loading class to enable scrolling
+                htmlElement.classList.remove('loading');
+                bodyElement.classList.remove('loading');
+                // Reset scroll position
+                window.scrollTo(0, 0);
+            }, 800);
+        });
+
+        // Show loader when navigating to other pages
+        document.querySelectorAll('a[href]').forEach(function (link) {
+            link.addEventListener('click', function (e) {
+                var href = this.getAttribute('href');
+
+                if (href &&
+                    !href.startsWith('#') &&
+                    !href.startsWith('http') &&
+                    !href.startsWith('mailto') &&
+                    !href.startsWith('tel') &&
+                    href !== window.location.pathname.split('/').pop()) {
+
+                    e.preventDefault();
+                    // Disable scrolling during transition
+                    htmlElement.classList.add('loading');
+                    bodyElement.classList.add('loading');
+                    pageTransition.classList.add('active');
+
+                    setTimeout(function () {
+                        window.location.href = href;
+                    }, 400);
+                }
+            });
+        });
+
+        // Show loader when using browser back/forward
+        window.addEventListener('pageshow', function (event) {
+            if (event.persisted) {
+                pageTransition.classList.remove('active');
+                pageLoader.classList.add('hidden');
+                htmlElement.classList.remove('loading');
+                bodyElement.classList.remove('loading');
+            }
+        });
+
+        // ==================== HAMBURGER MENU ====================
+        var hamburger = document.getElementById('hamburger');
+        var nav = document.getElementById('mainNav');
+        var body = document.body;
+
+        hamburger.addEventListener('click', function () {
+            nav.classList.toggle('active');
+            if (nav.classList.contains('active')) {
+                hamburger.textContent = '✕';
+                body.style.overflow = 'hidden';
+            } else {
+                hamburger.textContent = '☰';
+                body.style.overflow = '';
+            }
+        });
+
+        // Close nav when clicking a link
+        var navLinks = nav.querySelectorAll('a');
+        navLinks.forEach(function (link) {
+            link.addEventListener('click', function () {
+                nav.classList.remove('active');
+                hamburger.textContent = '☰';
+                body.style.overflow = '';
+            });
+        });
+
+        // ==================== TESTIMONIAL SLIDER ====================
+        var testimonialSlides = document.querySelectorAll('.testimonial-slide');
+        var pills = document.querySelectorAll('.pill');
+        var currentIndex = 0;
+        var totalSlides = testimonialSlides.length;
+        var autoSlideInterval;
+        var slideDelay = 5000; // 5 seconds
+
+        function showSlide(index) {
+            // Handle wrap around
+            if (index >= totalSlides) index = 0;
+            if (index < 0) index = totalSlides - 1;
+
+            currentIndex = index;
+
+            // Update slides
+            testimonialSlides.forEach(function (slide, i) {
+                slide.classList.remove('active');
+                if (i === currentIndex) {
+                    slide.classList.add('active');
+                }
+            });
+
+            // Update pills
+            pills.forEach(function (pill, i) {
+                pill.classList.remove('active');
+                if (i === currentIndex) {
+                    pill.classList.add('active');
+                }
+            });
+        }
+
+        function nextSlide() {
+            showSlide(currentIndex + 1);
+        }
+
+        function startAutoSlide() {
+            stopAutoSlide();
+            autoSlideInterval = setInterval(nextSlide, slideDelay);
+        }
+
+        function stopAutoSlide() {
+            if (autoSlideInterval) {
+                clearInterval(autoSlideInterval);
+            }
+        }
+
+        // Pill click events
+        pills.forEach(function (pill) {
+            pill.addEventListener('click', function () {
+                var index = parseInt(this.getAttribute('data-index'));
+                showSlide(index);
+                // Reset auto-slide timer
+                startAutoSlide();
+            });
+        });
+
+        // Touch/Swipe support for mobile
+        var slider = document.getElementById('testimonialSlider');
+        var touchStartX = 0;
+        var touchEndX = 0;
+
+        slider.addEventListener('touchstart', function (e) {
+            touchStartX = e.changedTouches[0].screenX;
+            stopAutoSlide();
+        }, { passive: true });
+
+        slider.addEventListener('touchend', function (e) {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+            startAutoSlide();
+        }, { passive: true });
+
+        function handleSwipe() {
+            var diff = touchStartX - touchEndX;
+            if (Math.abs(diff) > 50) {
+                if (diff > 0) {
+                    // Swipe left - next slide
+                    showSlide(currentIndex + 1);
+                } else {
+                    // Swipe right - previous slide
+                    showSlide(currentIndex - 1);
+                }
+            }
+        }
+
+        // Pause on hover (desktop)
+        var testimonialsContainer = document.querySelector('.testimonials-container');
+        testimonialsContainer.addEventListener('mouseenter', stopAutoSlide);
+        testimonialsContainer.addEventListener('mouseleave', startAutoSlide);
+
+        // Start auto-slide
+        startAutoSlide();
+
+        // ==================== BACK TO TOP ====================
+        var backToTop = document.querySelector('.back-to-top');
+        window.addEventListener('scroll', function () {
+            if (window.pageYOffset > 300) {
+                backToTop.classList.add('show');
+            } else {
+                backToTop.classList.remove('show');
+            }
+        });
+
+        backToTop.addEventListener('click', function () {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        // ==================== SEARCH FUNCTIONALITY ====================
+        var searchBtn = document.getElementById('searchBtn');
+        var searchModal = document.getElementById('searchModal');
+        var searchInput = document.getElementById('searchInput');
+        var searchClose = document.getElementById('searchClose');
+        var searchResults = document.getElementById('searchResults');
+
+        // Page data for search
+        var pageData = [
+            { title: 'Home - Printhada', page: 'HOME.html', description: 'Welcome to Printhada, your one-stop printing solution', keywords: ['home', 'main', 'start', 'welcome'] },
+            { title: 'About Us', page: 'ABOUT.html', description: 'Learn about our company, mission, and team', keywords: ['about', 'company', 'team', 'mission', 'who we are'] },
+            { title: 'Our Services', page: 'SERVICES.html', description: 'Professional printing services including document printing, binding, and lamination', keywords: ['services', 'printing', 'binding', 'lamination', 'stamps', 'seals', 'photocopy'] },
+            { title: 'Pricing Packages', page: 'PRICING.html', description: 'Standard Prints (₱250), Corporate Package (₱2,500), Premium Fabrication (₱7,500)', keywords: ['pricing', 'price', 'cost', 'packages', 'standard', 'corporate', 'premium', 'cheap', 'affordable'] },
+            { title: 'Contact Us', page: 'CONTACTS.html', description: 'Get in touch - Location, phone, email, and business hours', keywords: ['contact', 'location', 'address', 'phone', 'email', 'hours', 'reach us'] },
+            { title: 'Standard Prints Package', page: 'PRICING.html#standard', description: 'Starting at ₱250 - High-quality sticker & document printing', keywords: ['standard', 'cheap', 'basic', 'sticker', 'document'] },
+            { title: 'Corporate Package', page: 'PRICING.html#corporate', description: 'Starting at ₱2,500 - Corporate apparel, tumblers, and gifts', keywords: ['corporate', 'business', 'bulk', 'shirts', 'apparel', 'uniforms'] },
+            { title: 'Premium Fabrication', page: 'PRICING.html#premium', description: 'Starting at ₱7,500 - Trophies, awards, exhibition booths', keywords: ['premium', 'trophies', 'awards', 'booth', 'exhibition'] }
+        ];
+
+        searchBtn.addEventListener('click', function () {
+            searchModal.classList.add('active');
+            searchInput.focus();
+        });
+
+        searchClose.addEventListener('click', function () {
+            searchModal.classList.remove('active');
+            searchInput.value = '';
+            searchResults.innerHTML = '';
+        });
+
+        searchModal.addEventListener('click', function (e) {
+            if (e.target === searchModal) {
+                searchModal.classList.remove('active');
+                searchInput.value = '';
+                searchResults.innerHTML = '';
+            }
+        });
+
+        searchInput.addEventListener('input', function () {
+            var query = this.value.toLowerCase().trim();
+
+            if (query.length < 2) {
+                searchResults.innerHTML = '';
+                return;
+            }
+
+            var results = pageData.filter(function (item) {
+                return item.title.toLowerCase().includes(query) ||
+                    item.description.toLowerCase().includes(query) ||
+                    item.keywords.some(function (keyword) { return keyword.includes(query); });
+            });
+
+            if (results.length === 0) {
+                searchResults.innerHTML = '<div class="no-results">No results found for "' + query + '"</div>';
+                return;
+            }
+
+            searchResults.innerHTML = results.map(function (result) {
+                return '<div class="search-result-item" data-page="' + result.page + '">' +
+                    '<div class="result-title">' + result.title + '</div>' +
+                    '<div class="result-description">' + result.description + '</div>' +
+                    '</div>';
+            }).join('');
+
+            // Add click handlers
+            document.querySelectorAll('.search-result-item').forEach(function (item) {
+                item.addEventListener('click', function () {
+                    window.location.href = this.getAttribute('data-page');
+                });
+            });
+        });
+
+        // ==================== TAWK.TO AI CHATBOT ====================
+        var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+        (function () {
+            var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+            s1.async = true;
+            s1.src = 'https://embed.tawk.to/694f513a5585f019809e7c75/1jdetajrp';
+            s1.charset = 'UTF-8';
+            s1.setAttribute('crossorigin', '*');
+            s0.parentNode.insertBefore(s1, s0);
+        })();
+
+        // Keep chat bubble visible even when closed
+        Tawk_API.onLoad = function () {
+            Tawk_API.showWidget();
+        };
+
+        Tawk_API.onChatMinimized = function () {
+            Tawk_API.showWidget();
+        };
+
+        Tawk_API.onChatHidden = function () {
+            Tawk_API.showWidget();
+        };
+    </script>
+</body>
+
+</html>

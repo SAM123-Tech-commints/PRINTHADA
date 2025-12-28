@@ -1,0 +1,1930 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Printhada</title>
+    <link rel="icon" href="IMAGES/5db1c76c09bd4716a7ddbc483a6afc6e11d7ef70.png" type="image/png">
+    <!-- Google Fonts - Roboto (Standardized) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700;900&display=swap"
+        rel="stylesheet">
+    <!-- Inter font for About specific sections -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #d9bb28;
+            --text-dark: #333333;
+            --text-light: #ffffff;
+            --text-gray: #bdbdbd;
+            --bg-dark: #2c2c2c;
+            --border-color: #022a3a;
+            --font-main: 'Roboto', sans-serif;
+            --font-secondary: 'Inter', sans-serif;
+            /* For About specific */
+            --max-width: 1440px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: #ffffff;
+            color: var(--text-dark);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 20px;
+            width: 100%;
+        }
+
+        /* ==================== PRINTHADA PROFESSIONAL LOADER (COPIED FROM PRICING) ==================== */
+        .printhada-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 99999;
+            transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                visibility 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .printhada-loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .loader-logo-container {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .loader-ring {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            border-top-color: var(--primary-color);
+            animation: loaderSpin 1s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+        }
+
+        .loader-ring::before {
+            content: '';
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            right: 5px;
+            bottom: 5px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            border-top-color: var(--bg-dark);
+            animation: loaderSpin 1.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite reverse;
+        }
+
+        .loader-ring::after {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            right: 15px;
+            bottom: 15px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            border-top-color: var(--primary-color);
+            opacity: 0.5;
+            animation: loaderSpin 2s linear infinite;
+        }
+
+        .loader-logo {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            animation: logoPulse 1.5s ease-in-out infinite;
+            z-index: 2;
+        }
+
+        .loader-progress-container {
+            width: 200px;
+            height: 3px;
+            background: rgba(51, 51, 51, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .loader-progress-bar {
+            height: 100%;
+            width: 30%;
+            background: linear-gradient(90deg, var(--primary-color), #f5d547, var(--primary-color));
+            background-size: 200% 100%;
+            border-radius: 10px;
+            animation: progressMove 1.5s ease-in-out infinite, progressShimmer 1.5s linear infinite;
+        }
+
+        .loader-text {
+            font-family: var(--font-main);
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--text-dark);
+            opacity: 0.7;
+        }
+
+        .loader-text span {
+            display: inline-block;
+            animation: textFade 1.5s ease-in-out infinite;
+        }
+
+        .loader-text span:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .loader-text span:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+
+        .loader-text span:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+
+        .loader-text span:nth-child(4) {
+            animation-delay: 0.3s;
+        }
+
+        .loader-text span:nth-child(5) {
+            animation-delay: 0.4s;
+        }
+
+        .loader-text span:nth-child(6) {
+            animation-delay: 0.5s;
+        }
+
+        .loader-text span:nth-child(7) {
+            animation-delay: 0.6s;
+        }
+
+        .loader-text span:nth-child(8) {
+            animation-delay: 0.7s;
+        }
+
+        .loader-text span:nth-child(9) {
+            animation-delay: 0.8s;
+        }
+
+        .loader-dots {
+            display: flex;
+            gap: 8px;
+            margin-top: 5px;
+        }
+
+        .loader-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            animation: dotBounce 1.4s ease-in-out infinite;
+        }
+
+        .loader-dot:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .loader-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .loader-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes loaderSpin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes logoPulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            50% {
+                transform: scale(1.05);
+                opacity: 0.8;
+            }
+        }
+
+        @keyframes progressMove {
+            0% {
+                transform: translateX(-100%);
+                width: 30%;
+            }
+
+            50% {
+                width: 60%;
+            }
+
+            100% {
+                transform: translateX(400%);
+                width: 30%;
+            }
+        }
+
+        @keyframes progressShimmer {
+            0% {
+                background-position: 200% 0;
+            }
+
+            100% {
+                background-position: -200% 0;
+            }
+        }
+
+        @keyframes textFade {
+
+            0%,
+            100% {
+                opacity: 0.4;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes dotBounce {
+
+            0%,
+            80%,
+            100% {
+                transform: scale(0.8);
+                opacity: 0.5;
+            }
+
+            40% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+        }
+
+        .page-transition {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #ffffff;
+            z-index: 99998;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .page-transition.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* ==================== HEADER (COPIED FROM PRICING) ==================== */
+        #header-section {
+            padding: 30px 0;
+            background: #fff;
+            position: relative;
+            z-index: 1000;
+        }
+
+        .site-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            flex: 0 0 auto;
+            z-index: 1002;
+        }
+
+        .logo img {
+            width: 83px;
+            height: auto;
+        }
+
+        .main-nav {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .main-nav ul {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .main-nav a {
+            font-family: var(--font-main);
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-dark);
+            transition: color 0.3s ease;
+        }
+
+        .main-nav a:hover {
+            color: var(--primary-color);
+        }
+
+        .main-nav li.active {
+            position: relative;
+        }
+
+        /* Underline style from Pricing */
+        .underline {
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--text-dark);
+        }
+
+        .hamburger {
+            display: none;
+            font-size: 28px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: var(--text-dark);
+            z-index: 1002;
+            padding: 5px;
+            font-family: var(--font-main);
+            transition: color 0.3s ease;
+        }
+
+        .hamburger:hover {
+            color: var(--primary-color);
+        }
+
+        .search-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s;
+            margin-left: 20px;
+            color: var(--text-dark);
+        }
+
+        .search-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .search-btn svg {
+            width: 22px;
+            height: 22px;
+            stroke: currentColor;
+        }
+
+        /* Search Modal */
+        .search-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            align-items: flex-start;
+            justify-content: center;
+            z-index: 9999;
+            padding-top: 100px;
+        }
+
+        .search-modal.active {
+            display: flex;
+        }
+
+        .search-container {
+            background: white;
+            width: 90%;
+            max-width: 600px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .search-input-wrapper {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .search-input-wrapper svg {
+            width: 20px;
+            height: 20px;
+            stroke: #999;
+            margin-right: 15px;
+        }
+
+        .search-input {
+            flex: 1;
+            border: none;
+            outline: none;
+            font-size: 18px;
+            font-family: var(--font-main);
+            color: var(--text-dark);
+        }
+
+        .search-close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #999;
+            cursor: pointer;
+            padding: 0 10px;
+            transition: color 0.3s ease;
+        }
+
+        .search-close:hover {
+            color: var(--primary-color);
+        }
+
+        .search-results {
+            max-height: 400px;
+            overflow-y: auto;
+            padding: 10px 0;
+        }
+
+        /* ==================== GALLERY & ABOUT STYLES ==================== */
+        .gallery-section {
+            padding-top: 60px;
+            padding-bottom: 100px;
+        }
+
+        .gallery-header {
+            margin-bottom: 60px;
+        }
+
+        .gallery-header .subtitle {
+            font-family: var(--font-secondary);
+            font-size: 64px;
+            color: #bdbdbd;
+            font-weight: 400;
+            line-height: 1;
+            margin-bottom: 0;
+        }
+
+        .gallery-header .title {
+            font-family: var(--font-secondary);
+            font-size: 64px;
+            color: #333333;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .title-divider {
+            height: 1px;
+            background-color: #f2f2f2;
+            width: 100%;
+            margin-top: 40px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 260px;
+            object-fit: cover;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item img:hover {
+            transform: scale(1.02);
+        }
+
+        .gallery-controls {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .page-numbers {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .page-numbers .current {
+            color: #333333;
+        }
+
+        .page-numbers .total {
+            color: #bdbdbd;
+        }
+
+        .page-numbers .divider {
+            width: 40px;
+            height: 2px;
+            background-color: #e0e0e0;
+            transform: rotate(-45deg);
+        }
+
+        .nav-arrows {
+            display: flex;
+            gap: 20px;
+        }
+
+        .arrow-btn {
+            width: 53px;
+            height: 53px;
+            border: 1px solid #f2f2f2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .arrow-btn:hover {
+            background-color: #f9f9f9;
+        }
+
+        .arrow-btn.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .about-section {
+            padding: 100px 0;
+            background-color: #fff;
+        }
+
+        .about-container {
+            display: flex;
+            align-items: center;
+            gap: 89px;
+        }
+
+        .about-image {
+            flex: 1;
+            max-width: 640px;
+        }
+
+        .image-mask {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 640/648;
+            overflow: hidden;
+            background-color: #d9d9d9;
+        }
+
+        .image-mask img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .about-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .section-label {
+            font-size: 34px;
+            font-weight: 700;
+            color: #1a1a1a;
+            font-family: var(--font-secondary);
+        }
+
+        .section-heading {
+            font-size: 48px;
+            font-weight: 700;
+            color: #1a1a1a;
+            line-height: 1.2;
+            font-family: var(--font-secondary);
+        }
+
+        .section-desc {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #1a1a1a;
+            font-family: var(--font-secondary);
+            text-align: justify;
+        }
+
+        .features-section {
+            padding: 100px 0;
+        }
+
+        .features-header {
+            text-align: center;
+            margin-bottom: 80px;
+            max-width: 990px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .features-label {
+            font-family: var(--font-secondary);
+            font-size: 35px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 10px;
+        }
+
+        .features-title {
+            font-family: var(--font-secondary);
+            font-size: 48px;
+            font-weight: 700;
+            color: #1a1a1a;
+            line-height: 1.2;
+        }
+
+        .features-grid {
+            display: flex;
+            justify-content: space-between;
+            align-items: stretch;
+            gap: 0;
+        }
+
+        .feature-card {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 40px;
+            padding: 0 20px;
+            position: relative;
+        }
+
+        .feature-divider {
+            width: 1px;
+            background-color: #000;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .feature-icon {
+            width: 150px;
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .feature-icon img {
+            filter: brightness(0);
+        }
+
+        .feature-text h4 {
+            font-family: var(--font-secondary);
+            font-size: 24px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 20px;
+            white-space: pre-line;
+        }
+
+        .feature-text p {
+            font-family: var(--font-secondary);
+            font-size: 16px;
+            line-height: 1.5;
+            color: #1a1a1a;
+        }
+
+        .partners-section {
+            padding: 80px 0;
+            background-color: #fff;
+        }
+
+        .partners-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .partners-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        /* Reuse styles for consistency */
+        .partners-header .features-label {
+            font-size: 28px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .partners-header .features-title {
+            font-size: 36px;
+            color: #1a1a1a;
+        }
+
+        .partner-logo {
+            max-height: 100px;
+            width: auto;
+            object-fit: contain;
+            filter: grayscale(100%);
+            opacity: 0.7;
+            transition: all 0.3s;
+        }
+
+        .partner-logo:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+
+        .cta-section {
+            position: relative;
+            height: 556px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            margin-bottom: 120px;
+            /* Spacing above footer */
+        }
+
+        .cta-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .cta-background img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 50px;
+        }
+
+        /* History Section */
+        .history-section {
+            padding: 100px 0;
+            background-color: #ffffff;
+        }
+
+        .history-header {
+            margin-bottom: 60px;
+            text-align: center;
+            /* Center the entire header block */
+        }
+
+        .history-header .features-label {
+            font-size: 18px;
+            /* High priority: specific override for History label */
+            margin-bottom: 10px;
+        }
+
+        .history-grid {
+            display: flex;
+            justify-content: space-between;
+            text-align: center;
+            gap: 40px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .history-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .history-icon {
+            width: 150px;
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .history-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .history-content h3 {
+            font-family: var(--font-secondary);
+            font-size: 36px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 15px;
+        }
+
+        .history-content p {
+            font-family: var(--font-secondary);
+            font-size: 18px;
+            font-weight: 700;
+            color: #1a1a1a;
+            line-height: 1.4;
+        }
+
+        @media (max-width: 768px) {
+            .history-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                justify-items: center;
+                gap: 30px;
+            }
+
+            .history-item:nth-child(1) {
+                grid-column: 1 / -1;
+            }
+
+            /* Mobile Lightbox CSS Fix */
+            .lightbox-prev {
+                left: 10px !important;
+                background: rgba(0, 0, 0, 0.5) !important;
+            }
+
+            .lightbox-next {
+                right: 10px !important;
+                background: rgba(0, 0, 0, 0.5) !important;
+            }
+
+            .lightbox-close {
+                top: 20px !important;
+                right: 20px !important;
+                z-index: 10001;
+                /* Ensure on top */
+            }
+        }
+
+        /* CTA Styles (Restored) */
+        .cta-title {
+            font-family: var(--font-secondary);
+            font-size: 64px;
+            font-weight: 700;
+            color: #ffffff;
+            line-height: 1.2;
+        }
+
+        .cta-logo {
+            width: 120px;
+            height: auto;
+            margin-bottom: -30px;
+        }
+
+        .cta-title .highlight {
+            color: #ffd700;
+        }
+
+        .cta-btn {
+            background-color: #ffffff;
+            color: #1a1a1a;
+            font-size: 16px;
+            font-weight: 700;
+            padding: 12px 40px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s;
+            font-family: var(--font-secondary);
+        }
+
+        .cta-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* ==================== FOOTER (COPIED FROM PRICING for Consistency) ==================== */
+        .site-footer {
+            background-color: var(--bg-dark);
+            color: #fff;
+            padding-top: 60px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: auto 1fr 1fr 1fr;
+            gap: 60px;
+            padding-bottom: 60px;
+        }
+
+        .footer-col h3 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: #ffffff;
+        }
+
+        .logo-col {
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .footer-logo {
+            width: 100px;
+            height: auto;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            font-size: 14px;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+            color: #fff;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+        }
+
+        .contact-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .contact-list img {
+            margin-top: 4px;
+            flex-shrink: 0;
+            width: 16px;
+            height: 16px;
+        }
+
+        .contact-list span {
+            word-break: break-word;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 35px;
+            height: 35px;
+        }
+
+        .social-icons a img {
+            transition: opacity 0.3s;
+            width: 20px;
+            height: 20px;
+        }
+
+        .social-icons a:hover img {
+            opacity: 0.7;
+        }
+
+        .copyright-bar {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .copyright-bar p {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        @media (max-width: 1024px) {
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .features-grid {
+                flex-direction: column;
+                gap: 40px;
+            }
+
+            .feature-divider {
+                width: 100%;
+                height: 1px;
+                margin: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                height: auto;
+                gap: 20px;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .main-nav {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                width: 100%;
+                height: 100vh;
+                background: #fff;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                opacity: 0;
+                visibility: hidden;
+                transition: opacity 0.3s ease, visibility 0.3s ease;
+                z-index: 1001;
+            }
+
+            .main-nav.active {
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .main-nav ul {
+                flex-direction: column;
+                gap: 30px;
+                text-align: center;
+            }
+
+            .main-nav a {
+                font-size: 24px;
+            }
+
+            .main-nav li.active .underline {
+                bottom: -8px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+                gap: 30px;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .gallery-header .subtitle,
+            .gallery-header .title {
+                font-size: 40px;
+            }
+
+            .search-btn {
+                margin-left: auto;
+                margin-right: 25px;
+            }
+
+            /* About Section Mobile */
+            .about-container {
+                flex-direction: column;
+                gap: 40px;
+                text-align: center;
+            }
+
+            .about-image {
+                max-width: 100%;
+                width: 100%;
+            }
+
+            .about-content {
+                width: 100%;
+            }
+
+            /* Partners Mobile */
+            .partners-container {
+                justify-content: center;
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 10000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .lightbox-content img {
+            max-height: 90vh;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: #fff;
+            font-size: 40px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            transition: all 0.3s ease;
+            z-index: 10001;
+        }
+
+        .lightbox-close:hover {
+            color: var(--primary-color);
+            transform: scale(1.1);
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 24px;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 10001;
+        }
+
+        .lightbox-nav:hover {
+            color: var(--primary-color);
+            background: rgba(0, 0, 0, 0.8);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .lightbox-caption {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #fff;
+            background: rgba(0, 0, 0, 0.85);
+            padding: 12px 25px;
+            border-radius: 10px;
+            font-family: var(--font-secondary);
+            font-size: 18px;
+            font-weight: 500;
+            text-align: center;
+            max-width: 85%;
+            z-index: 10002;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(5px);
+            pointer-events: none;
+        }
+
+        .lightbox-prev {
+            left: 20px;
+        }
+
+        .lightbox-next {
+            right: 20px;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 45px;
+            height: 45px;
+            background: #D9BB28;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 999;
+            font-size: 24px;
+        }
+
+        .back-to-top.show {
+            display: flex;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ==================== PRINTHADA PROFESSIONAL LOADER ==================== -->
+    <div class="printhada-loader" id="pageLoader">
+        <div class="loader-content">
+            <div class="loader-logo-container">
+                <div class="loader-ring"></div>
+                <img src="IMAGES/5db1c76c09bd4716a7ddbc483a6afc6e11d7ef70.png" alt="Printhada" class="loader-logo">
+            </div>
+            <div class="loader-progress-container">
+                <div class="loader-progress-bar"></div>
+            </div>
+            <div class="loader-text">
+                <span>P</span><span>R</span><span>I</span><span>N</span><span>T</span><span>H</span><span>A</span><span>D</span><span>A</span>
+            </div>
+            <div class="loader-dots">
+                <div class="loader-dot"></div>
+                <div class="loader-dot"></div>
+                <div class="loader-dot"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-transition" id="pageTransition">
+        <div class="loader-content">
+            <div class="loader-logo-container">
+                <div class="loader-ring"></div>
+                <img src="IMAGES/5db1c76c09bd4716a7ddbc483a6afc6e11d7ef70.png" alt="Printhada" class="loader-logo">
+            </div>
+            <div class="loader-dots">
+                <div class="loader-dot"></div>
+                <div class="loader-dot"></div>
+                <div class="loader-dot"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" id="lightboxClose">×</button>
+        <button class="lightbox-nav lightbox-prev" id="lightboxPrev">❮</button>
+        <div class="lightbox-content">
+            <img src="" alt="" id="lightboxImg">
+            <div class="lightbox-caption" id="lightboxCaption"></div>
+        </div>
+        <button class="lightbox-nav lightbox-next" id="lightboxNext">❯</button>
+    </div>
+
+    <!-- ==================== HEADER ==================== -->
+    <section id="header-section">
+        <header class="site-header container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="IMAGES/5db1c76c09bd4716a7ddbc483a6afc6e11d7ef70.png" alt="Printhada Logo" />
+                </a>
+            </div>
+            <nav class="main-nav" id="mainNav">
+                <ul>
+                    <li><a href="index.html">HOME</a></li>
+                    <li class="active">
+                        <a href="ABOUT.html">ABOUT</a>
+                        <div class="underline"></div>
+                    </li>
+                    <li><a href="SERVICES.html">SERVICES</a></li>
+                    <li><a href="PRICING.html">PRICING</a></li>
+                    <li><a href="CONTACTS.html">CONTACTS</a></li>
+                </ul>
+            </nav>
+            <button class="search-btn" id="searchBtn" aria-label="Search">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.35-4.35"></path>
+                </svg>
+            </button>
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu">☰</button>
+        </header>
+    </section>
+
+    <!-- Search Modal -->
+    <div class="search-modal" id="searchModal">
+        <div class="search-container">
+            <div class="search-input-wrapper">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.35-4.35"></path>
+                </svg>
+                <input type="text" class="search-input" id="searchInput"
+                    placeholder="Search pages, services, pricing..." />
+                <button class="search-close" id="searchClose">✕</button>
+            </div>
+            <div class="search-results" id="searchResults"></div>
+        </div>
+    </div>
+
+    <section id="section-gallery" class="section gallery-section">
+        <div class="container">
+            <div class="gallery-header">
+                <h2 class="subtitle">ABOUT US</h2>
+                <h1 class="title">Gallery</h1>
+                <div class="title-divider"></div>
+            </div>
+
+            <div class="gallery-grid" id="galleryGrid">
+                <!-- Javascript will populate this -->
+            </div>
+
+            <div class="gallery-controls">
+                <div class="page-numbers">
+                    <span class="current" id="currentPage">01</span>
+                    <span class="divider"></span>
+                    <span class="total" id="totalPages">02</span>
+                </div>
+                <div class="nav-arrows">
+                    <div class="arrow-btn prev" id="prevBtn">
+                        <img src="IMAGES/1_342.svg" alt="Previous" />
+                    </div>
+                    <div class="arrow-btn next" id="nextBtn">
+                        <img src="IMAGES/1_333.svg" alt="Next" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="section-about" class="section about-section">
+        <div class="container about-container">
+            <div class="about-image">
+                <div class="image-mask">
+                    <img src="IMAGES/ABOUT.png" alt="About Us Team" />
+                </div>
+            </div>
+            <div class="about-content">
+                <h3 class="section-label">About Us</h3>
+                <h2 class="section-heading">Experience The Power Of Digital Printing</h2>
+                <p class="section-desc">
+                    “At Printhada, we believe that professional printing should be seamless
+                    and secure. We started this business with a simple goal: to make
+                    high-quality printing easy and accessible for everyone in our community.
+                    Whether you’re a student needing school records, a small business owner
+                    looking for stickers, or a company needing full-scale event booths, we
+                    treat every project like it’s our own.”
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="section-features" class="section features-section">
+        <div class="container">
+            <div class="features-header">
+                <h3 class="features-label">Why?</h3>
+                <h2 class="features-title">
+                    Fast, Cheap and High-Quality Digital Prints Why Not?
+                </h2>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <img src="IMAGES/553_1594.svg" alt="Modern Technology" />
+                    </div>
+                    <div class="feature-text">
+                        <h4>Modern Technology</h4>
+                        <p>
+                            We understand the importance of lead times and commit to realistic
+                            delivery schedules that respect your business needs.
+                        </p>
+                    </div>
+                </div>
+                <div class="feature-divider"></div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <img src="IMAGES/553_1614.svg" alt="Speed And Accuracy" />
+                    </div>
+                    <div class="feature-text">
+                        <h4>Speed And Accuracy</h4>
+                        <p>
+                            Get premium results through modern technology—like sublimation and
+                            digital transfer—at reasonable prices.
+                        </p>
+                    </div>
+                </div>
+                <div class="feature-divider"></div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <img src="IMAGES/553_1629.svg" alt="Professional Team" />
+                    </div>
+                    <div class="feature-text">
+                        <h4>Professional Team</h4>
+                        <p>
+                            No complicated forms—just reach out to us directly through Gmail or
+                            Messenger for a quick quote and personalized service.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="section-partners" class="section partners-section">
+        <div class="container">
+            <!-- RESTORED PARTNERS HEADER -->
+            <div class="features-header partners-header">
+                <h3 class="features-label">Our Partners</h3>
+                <h2 class="features-title">Trusted By Leading Companies</h2>
+            </div>
+            <div class="partners-container">
+                <img src="IMAGES/47a54f7e54b14d24e62ff91e0d7d4101b868f973.png" alt="Partner 1" class="partner-logo" />
+                <img src="IMAGES/bf6c85c84209d51bfba46d59a8f9647a5163add0.png" alt="Partner 2" class="partner-logo" />
+                <img src="IMAGES/b46f0d6a2f05853224d736ced2317c5da50adc09.png" alt="Partner 3" class="partner-logo" />
+                <img src="IMAGES/a1a22161099f1ff37bc9bed7ff1da5596690e722.png" alt="Partner 4" class="partner-logo" />
+                <img src="IMAGES/de0fc73912b2d4b65e6f7122e91160bd0210f835.png" alt="Partner 5" class="partner-logo" />
+                <img src="IMAGES/a5d5e8e6e305ab0284847d2b0ab761b986663f38.png" alt="Partner 6" class="partner-logo" />
+                <img src="IMAGES/40a2877daaf8c45b4b83f6b053236acf0a058f18.png" alt="Partner 7" class="partner-logo" />
+            </div>
+        </div>
+    </section>
+
+    <section id="section-history" class="section history-section">
+        <div class="container">
+            <div class="features-header history-header">
+                <h3 class="features-label">History</h3>
+                <h2 class="features-title">
+                    From Startup To Success The Digital<br />
+                    Printing Website That Revolutionized<br />
+                    The Industry
+                </h2>
+            </div>
+            <div class="history-grid">
+                <div class="history-item">
+                    <div class="history-icon">
+                        <img src="IMAGES/History1.png" alt="2009" style="filter: grayscale(100%); opacity: 0.8;" />
+                    </div>
+                    <div class="history-content">
+                        <h3>2009</h3>
+                        <p>Started With<br />Home Digital<br />Printing</p>
+                    </div>
+                </div>
+                <div class="history-item">
+                    <div class="history-icon">
+                        <img src="IMAGES/History2.png" alt="2015" />
+                    </div>
+                    <div class="history-content">
+                        <h3>2015</h3>
+                        <p>Become A<br />Professional<br />Digital Printing</p>
+                    </div>
+                </div>
+                <div class="history-item">
+                    <div class="history-icon">
+                        <img src="IMAGES/History3.png" alt="2025" />
+                    </div>
+                    <div class="history-content">
+                        <h3>2025</h3>
+                        <p>Become A Big<br />Industry Digital<br />Printing</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="section-cta" class="section cta-section">
+        <div class="cta-background">
+            <img src="IMAGES/ad4e5bb138141a5095f7caf9193f0c0f0d0b794f.png" alt="CTA Background" />
+        </div>
+        <div class="container cta-content">
+            <img src="IMAGES/5db1c76c09bd4716a7ddbc483a6afc6e11d7ef70.png" alt="Printhada Logo" class="cta-logo" />
+            <h2 class="cta-title">
+                Get <span class="highlight">Special Offer</span> For Today<br />With
+                Printhada
+            </h2>
+            <div class="cta-button-wrapper">
+                <a href="SERVICES.html"><button class="cta-btn">Let’s Try Printhada</button></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <section id="footer-section">
+        <footer class="site-footer">
+            <div class="container footer-content">
+                <div class="footer-col logo-col">
+                    <a href="index.html">
+                        <img src="IMAGES/5db1c76c09bd4716a7ddbc483a6afc6e11d7ef70.png" alt="Printhada Logo"
+                            class="footer-logo" />
+                    </a>
+                </div>
+                <div class="footer-col">
+                    <h3>Information</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="ABOUT.html">About</a></li>
+                        <li><a href="SERVICES.html">Services</a></li>
+                        <li><a href="PRICING.html">Pricing</a></li>
+                        <li><a href="CONTACTS.html">Contacts</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col contact-col">
+                    <h3>Contacts</h3>
+                    <ul class="contact-list">
+                        <li>
+                            <img src="IMAGES/1_641.svg" alt="Location" />
+                            <span>3486 Varona, Makati City, 1204 Metro Manila</span>
+                        </li>
+                        <li>
+                            <img src="IMAGES/1_643.svg" alt="Phone" />
+                            <span>09174704724 / 09302819063</span>
+                        </li>
+                        <li>
+                            <img src="IMAGES/1_645.svg" alt="Email" />
+                            <span>printhada.2009@gmail.com</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer-col social-col">
+                    <h3>Social Media</h3>
+                    <div class="social-icons">
+                        <a href="https://www.facebook.com" target="_blank"><img src="IMAGES/1_614.svg"
+                                alt="Facebook" /></a>
+                        <a href="https://www.twitter.com" target="_blank"><img src="IMAGES/1_616.svg"
+                                alt="Twitter" /></a>
+                        <a href="https://www.linkedin.com" target="_blank"><img src="IMAGES/1_619.svg"
+                                alt="LinkedIn" /></a>
+                        <a href="https://www.pinterest.com" target="_blank"><img src="IMAGES/1_625.svg"
+                                alt="Pinterest" /></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright-bar">
+                <div class="container">
+                    <p>© 2025 All Rights Reserved</p>
+                </div>
+            </div>
+        </footer>
+    </section>
+
+    <!-- Back to Top -->
+    <button class="back-to-top" aria-label="Back to top">↑</button>
+
+    <script>
+        // ==================== PAGE LOADER & SCROLL TO TOP ====================
+        var pageLoader = document.getElementById('pageLoader');
+
+        // Force scroll to top before user leaves or reloads
+        window.onbeforeunload = function () {
+            window.scrollTo(0, 0);
+        };
+
+        window.addEventListener('load', function () {
+            // Also force scroll to top on load just to be safe
+            if (history.scrollRestoration) {
+                history.scrollRestoration = 'manual';
+            }
+            window.scrollTo(0, 0);
+
+            setTimeout(function () {
+                pageLoader.classList.add('hidden');
+            }, 800);
+        });
+
+        // ==================== SEARCH MODAL ====================
+        const searchBtn = document.getElementById('searchBtn');
+        const searchModal = document.getElementById('searchModal');
+        const searchClose = document.getElementById('searchClose');
+        const searchInput = document.getElementById('searchInput');
+        const searchResults = document.getElementById('searchResults');
+
+        if (searchBtn && searchModal && searchClose) {
+            searchBtn.addEventListener('click', () => {
+                searchModal.classList.add('active');
+                searchInput.focus();
+            });
+
+            searchClose.addEventListener('click', () => {
+                searchModal.classList.remove('active');
+            });
+
+            searchModal.addEventListener('click', (e) => {
+                if (e.target === searchModal) {
+                    searchModal.classList.remove('active');
+                }
+            });
+        }
+
+        // ==================== HAMBURGER MENU ====================
+        var hamburger = document.getElementById('hamburger');
+        var nav = document.getElementById('mainNav');
+        var body = document.body;
+
+        hamburger.addEventListener('click', function () {
+            nav.classList.toggle('active');
+            if (nav.classList.contains('active')) {
+                hamburger.textContent = '✕';
+                body.style.overflow = 'hidden';
+            } else {
+                hamburger.textContent = '☰';
+                body.style.overflow = '';
+            }
+        });
+
+        // Close nav when clicking a link
+        var navLinks = nav.querySelectorAll('a');
+        navLinks.forEach(function (link) {
+            link.addEventListener('click', function () {
+                nav.classList.remove('active');
+                hamburger.textContent = '☰';
+                body.style.overflow = '';
+            });
+        });
+
+        // ==================== GALLERY PAGINATION ====================
+        var galleryImages = {
+            page1: [
+                { src: 'IMAGES/PRINTLOGO.png', alt: 'Gallery Image 1', caption: 'Printhada Brand Identity' },
+                { src: 'IMAGES/4950d9722244d17e34fac824f1eceea10c7b44eb.png', alt: 'Gallery Image 2', caption: 'Professional Digital Prints' },
+                { src: 'IMAGES/d39ac218e6dbf06ec859a94712e4bd0bd577f29c.png', alt: 'Gallery Image 3', caption: 'High-Quality Marketing Materials' },
+                { src: 'IMAGES/2755c2bfa4133608274833a7f3d47a12da42a248.png', alt: 'Gallery Image 4', caption: 'Custom Business Solutions' },
+                { src: 'IMAGES/3d9526c5bf980d0ee02c8c2f4320342cd57c704f.png', alt: 'Gallery Image 5', caption: 'Creative Design & Print' },
+                { src: 'IMAGES/a6cdd1200160c6fd49a80d1b472f87176df609a6.png', alt: 'Gallery Image 6', caption: 'Fast & Reliable Service' },
+                { src: 'IMAGES/6fb5dd054adc0549549f9633d96bc85f64ac8575.png', alt: 'Gallery Image 7', caption: 'Premium Print Quality' },
+                { src: 'IMAGES/47f4b6b6155604e315161cbbe02ab1dad5aedd2a.png', alt: 'Gallery Image 8', caption: 'Professional Branding' },
+                { src: 'IMAGES/c681400ded5bc446dcf0d75417196746b901e7be.png', alt: 'Gallery Image 9', caption: 'Innovative Printing Technology' },
+                { src: 'IMAGES/ed718cddec1fe73b80e2dfae0d90587f864bc58c.png', alt: 'Gallery Image 10', caption: 'Custom Printing Team' }
+            ],
+            page2: [
+                { src: 'IMAGES/477706515_1601976301195080_6838583272437518714_n.jpg', alt: 'Gallery Image 11', caption: 'Custom Printing Work' },
+                { src: 'IMAGES/476961244_1601976281195082_3533600653720107022_n.jpg', alt: 'Gallery Image 12', caption: 'High Quality Prints' },
+                { src: 'IMAGES/477112086_1602694234456620_3810695930012273557_n.jpg', alt: 'Gallery Image 13', caption: 'Detailed Designs' },
+                { src: 'IMAGES/477157622_1602694041123306_1094841578766049271_n.jpg', alt: 'Gallery Image 14', caption: 'Vibrant Colors' },
+                { src: 'IMAGES/480431931_1607817493944294_7174673618517108875_n.jpg', alt: 'Gallery Image 15', caption: 'Professional Finish' },
+                { src: 'IMAGES/480663936_1607825090610201_7015518235675088101_n.jpg', alt: 'Gallery Image 16', caption: 'Custom Apparel' },
+                { src: 'IMAGES/480649295_1607829237276453_6499031061783002577_n.jpg', alt: 'Gallery Image 17', caption: 'Large Format Printing' },
+                { src: 'IMAGES/483565266_1058100179668029_3786631059142320000_n.jpg', alt: 'Gallery Image 18', caption: 'Precision Cutting' },
+                { src: 'IMAGES/482261292_1058099886334725_1468526176947138645_n.jpg', alt: 'Gallery Image 19', caption: 'Creative Solutions' },
+                { src: 'IMAGES/476901190_1601983167861060_3258526750588268181_n.jpg', alt: 'Gallery Image 20', caption: 'Satisfied Clients' }
+            ]
+        };
+
+        var currentGalleryPage = 1;
+        var totalGalleryPages = 2;
+        var galleryGrid = document.getElementById('galleryGrid');
+        var currentPageEl = document.getElementById('currentPage');
+        var totalPagesEl = document.getElementById('totalPages');
+        var prevBtn = document.getElementById('prevBtn');
+        var nextBtn = document.getElementById('nextBtn');
+        var isAnimating = false;
+
+        function renderGallery(page, direction) {
+            var images = page === 1 ? galleryImages.page1 : galleryImages.page2;
+            var existingItems = galleryGrid.querySelectorAll('.gallery-item');
+
+            if (existingItems.length > 0 && direction) {
+                isAnimating = true;
+                existingItems.forEach(function (item, index) {
+                    setTimeout(function () {
+                        item.style.opacity = '0';
+                        item.style.transform = 'translateY(10px) scale(0.95)';
+                    }, index * 10);
+                });
+
+                setTimeout(function () {
+                    galleryGrid.innerHTML = '';
+                    images.forEach(function (img, index) {
+                        var item = document.createElement('div');
+                        item.className = 'gallery-item';
+                        item.innerHTML = '<img src="' + img.src + '" alt="' + img.alt + '">';
+                        item.querySelector('img').addEventListener('click', function () { openLightbox(this.src); });
+                        galleryGrid.appendChild(item);
+
+                        item.style.opacity = '0';
+                        item.style.transform = 'translateY(10px) scale(0.95)';
+                        item.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+
+                        setTimeout(() => {
+                            item.style.opacity = '1';
+                            item.style.transform = 'translateY(0) scale(1)';
+                        }, index * 20); // Smooth staggered entry
+                    });
+                    isAnimating = false;
+                }, existingItems.length * 10 + 200);
+
+            } else {
+                galleryGrid.innerHTML = '';
+                images.forEach(function (img, index) {
+                    var item = document.createElement('div');
+                    item.className = 'gallery-item';
+                    item.innerHTML = '<img src="' + img.src + '" alt="' + img.alt + '">';
+                    item.querySelector('img').addEventListener('click', function () { openLightbox(this.src); });
+                    galleryGrid.appendChild(item);
+                });
+            }
+
+            currentPageEl.textContent = page.toString().padStart(2, '0');
+            updateNavButtons();
+        }
+
+        function updateNavButtons() {
+            if (currentGalleryPage === 1) prevBtn.classList.add('disabled');
+            else prevBtn.classList.remove('disabled');
+
+            if (currentGalleryPage === totalGalleryPages) nextBtn.classList.add('disabled');
+            else nextBtn.classList.remove('disabled');
+        }
+
+        prevBtn.addEventListener('click', function () {
+            if (currentGalleryPage > 1 && !isAnimating) {
+                currentGalleryPage--;
+                renderGallery(currentGalleryPage, 'prev');
+            }
+        });
+
+        nextBtn.addEventListener('click', function () {
+            if (currentGalleryPage < totalGalleryPages && !isAnimating) {
+                currentGalleryPage++;
+                renderGallery(currentGalleryPage, 'next');
+            }
+        });
+
+        // Initial setup
+        renderGallery(1, null);
+
+        // ==================== LIGHTBOX ====================
+        var lightbox = document.getElementById('lightbox');
+        var lightboxImg = document.getElementById('lightboxImg');
+        var lightboxCaption = document.getElementById('lightboxCaption'); // New
+        var lightboxClose = document.getElementById('lightboxClose');
+        var lightboxPrev = document.getElementById('lightboxPrev');
+        var lightboxNext = document.getElementById('lightboxNext');
+        var currentLightboxIndex = 0;
+        var currentImages = [];
+
+        function openLightbox(src) {
+            currentImages = currentGalleryPage === 1 ? galleryImages.page1 : galleryImages.page2;
+            currentLightboxIndex = currentImages.findIndex(function (img) { return img.src === src; });
+            if (currentLightboxIndex === -1 && currentGalleryPage === 1) currentLightboxIndex = 0;
+
+            lightboxImg.src = src;
+
+            // Set caption
+            var imageObj = currentImages[currentLightboxIndex];
+            if (imageObj && imageObj.caption) {
+                lightboxCaption.textContent = imageObj.caption;
+                lightboxCaption.style.display = 'block';
+            } else {
+                lightboxCaption.style.display = 'none';
+            }
+
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function navigateLightbox(direction) {
+            currentLightboxIndex += direction;
+            if (currentLightboxIndex < 0) currentLightboxIndex = currentImages.length - 1;
+            if (currentLightboxIndex >= currentImages.length) currentLightboxIndex = 0;
+            lightboxImg.src = currentImages[currentLightboxIndex].src;
+
+            // Update caption on navigate
+            var imageObj = currentImages[currentLightboxIndex];
+            if (imageObj && imageObj.caption) {
+                lightboxCaption.textContent = imageObj.caption;
+                lightboxCaption.style.display = 'block';
+            } else {
+                lightboxCaption.style.display = 'none';
+            }
+        }
+
+        lightboxClose.addEventListener('click', closeLightbox);
+        lightboxPrev.addEventListener('click', function () { navigateLightbox(-1); });
+        lightboxNext.addEventListener('click', function () { navigateLightbox(1); });
+        lightbox.addEventListener('click', function (e) {
+            if (e.target === lightbox) closeLightbox();
+        });
+
+        // ==================== BACK TO TOP ====================
+        var backToTop = document.querySelector('.back-to-top');
+        window.addEventListener('scroll', function () {
+            if (window.pageYOffset > 300) backToTop.classList.add('show');
+            else backToTop.classList.remove('show');
+        });
+        backToTop.addEventListener('click', function () {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // ==================== TAWK.TO ====================
+        var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+        (function () {
+            var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+            s1.async = true;
+            s1.src = 'https://embed.tawk.to/694f513a5585f019809e7c75/1jdetajrp';
+            s1.charset = 'UTF-8';
+            s1.setAttribute('crossorigin', '*');
+            s0.parentNode.insertBefore(s1, s0);
+        })();
+
+        // Keep chat bubble visible even when closed
+        Tawk_API.onLoad = function () {
+            Tawk_API.showWidget();
+        };
+
+        Tawk_API.onChatMinimized = function () {
+            Tawk_API.showWidget();
+        };
+
+        Tawk_API.onChatHidden = function () {
+            Tawk_API.showWidget();
+        };
+    </script>
+</body>
+
+</html>
