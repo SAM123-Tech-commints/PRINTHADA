@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Services - Printhada</title>
-    <link rel="icon" href="icon.ico" type="image/x-icon">
+    <link rel="icon" href="https://i.imgur.com/9Q6WeZb.png" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700;900&display=swap"
@@ -737,15 +737,15 @@
             max-width: 150px;
         }
 
-        /* ==================== CTA BANNER ==================== */
-        #cta-banner {
+        /* ==================== CTA STYLES ==================== */
+        .cta-section {
             position: relative;
-            background-color: #1a1a1a;
-            padding: 60px 0;
-            overflow: hidden;
-            min-height: 280px;
+            height: 556px;
             display: flex;
             align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            margin-bottom: 120px;
         }
 
         .cta-background {
@@ -755,10 +755,9 @@
             width: 100%;
             height: 100%;
             z-index: 1;
-            opacity: 0.3;
         }
 
-        .cta-background .bg-img {
+        .cta-background img {
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -767,26 +766,46 @@
         .cta-content {
             position: relative;
             z-index: 2;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 40px;
-        }
-
-        .cta-text {
-            color: #ffffff;
-            font-size: 36px;
-            font-weight: 700;
             text-align: center;
-            max-width: 800px;
-            line-height: 1.4;
-            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 50px;
         }
 
-        .cta-icon-left img,
-        .cta-icon-right img {
-            max-height: 120px;
-            width: auto;
+        .cta-title {
+            font-family: var(--font-main);
+            font-size: 64px;
+            font-weight: 700;
+            color: #ffffff;
+            line-height: 1.2;
+        }
+
+        .cta-logo {
+            width: 120px;
+            height: auto;
+            margin-bottom: -30px;
+        }
+
+        .cta-title .highlight {
+            color: #ffd700;
+        }
+
+        .cta-btn {
+            background-color: #ffffff;
+            color: #1a1a1a;
+            font-size: 16px;
+            font-weight: 700;
+            padding: 12px 40px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s;
+            font-family: var(--font-main);
+        }
+
+        .cta-btn:hover {
+            transform: scale(1.05);
         }
 
         /* ==================== FORM SECTION ==================== */
@@ -2185,10 +2204,25 @@
                 font-size: 22px;
             }
 
-            #cta-banner {
-                padding: 50px 0;
-                min-height: auto;
+
+            #section-cta {
+                min-height: 350px;
+                margin-bottom: 40px;
             }
+
+            .cta-title {
+                font-size: 26px;
+            }
+
+            .cta-logo {
+                width: 70px;
+                margin-bottom: -15px;
+            }
+
+            .cta-btn {
+                padding: 12px 35px;
+            }
+
 
             #form-section {
                 padding: 60px 0 80px;
@@ -2650,12 +2684,13 @@
                             <span id="summary-customer-name">-</span>
                         </div>
                         <div class="summary-row">
-                            <span>Phone</span>
-                            <span id="summary-customer-phone">-</span>
+                            <span>Payment Method</span>
+                            <span id="summary-method" style="font-weight: 600; color: var(--primary-color);">-</span>
                         </div>
                         <div class="summary-row">
-                            <span>Request Type</span>
-                            <span id="summary-request-type">-</span>
+                            <span>Reference / Notes</span>
+                            <span id="summary-reference"
+                                style="word-break: break-word; text-align: right; max-width: 150px; font-size: 11px; color: #666;">-</span>
                         </div>
 
                         <div class="summary-total">
@@ -2816,19 +2851,18 @@
     </section>
 
     <!-- ==================== CTA BANNER ==================== -->
-    <section id="cta-banner">
+    <section id="section-cta" class="section cta-section">
         <div class="cta-background">
-            <img src="IMAGES/Banner2.png" alt="Background" class="bg-img" />
+            <img src="IMAGES/ad4e5bb138141a5095f7caf9193f0c0f0d0b794f.png" alt="CTA Background" />
         </div>
         <div class="container cta-content">
-            <div class="cta-icon-left">
-                <img src="IMAGES/9e7aaa994ebaa9005cd542907bf9162be91c98f7.png" alt="Printer Icon" />
-            </div>
-            <h2 class="cta-text">
-                One Stop Shop for All Your Printing Needs<br />Let Us Help You Today!
+            <img src="IMAGES/5db1c76c09bd4716a7ddbc483a6afc6e11d7ef70.png" alt="Printhada Logo" class="cta-logo" />
+            <h2 class="cta-title">
+                Get <span class="highlight">Special Offer</span> For Today<br />With
+                Printhada
             </h2>
-            <div class="cta-icon-right">
-                <img src="IMAGES/09faa0bde9f68637f89a814f2e0e28476878dfa6.png" alt="Flower Icon" />
+            <div class="cta-button-wrapper">
+                <a href="SERVICES.html"><button class="cta-btn">Let's Try Printhada</button></a>
             </div>
         </div>
     </section>
@@ -3268,6 +3302,11 @@
                 var detailBox = document.getElementById(detailsId);
                 if (detailBox) detailBox.classList.add('active');
 
+                // Update summary method
+                var methodNameDisplay = this.querySelector('.payment-name').textContent;
+                var summaryMethod = document.getElementById('summary-method');
+                if (summaryMethod) summaryMethod.textContent = methodNameDisplay;
+
                 checkPaymentReadiness();
             });
         });
@@ -3455,6 +3494,14 @@
             payEmailInput.addEventListener('input', checkPaymentReadiness);
         }
 
+        if (payReferenceInput) {
+            payReferenceInput.addEventListener('input', function () {
+                var summaryRef = document.getElementById('summary-reference');
+                if (summaryRef) summaryRef.textContent = this.value || '-';
+                checkPaymentReadiness();
+            });
+        }
+
         function checkPaymentReadiness() {
             var amount = parseFloat(payAmountInput.value) || 0;
             var isPackageSelected = payPackageType && payPackageType.value !== '';
@@ -3568,6 +3615,10 @@
                         selectedMethod = null;
                         document.getElementById('summary-total-amount').textContent = '₱0.00';
                         document.getElementById('summary-customer-name').textContent = '-';
+                        var sMethod = document.getElementById('summary-method');
+                        var sRef = document.getElementById('summary-reference');
+                        if (sMethod) sMethod.textContent = '-';
+                        if (sRef) sRef.textContent = '-';
 
                     } else {
                         // Server Error
