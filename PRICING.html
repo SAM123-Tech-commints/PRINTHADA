@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pricing - Printhada</title>
-    <link rel="icon" href="IMAGES/5db1c76c09bd4716a7ddbc483a6afc6e11d7ef70.png" type="image/png">
+    <link rel="icon" href="./IMAGES/5db1c76c09bd4716a7ddbc483a6afc6e11d7ef70.png" type="image/png">
     <!-- Google Fonts - Roboto -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1184,13 +1184,15 @@
             height: 35px;
         }
 
-        .social-icons a img {
+        .social-icons a img,
+        .social-icons a svg {
             transition: opacity 0.3s;
             width: 20px;
             height: 20px;
         }
 
-        .social-icons a:hover img {
+        .social-icons a:hover img,
+        .social-icons a:hover svg {
             opacity: 0.7;
         }
 
@@ -2085,14 +2087,26 @@
                 <div class="footer-col social-col">
                     <h3>Social Media</h3>
                     <div class="social-icons">
-                        <a href="https://www.facebook.com" target="_blank"><img src="IMAGES/1_614.svg"
-                                alt="Facebook" /></a>
-                        <a href="https://www.twitter.com" target="_blank"><img src="IMAGES/1_616.svg"
-                                alt="Twitter" /></a>
-                        <a href="https://www.linkedin.com" target="_blank"><img src="IMAGES/1_619.svg"
-                                alt="LinkedIn" /></a>
-                        <a href="https://www.pinterest.com" target="_blank"><img src="IMAGES/1_625.svg"
-                                alt="Pinterest" /></a>
+                        <a href="https://www.facebook.com/gilbert.pascual1" target="_blank" aria-label="Facebook"><img
+                                src="IMAGES/1_614.svg" alt="Facebook" /></a>
+                        <a href="mailto:printhada.2009@gmail.com" aria-label="Gmail">
+                            <!-- Gmail Icon -->
+                            <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
+                                style="width: 20px; height: 20px; color: white;">
+                                <path
+                                    d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z" />
+                            </svg>
+                        </a>
+                        <a href="https://www.tiktok.com/@printhada8" target="_blank" aria-label="TikTok">
+                            <!-- TikTok Icon -->
+                            <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
+                                style="width: 20px; height: 20px; color: white;">
+                                <path
+                                    d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z" />
+                            </svg>
+                        </a>
+                        <a href="https://pin.it/7j7o76YWY" target="_blank" aria-label="Pinterest"><img
+                                src="IMAGES/1_625.svg" alt="Pinterest" /></a>
                     </div>
                 </div>
             </div>
@@ -2108,7 +2122,7 @@
     <button class="back-to-top" aria-label="Back to top">↑</button>
 
     <script>
-        // ==================== PAGE LOADER ====================
+
         var pageLoader = document.getElementById('pageLoader');
         var pageTransition = document.getElementById('pageTransition');
         var htmlElement = document.documentElement;
@@ -2118,23 +2132,23 @@
             history.scrollRestoration = 'manual';
         }
 
-        // Add loading class immediately to prevent scroll
+
         htmlElement.classList.add('loading');
         bodyElement.classList.add('loading');
 
-        // Hide loader when page is fully loaded
+
         window.addEventListener('load', function () {
             setTimeout(function () {
                 pageLoader.classList.add('hidden');
-                // Remove loading class to enable scrolling
+
                 htmlElement.classList.remove('loading');
                 bodyElement.classList.remove('loading');
-                // Reset scroll position
+
                 window.scrollTo(0, 0);
             }, 800);
         });
 
-        // Show loader when navigating to other pages
+
         document.querySelectorAll('a[href]').forEach(function (link) {
             link.addEventListener('click', function (e) {
                 var href = this.getAttribute('href');
@@ -2147,7 +2161,7 @@
                     href !== window.location.pathname.split('/').pop()) {
 
                     e.preventDefault();
-                    // Disable scrolling during transition
+
                     htmlElement.classList.add('loading');
                     bodyElement.classList.add('loading');
                     pageTransition.classList.add('active');
@@ -2159,7 +2173,7 @@
             });
         });
 
-        // Show loader when using browser back/forward
+
         window.addEventListener('pageshow', function (event) {
             if (event.persisted) {
                 pageTransition.classList.remove('active');
@@ -2169,7 +2183,7 @@
             }
         });
 
-        // ==================== HAMBURGER MENU ====================
+
         var hamburger = document.getElementById('hamburger');
         var nav = document.getElementById('mainNav');
         var body = document.body;
@@ -2185,7 +2199,7 @@
             }
         });
 
-        // Close nav when clicking a link
+
         var navLinks = nav.querySelectorAll('a');
         navLinks.forEach(function (link) {
             link.addEventListener('click', function () {
@@ -2195,7 +2209,7 @@
             });
         });
 
-        // ==================== TESTIMONIAL SLIDER ====================
+
         var testimonialSlides = document.querySelectorAll('.testimonial-slide');
         var pills = document.querySelectorAll('.pill');
         var currentIndex = 0;
@@ -2210,7 +2224,7 @@
 
             currentIndex = index;
 
-            // Update slides
+
             testimonialSlides.forEach(function (slide, i) {
                 slide.classList.remove('active');
                 if (i === currentIndex) {
@@ -2218,7 +2232,7 @@
                 }
             });
 
-            // Update pills
+
             pills.forEach(function (pill, i) {
                 pill.classList.remove('active');
                 if (i === currentIndex) {
@@ -2242,17 +2256,17 @@
             }
         }
 
-        // Pill click events
+
         pills.forEach(function (pill) {
             pill.addEventListener('click', function () {
                 var index = parseInt(this.getAttribute('data-index'));
                 showSlide(index);
-                // Reset auto-slide timer
+
                 startAutoSlide();
             });
         });
 
-        // Touch/Swipe support for mobile
+
         var slider = document.getElementById('testimonialSlider');
         var touchStartX = 0;
         var touchEndX = 0;
@@ -2272,24 +2286,24 @@
             var diff = touchStartX - touchEndX;
             if (Math.abs(diff) > 50) {
                 if (diff > 0) {
-                    // Swipe left - next slide
+
                     showSlide(currentIndex + 1);
                 } else {
-                    // Swipe right - previous slide
+
                     showSlide(currentIndex - 1);
                 }
             }
         }
 
-        // Pause on hover (desktop)
+
         var testimonialsContainer = document.querySelector('.testimonials-container');
         testimonialsContainer.addEventListener('mouseenter', stopAutoSlide);
         testimonialsContainer.addEventListener('mouseleave', startAutoSlide);
 
-        // Start auto-slide
+
         startAutoSlide();
 
-        // ==================== BACK TO TOP ====================
+
         var backToTop = document.querySelector('.back-to-top');
         window.addEventListener('scroll', function () {
             if (window.pageYOffset > 300) {
@@ -2302,28 +2316,72 @@
         backToTop.addEventListener('click', function () {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
-        // ==================== SEARCH FUNCTIONALITY ====================
+
         var searchBtn = document.getElementById('searchBtn');
         var searchModal = document.getElementById('searchModal');
         var searchInput = document.getElementById('searchInput');
         var searchClose = document.getElementById('searchClose');
         var searchResults = document.getElementById('searchResults');
 
-        // Page data for search
+
         var pageData = [
-            { title: 'Home - Printhada', page: 'HOME.html', description: 'Welcome to Printhada, your one-stop printing solution', keywords: ['home', 'main', 'start', 'welcome'] },
-            { title: 'About Us', page: 'ABOUT.html', description: 'Learn about our company, mission, and team', keywords: ['about', 'company', 'team', 'mission', 'who we are'] },
-            { title: 'Our Services', page: 'SERVICES.html', description: 'Professional printing services including document printing, binding, and lamination', keywords: ['services', 'printing', 'binding', 'lamination', 'stamps', 'seals', 'photocopy'] },
-            { title: 'Pricing Packages', page: 'PRICING.html', description: 'Standard Prints (₱250), Corporate Package (₱2,500), Premium Fabrication (₱7,500)', keywords: ['pricing', 'price', 'cost', 'packages', 'standard', 'corporate', 'premium', 'cheap', 'affordable'] },
-            { title: 'Contact Us', page: 'CONTACTS.html', description: 'Get in touch - Location, phone, email, and business hours', keywords: ['contact', 'location', 'address', 'phone', 'email', 'hours', 'reach us'] },
-            { title: 'Standard Prints Package', page: 'PRICING.html#standard', description: 'Starting at ₱250 - High-quality sticker & document printing', keywords: ['standard', 'cheap', 'basic', 'sticker', 'document'] },
-            { title: 'Corporate Package', page: 'PRICING.html#corporate', description: 'Starting at ₱2,500 - Corporate apparel, tumblers, and gifts', keywords: ['corporate', 'business', 'bulk', 'shirts', 'apparel', 'uniforms'] },
-            { title: 'Premium Fabrication', page: 'PRICING.html#premium', description: 'Starting at ₱7,500 - Trophies, awards, exhibition booths', keywords: ['premium', 'trophies', 'awards', 'booth', 'exhibition'] }
+
+            { title: 'Home', page: 'index.html', description: 'Welcome to Printhada - Your trusted printing partner.', keywords: ['home', 'main', 'start', 'index', 'welcome'] },
+            { title: 'Hero Section', page: 'index.html#hero-section', description: 'Printhada top banner and featured slide.', keywords: ['banner', 'hero', 'slide', 'intro'] },
+            { title: 'About Us Section', page: 'index.html#about-section', description: 'Who we are and our story.', keywords: ['about', 'story', 'history', 'who we are'] },
+            { title: 'Our Mission', page: 'index.html#mission-section', description: 'Our goals and commitment to quality.', keywords: ['mission', 'vision', 'goal', 'commitment'] },
+            { title: 'Featured Projects', page: 'index.html#projects-section', description: 'Showcase of our recent work.', keywords: ['projects', 'work', 'showcase', 'portfolio'] },
+            { title: 'Our Team', page: 'index.html#team-section', description: 'Meet the people behind Printhada.', keywords: ['team', 'staff', 'members', 'people'] },
+
+            // ABOUT
+            { title: 'About Page', page: 'ABOUT.html', description: 'Detailed information about our company.', keywords: ['about page', 'company info'] },
+
+            // SERVICES
+            { title: 'Services Page', page: 'SERVICES.html', description: 'Overview of all our printing services.', keywords: ['services', 'all services', 'what we do'] },
+            { title: 'Document Printing', page: 'SERVICES.html#document-printing', description: 'High-quality document printing for students and businesses.', keywords: ['document', 'print', 'paper', 'thesis', 'modules', 'flyers'] },
+            { title: 'Large Format Printing', page: 'SERVICES.html#large-format', description: 'Tarpaulins, banners, and signage.', keywords: ['large', 'format', 'tarpaulin', 'banner', 'signage', 'billboard'] },
+            { title: 'Stickers & Labels', page: 'SERVICES.html#stickers', description: 'Custom stickers, product labels, and decals.', keywords: ['sticker', 'label', 'decal', 'adhesive', 'product label'] },
+            { title: 'Apparel Printing', page: 'SERVICES.html#apparel', description: 'T-shirt printing, sublimation, and uniforms.', keywords: ['t-shirt', 'shirt', 'sublimation', 'uniform', 'jersey', 'clothing'] },
+            { title: 'Personalized Gifts', page: 'SERVICES.html#gifts', description: 'Mugs, tumblers, keychains, and tokens.', keywords: ['gift', 'mug', 'tumbler', 'keychain', 'souvenir', 'giveaway'] },
+
+            // PRICING
+            { title: 'Pricing Page', page: 'PRICING.html', description: 'View our competitive pricing packages.', keywords: ['pricing', 'rates', 'cost', 'price list'] },
+            { title: 'Standard Prints Package', page: 'PRICING.html#standard', description: 'Starting at ₱250 - Affordable printing solutions.', keywords: ['standard', 'cheap', 'basic', 'budget', '250'] },
+            { title: 'Corporate Package', page: 'PRICING.html#corporate', description: 'Starting at ₱2,500 - For businesses and events.', keywords: ['corporate', 'business', 'bulk', '2500', 'event'] },
+            { title: 'Premium Fabrication', page: 'PRICING.html#premium', description: 'Starting at ₱7,500 - High-end trophies and booths.', keywords: ['premium', 'luxury', 'trophy', 'award', 'booth', '7500'] },
+
+            // CONTACTS
+            { title: 'Contact Us', page: 'CONTACTS.html', description: 'Get in touch with us.', keywords: ['contact', 'call', 'email', 'message', 'touch'] },
+            { title: 'Location Map', page: 'CONTACTS.html#contact-hero', description: 'Find our physical store.', keywords: ['map', 'location', 'address', 'where', 'find'] },
+            { title: 'Inquiry Form', page: 'CONTACTS.html#contact-form', description: 'Send us a direct message.', keywords: ['form', 'inquiry', 'message', 'quote', 'ask'] },
+            { title: 'FAQ', page: 'CONTACTS.html#faq-section', description: 'Frequently Asked Questions.', keywords: ['faq', 'question', 'answer', 'help'] }
         ];
+
+        // Initialize Help State
+        function renderHelp() {
+            searchResults.innerHTML = `
+                <div class="search-help">
+                    <div class="help-section">
+                        <h4>Search Tips</h4>
+                        <p>Try searching for specific items like <span class="highlight-term">"stickers"</span>, <span class="highlight-term">"receipts"</span>, <span class="highlight-term">"map"</span>, or <span class="highlight-term">"corporate"</span>.</p>
+                    </div>
+                </div>
+                <style>
+                    .search-help { padding: 10px 20px; }
+                    .help-section { margin-bottom: 20px; }
+                    .help-section h4 { font-size: 14px; color: #999; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
+                    .help-section p { font-size: 14px; color: #666; line-height: 1.5; }
+                    .highlight-term { color: #d9bb28; font-weight: 600; }
+                    .no-results-help { padding: 20px; text-align: center; color: #666; }
+                    .no-results-help a { color: #d9bb28; text-decoration: underline; }
+                </style>
+            `;
+        }
 
         searchBtn.addEventListener('click', function () {
             searchModal.classList.add('active');
             searchInput.focus();
+            if (!searchInput.value.trim()) renderHelp();
         });
 
         searchClose.addEventListener('click', function () {
@@ -2343,19 +2401,35 @@
         searchInput.addEventListener('input', function () {
             var query = this.value.toLowerCase().trim();
 
-            if (query.length < 2) {
-                searchResults.innerHTML = '';
+            if (query.length === 0) {
+                renderHelp();
                 return;
             }
 
             var results = pageData.filter(function (item) {
-                return item.title.toLowerCase().includes(query) ||
-                    item.description.toLowerCase().includes(query) ||
-                    item.keywords.some(function (keyword) { return keyword.includes(query); });
+                var titleMatch = item.title.toLowerCase().includes(query);
+                var descMatch = item.description.toLowerCase().includes(query);
+                var keywordMatch = item.keywords.some(function (keyword) { return keyword.includes(query); });
+                return titleMatch || descMatch || keywordMatch;
+            });
+
+            // Sort results: title match > keyword match > description match
+            results.sort(function (a, b) {
+                var aTitle = a.title.toLowerCase().includes(query);
+                var bTitle = b.title.toLowerCase().includes(query);
+                if (aTitle && !bTitle) return -1;
+                if (!aTitle && bTitle) return 1;
+                return 0;
             });
 
             if (results.length === 0) {
-                searchResults.innerHTML = '<div class="no-results">No results found for "' + query + '"</div>';
+                searchResults.innerHTML = `
+                    <div class="no-results">
+                        <p>No results found for "<strong>${query}</strong>"</p>
+                        <div class="no-results-help">
+                            <p>Need help? Visit our <a href="SERVICES.html">Services Page</a> or <a href="CONTACTS.html">Contact Us</a> directly.</p>
+                        </div>
+                    </div>`;
                 return;
             }
 
@@ -2366,7 +2440,6 @@
                     '</div>';
             }).join('');
 
-            // Add click handlers
             document.querySelectorAll('.search-result-item').forEach(function (item) {
                 item.addEventListener('click', function () {
                     window.location.href = this.getAttribute('data-page');
@@ -2374,7 +2447,7 @@
             });
         });
 
-        // ==================== TAWK.TO AI CHATBOT ====================
+
         var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
         (function () {
             var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
@@ -2385,7 +2458,7 @@
             s0.parentNode.insertBefore(s1, s0);
         })();
 
-        // Keep chat bubble visible even when closed
+
         Tawk_API.onLoad = function () {
             Tawk_API.showWidget();
         };

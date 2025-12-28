@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Services - Printhada</title>
-    <link rel="icon" href="IMAGES/5db1c76c09bd4716a7ddbc483a6afc6e11d7ef70.png" type="image/png">
+    <link rel="icon" href="./IMAGES/5db1c76c09bd4716a7ddbc483a6afc6e11d7ef70.png" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700;900&display=swap"
@@ -1397,7 +1397,365 @@
             color: var(--primary-color);
         }
 
-        /* ==================== FOOTER ==================== */
+        /* ==================== PAYMENT MODAL ==================== */
+        .payment-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            backdrop-filter: blur(5px);
+            padding: 20px;
+        }
+
+        .payment-modal.active {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .payment-content {
+            background: #fff;
+            width: 100%;
+            max-width: 900px;
+            max-height: 90vh;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .payment-header {
+            padding: 25px 30px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #fff;
+        }
+
+        .payment-title h3 {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 5px;
+        }
+
+        .payment-title p {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .payment-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 30px;
+            display: flex;
+            gap: 40px;
+            background: #f9fafb;
+        }
+
+        .payment-left {
+            flex: 2;
+        }
+
+        .payment-right {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .payment-section-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .payment-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+            max-width: 250px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .payment-method-card {
+            background: #fff;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            aspect-ratio: 1 / 1;
+            width: 100%;
+        }
+
+        .payment-method-card:hover {
+            border-color: var(--primary-color);
+            background: #fffbef;
+            transform: translateY(-2px);
+        }
+
+        .payment-method-card.selected {
+            border-color: var(--primary-color);
+            background: #fff9e6;
+            box-shadow: 0 4px 12px rgba(217, 187, 40, 0.15);
+            transform: translateY(-2px);
+            border-width: 2px;
+        }
+
+        .payment-logo {
+            height: 35px;
+            width: auto;
+            object-fit: contain;
+            margin-bottom: 2px;
+        }
+
+        .payment-name {
+            font-size: 11px;
+            font-weight: 500;
+            color: #4b5563;
+            text-align: center;
+        }
+
+
+
+        .payment-details-box {
+            background: #fff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+            display: none;
+        }
+
+        .payment-details-box.active {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed #e5e7eb;
+        }
+
+        .detail-row:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .detail-label {
+            font-size: 14px;
+            color: #6b7280;
+        }
+
+        .detail-value {
+            font-size: 14px;
+            font-weight: 600;
+            color: #111827;
+            text-align: right;
+            font-family: monospace;
+        }
+
+        .copy-btn {
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            font-size: 12px;
+            cursor: pointer;
+            margin-left: 10px;
+            font-weight: 600;
+        }
+
+        .order-summary-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e5e7eb;
+            position: sticky;
+            top: 0;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            font-size: 14px;
+            color: #4b5563;
+        }
+
+        .summary-total {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #f3f4f6;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .total-label {
+            font-weight: 700;
+            color: #111827;
+            font-size: 16px;
+        }
+
+        .total-amount {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--primary-color);
+        }
+
+        .proof-upload-area {
+            border: 2px dashed #d1d5db;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background: #fff;
+        }
+
+        .proof-upload-area:hover {
+            border-color: var(--primary-color);
+            background: #fafafa;
+        }
+
+        .upload-icon {
+            font-size: 32px;
+            color: #9ca3af;
+            margin-bottom: 10px;
+        }
+
+        .upload-text {
+            font-size: 14px;
+            color: #6b7280;
+        }
+
+        #proof-preview {
+            margin-top: 15px;
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            display: none;
+            max-height: 200px;
+            object-fit: contain;
+        }
+
+        .payment-footer {
+            padding: 20px 30px;
+            background: #fff;
+            border-top: 1px solid #eee;
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+        }
+
+        .btn-cancel {
+            padding: 12px 25px;
+            border-radius: 10px;
+            border: 1px solid #e5e7eb;
+            background: #fff;
+            color: #4b5563;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-cancel:hover {
+            background: #f9fafb;
+        }
+
+        .btn-confirm {
+            padding: 12px 40px;
+            border-radius: 10px;
+            background: var(--primary-color);
+            color: #fff;
+            border: none;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 4px 12px rgba(217, 187, 40, 0.4);
+        }
+
+        .btn-confirm:hover {
+            background-color: #c5a020;
+            transform: translateY(-2px);
+        }
+
+        .btn-confirm:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive payment modal */
+        @media (max-width: 768px) {
+            .payment-body {
+                flex-direction: column;
+                padding: 20px;
+                gap: 20px;
+            }
+
+            .payment-right {
+                order: -1;
+            }
+
+            .payment-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .payment-header {
+                padding: 15px 20px;
+            }
+
+            .payment-footer {
+                padding: 15px 20px;
+            }
+        }
+
         .site-footer {
             background-color: var(--bg-dark);
             color: #fff;
@@ -1475,13 +1833,15 @@
             height: 35px;
         }
 
-        .social-icons a img {
+        .social-icons a img,
+        .social-icons a svg {
             transition: opacity 0.3s;
             width: 20px;
             height: 20px;
         }
 
-        .social-icons a:hover img {
+        .social-icons a:hover img,
+        .social-icons a:hover svg {
             opacity: 0.7;
         }
 
@@ -2101,6 +2461,216 @@
         </div>
     </div>
 
+    <!-- ==================== PAYMENT MODAL ==================== -->
+    <div class="payment-modal" id="paymentModal">
+        <div class="payment-content">
+            <div class="payment-header">
+                <div class="payment-title">
+                    <h3>Secure Payment</h3>
+                    <p>Complete your request by selecting a payment method</p>
+                </div>
+                <button class="close-btn" id="closePaymentBtn">
+                    <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1 1L13 13M1 13L13 1" stroke="#333333" stroke-width="2" stroke-linecap="round" />
+                    </svg>
+                </button>
+            </div>
+            <div class="payment-body">
+                <div class="payment-left">
+                    <!-- New Step 1: Payer Details -->
+                    <div class="payment-section-title">
+                        <span class="step-badge">1</span> Payment Details
+                    </div>
+                    <div class="manual-payment-form" style="margin-bottom: 25px; display: grid; gap: 15px;">
+                        <div class="form-group" style="margin:0;">
+                            <label style="font-size:13px; font-weight:600; margin-bottom:5px; display:block;">Payment
+                                For (Select Package)</label>
+                            <select id="pay-package-type"
+                                style="width:100%; padding:10px; border:1px solid #ddd; border-radius:5px; background:#fff;">
+                                <option value="" disabled selected>Select Package Type</option>
+                                <option value="standard">Standard Prints (Min. ₱250)</option>
+                                <option value="corporate">Corporate Package (Min. ₱2,500)</option>
+                                <option value="premium">Premium Fabrication (Min. ₱7,500)</option>
+                                <option value="other">Other / Custom Amount</option>
+                            </select>
+                        </div>
+                        <div class="form-group" style="margin:0;">
+                            <label style="font-size:13px; font-weight:600; margin-bottom:5px; display:block;">Amount to
+                                Pay (₱)</label>
+                            <input type="number" id="pay-amount" placeholder="0.00" step="0.01"
+                                style="width:100%; padding:10px; border:1px solid #ddd; border-radius:5px;">
+                            <small id="min-amount-msg" style="color: #e74c3c; font-size: 11px; display: none;">Minimum
+                                amount for this package is ₱<span id="min-val">0</span></small>
+                        </div>
+                        <div class="form-group" style="margin:0;">
+                            <label style="font-size:13px; font-weight:600; margin-bottom:5px; display:block;">Payment
+                                Reference / Message</label>
+                            <input type="text" id="pay-reference" placeholder="e.g. Quote #1234 or Notes"
+                                style="width:100%; padding:10px; border:1px solid #ddd; border-radius:5px;">
+                        </div>
+                        <div class="form-grid-2" style="display:grid; grid-template-columns: 1fr 1fr; gap:15px;">
+                            <div class="form-group" style="margin:0;">
+                                <label style="font-size:13px; font-weight:600; margin-bottom:5px; display:block;">Your
+                                    Name</label>
+                                <input type="text" id="pay-name" placeholder="Full Name"
+                                    style="width:100%; padding:10px; border:1px solid #ddd; border-radius:5px;">
+                            </div>
+                            <div class="form-group" style="margin:0;">
+                                <label style="font-size:13px; font-weight:600; margin-bottom:5px; display:block;">Your
+                                    Email</label>
+                                <input type="email" id="pay-email" placeholder="email@example.com"
+                                    style="width:100%; padding:10px; border:1px solid #ddd; border-radius:5px;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="payment-section-title">
+                        <span class="step-badge">2</span> Select Payment Method
+                    </div>
+                    <div class="payment-grid">
+                        <div class="payment-method-card" data-method="gcash">
+                            <img src="IMAGES/1t.png" alt="GCash" class="payment-logo">
+                            <span class="payment-name">GCash</span>
+                        </div>
+                        <div class="payment-method-card" data-method="maya">
+                            <img src="IMAGES/2t.png" alt="Maya" class="payment-logo">
+                            <span class="payment-name">Maya</span>
+                        </div>
+                        <div class="payment-method-card" data-method="bpi">
+                            <img src="IMAGES/3t.png" alt="BPI" class="payment-logo">
+                            <span class="payment-name">BPI</span>
+                        </div>
+                        <div class="payment-method-card" data-method="bdo">
+                            <img src="IMAGES/4t.png" alt="BDO" class="payment-logo">
+                            <span class="payment-name">BDO</span>
+                        </div>
+                    </div>
+
+                    <!-- Payment Details Dynamic Section -->
+                    <div id="payment-instruction-box">
+                        <div id="gcash-details" class="payment-details-box">
+                            <h4 style="margin-bottom:15px; color:var(--primary-color);">Scan to Pay or Send Money</h4>
+                            <div class="detail-row">
+                                <span class="detail-label">Account Name</span>
+                                <span class="detail-value">PRINTHADA SERVICES</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Account Number</span>
+                                <span class="detail-value">0917 470 4724 <button class="copy-btn">COPY</button></span>
+                            </div>
+                        </div>
+
+                        <div id="maya-details" class="payment-details-box">
+                            <h4 style="margin-bottom:15px; color:var(--primary-color);">Scan to Pay or Send Money</h4>
+                            <div class="detail-row">
+                                <span class="detail-label">Account Name</span>
+                                <span class="detail-value">PRINTHADA SERVICES</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Account Number</span>
+                                <span class="detail-value">0930 281 9063 <button class="copy-btn">COPY</button></span>
+                            </div>
+                        </div>
+
+                        <div id="bank-details" class="payment-details-box">
+                            <h4 style="margin-bottom:15px; color:var(--primary-color);">Bank Transfer</h4>
+                            <div class="detail-row"
+                                style="flex-direction: column; align-items: center; border: none; gap: 10px;">
+                                <span class="detail-label"
+                                    style="text-align:center; display:block; margin-bottom:5px;">Scan QR for Faster
+                                    Transaction</span>
+                                <div style="display:flex; gap:20px; justify-content:center; flex-wrap:wrap;">
+                                    <div style="text-align:center;">
+                                        <div
+                                            style="width:120px; height:120px; background:#fff; display:flex; align-items:center; justify-content:center; border:1px solid #ddd; border-radius:8px; margin-bottom:5px; overflow:hidden;">
+                                            <img src="IMAGES/BPI.png"
+                                                style="width:100%; height:100%; object-fit:contain;" alt="BPI QR">
+                                        </div>
+                                        <span style="font-size:11px; font-weight:600;">BPI</span>
+                                        <p style="font-size:9px; color:#666; margin-top:2px;">Scan to Pay</p>
+                                    </div>
+                                    <div style="text-align:center;">
+                                        <div
+                                            style="width:120px; height:120px; background:#fff; display:flex; align-items:center; justify-content:center; border:1px solid #ddd; border-radius:8px; margin-bottom:5px; overflow:hidden;">
+                                            <img src="IMAGES/BDO.png"
+                                                style="width:100%; height:100%; object-fit:contain;" alt="BDO QR">
+                                        </div>
+                                        <span style="font-size:11px; font-weight:600;">BDO</span>
+                                        <p style="font-size:9px; color:#666; margin-top:2px;">Scan to Pay</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Bank Info</span>
+                                <span class="detail-value">Details provided upon request</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="payment-section-title" style="margin-top: 30px;">
+                        <span class="step-badge">3</span> Upload Proof of Payment
+                    </div>
+
+                    <div class="proof-upload-area" id="proof-drop-zone">
+                        <!-- Camera icon removed as requested -->
+                        <p class="upload-text"><strong>Click to upload</strong> or drag and drop<br>receipts or
+                            screenshots here (Max. of 2 files)</p>
+                        <input type="file" id="proof-file" accept="image/*,.pdf" multiple style="display: none;">
+                    </div>
+                    <!-- Inline Error Message for File Limit -->
+                    <div id="proof-upload-error"
+                        style="color: #e74c3c; font-size: 12px; margin-top: 5px; display: none; text-align: center;">
+                        <span style="display:flex; align-items:center; justify-content:center; gap:5px;">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="12" y1="8" x2="12" y2="12"></line>
+                                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                            </svg>
+                            Maximum of 2 files allowed.
+                        </span>
+                    </div>
+                    <!-- New File Status Container for Proofs -->
+                    <div class="file-status" id="proof-file-status" style="margin-top: 15px;"></div>
+
+                </div>
+
+                <div class="payment-right">
+                    <div class="order-summary-card">
+                        <h4 style="margin-bottom: 20px; font-size: 18px;">Order Summary</h4>
+                        <div class="summary-row">
+                            <span>Service Package</span>
+                            <span id="summary-service-name" style="font-weight: 600;">-</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Customer</span>
+                            <span id="summary-customer-name">-</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Phone</span>
+                            <span id="summary-customer-phone">-</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Request Type</span>
+                            <span id="summary-request-type">-</span>
+                        </div>
+
+                        <div class="summary-total">
+                            <span class="total-label">Estimated Total</span>
+                            <span class="total-amount" id="summary-total-amount">₱0.00</span>
+                        </div>
+                        <p style="font-size: 11px; color: #999; margin-top: 10px; text-align: center;">*Final price may
+                            vary based on customization</p>
+                    </div>
+                </div>
+            </div>
+            <div class="payment-footer">
+                <button class="btn-cancel" id="cancelPaymentBtn">Cancel</button>
+                <button class="btn-confirm" id="confirmPaymentBtn" disabled>Confirm Payment & Submit</button>
+            </div>
+        </div>
+    </div>
+
     <!-- ==================== HEADER ==================== -->
     <section id="header-section">
         <header class="site-header container">
@@ -2266,6 +2836,13 @@
             <div class="form-header">
                 <h2>Request a Service</h2>
                 <p>Fill out the form below and we'll get back to you with a quote</p>
+                <p style="margin-top: 15px; font-size: 0.9em;">
+                    Already have a quote?
+                    <a href="#" id="openPayModalBtn"
+                        style="color: var(--primary-color); font-weight: bold; text-decoration: underline;">
+                        Click here to Pay
+                    </a>
+                </p>
             </div>
             <form class="contact-form" id="serviceForm" action="https://getform.io/f/agdvllkb" method="POST"
                 enctype="multipart/form-data">
@@ -2380,6 +2957,8 @@
                 <div class="form-group full-width">
                     <label for="message">Message (optional)</label>
                     <div class="textarea-wrapper" id="message-wrapper">
+                        <textarea id="message" name="message"
+                            placeholder="Tell us more about your request (optional)"></textarea>
                     </div>
 
                     <!-- Row 5: File Upload & Button -->
@@ -2391,7 +2970,7 @@
                                     <img src="IMAGES/553_1130.svg" alt="doc" />
                                 </div>
                             </label>
-                            <input type="file" id="file-upload" name="file"
+                            <input type="file" id="file-upload" name="files[]" multiple
                                 accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.ai,.psd" style="display:none;" />
                             <div class="file-status" id="file-status">
                                 <span id="file-name">No file chosen</span>
@@ -2446,14 +3025,26 @@
                 <div class="footer-col social-col">
                     <h3>Social Media</h3>
                     <div class="social-icons">
-                        <a href="https://www.facebook.com" target="_blank"><img src="IMAGES/1_614.svg"
-                                alt="Facebook" /></a>
-                        <a href="https://www.twitter.com" target="_blank"><img src="IMAGES/1_616.svg"
-                                alt="Twitter" /></a>
-                        <a href="https://www.linkedin.com" target="_blank"><img src="IMAGES/1_619.svg"
-                                alt="LinkedIn" /></a>
-                        <a href="https://www.pinterest.com" target="_blank"><img src="IMAGES/1_625.svg"
-                                alt="Pinterest" /></a>
+                        <a href="https://www.facebook.com/gilbert.pascual1" target="_blank" aria-label="Facebook"><img
+                                src="IMAGES/1_614.svg" alt="Facebook" /></a>
+                        <a href="mailto:printhada.2009@gmail.com" aria-label="Gmail">
+                            <!-- Gmail Icon -->
+                            <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
+                                style="width: 20px; height: 20px; color: white;">
+                                <path
+                                    d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z" />
+                            </svg>
+                        </a>
+                        <a href="https://www.tiktok.com/@printhada8" target="_blank" aria-label="TikTok">
+                            <!-- TikTok Icon -->
+                            <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
+                                style="width: 20px; height: 20px; color: white;">
+                                <path
+                                    d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z" />
+                            </svg>
+                        </a>
+                        <a href="https://pin.it/7j7o76YWY" target="_blank" aria-label="Pinterest"><img
+                                src="IMAGES/1_625.svg" alt="Pinterest" /></a>
                     </div>
                 </div>
             </div>
@@ -2469,7 +3060,7 @@
     <button class="back-to-top" aria-label="Back to top">↑</button>
 
     <script>
-        // ==================== PAGE LOADER ====================
+
         var pageLoader = document.getElementById('pageLoader');
         var pageTransition = document.getElementById('pageTransition');
         var htmlElement = document.documentElement;
@@ -2523,7 +3114,7 @@
             }
         });
 
-        // ==================== HAMBURGER MENU ====================
+
         var hamburger = document.getElementById('hamburger');
         var nav = document.getElementById('mainNav');
         var body = document.body;
@@ -2548,7 +3139,7 @@
             });
         });
 
-        // ==================== BACK TO TOP ====================
+
         var backToTop = document.querySelector('.back-to-top');
         window.addEventListener('scroll', function () {
             if (window.pageYOffset > 300) {
@@ -2562,31 +3153,78 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
 
-        // ==================== FILE UPLOAD ====================
+
         var fileInput = document.getElementById('file-upload');
-        var fileName = document.getElementById('file-name');
-        var fileClearBtn = document.getElementById('file-clear-btn');
+        var fileStatus = document.getElementById('file-status');
+
+
+        fileStatus.innerHTML = '';
+        var fileListContainer = document.createElement('div');
+        fileListContainer.style.display = 'flex';
+        fileListContainer.style.flexDirection = 'column';
+        fileListContainer.style.gap = '5px';
+        fileStatus.appendChild(fileListContainer);
+
+        var selectedFiles = [];
 
         fileInput.addEventListener('change', function () {
-            if (this.files.length > 0) {
-                fileName.textContent = this.files[0].name;
-                fileName.style.color = 'var(--success-color)';
-                fileClearBtn.classList.add('show');
-            } else {
-                fileName.textContent = 'No file chosen';
-                fileName.style.color = '#888';
-                fileClearBtn.classList.remove('show');
+            var newFiles = Array.from(this.files);
+            selectedFiles = selectedFiles.concat(newFiles);
+            updateFileList();
+        });
+
+        function updateFileList() {
+            fileListContainer.innerHTML = '';
+
+            if (selectedFiles.length === 0) {
+                var emptyMsg = document.createElement('span');
+                emptyMsg.textContent = 'No file chosen';
+                emptyMsg.style.color = '#888';
+                fileListContainer.appendChild(emptyMsg);
+                return;
             }
-        });
 
-        fileClearBtn.addEventListener('click', function () {
-            fileInput.value = '';
-            fileName.textContent = 'No file chosen';
-            fileName.style.color = '#888';
-            fileClearBtn.classList.remove('show');
-        });
+            selectedFiles.forEach(function (file, index) {
+                var fileItem = document.createElement('div');
+                fileItem.style.display = 'flex';
+                fileItem.style.alignItems = 'center';
+                fileItem.style.gap = '10px';
+                fileItem.style.fontSize = '14px';
+                fileItem.style.color = 'var(--text-dark)';
 
-        // ==================== FORM HANDLING ====================
+                var nameSpan = document.createElement('span');
+                nameSpan.textContent = file.name;
+
+                var removeBtn = document.createElement('button');
+                removeBtn.textContent = '✕';
+                removeBtn.style.background = '#ff4444';
+                removeBtn.style.color = 'white';
+                removeBtn.style.border = 'none';
+                removeBtn.style.borderRadius = '50%';
+                removeBtn.style.width = '18px';
+                removeBtn.style.height = '18px';
+                removeBtn.style.cursor = 'pointer';
+                removeBtn.style.fontSize = '10px';
+                removeBtn.style.display = 'flex';
+                removeBtn.style.alignItems = 'center';
+                removeBtn.style.justifyContent = 'center';
+
+                removeBtn.onclick = function (e) {
+                    e.preventDefault();
+                    selectedFiles.splice(index, 1);
+                    updateFileList();
+                };
+
+                fileItem.appendChild(removeBtn);
+                fileItem.appendChild(nameSpan);
+                fileListContainer.appendChild(fileItem);
+            });
+        }
+
+
+        updateFileList();
+
+
         var form = document.getElementById('serviceForm');
         var nameInput = document.getElementById('name');
         var emailInput = document.getElementById('email');
@@ -2594,17 +3232,368 @@
         var servicesInput = document.getElementById('services');
         var submitBtn = document.getElementById('submitBtn');
 
-        var modal = document.getElementById('responseModal');
-        var iconWrapper = document.getElementById('iconWrapper');
-        var modalTitle = document.getElementById('modalTitle');
-        var modalUserInfo = document.getElementById('modalUserInfo');
-        var modalUserName = document.getElementById('modalUserName');
-        var modalUserEmail = document.getElementById('modalUserEmail');
-        var modalDescription = document.getElementById('modalDescription');
-        var modalNote = document.getElementById('modalNote');
-        var closeModalBtn = document.getElementById('closeModalBtn');
-        var btnDone = document.getElementById('btnDone');
-        var btnSendAnother = document.getElementById('btnSendAnother');
+
+        var modal = document.getElementById('responseModal'); // Success Modal
+        var paymentModal = document.getElementById('paymentModal');
+        var openPayModalBtn = document.getElementById('openPayModalBtn'); // NEW
+        var closePaymentBtn = document.getElementById('closePaymentBtn');
+        var cancelPaymentBtn = document.getElementById('cancelPaymentBtn');
+        var confirmPaymentBtn = document.getElementById('confirmPaymentBtn');
+
+
+        var paymentMethods = document.querySelectorAll('.payment-method-card');
+        var selectedMethod = null;
+        var proofFile = null;
+
+        paymentMethods.forEach(function (card) {
+            card.addEventListener('click', function () {
+
+                paymentMethods.forEach(c => c.classList.remove('selected'));
+                document.querySelectorAll('.payment-details-box').forEach(b => b.classList.remove('active'));
+
+
+                this.classList.add('selected');
+                selectedMethod = this; // Store the card element, not the data-method value
+                var methodName = this.getAttribute('data-method');
+
+
+                var detailsId = '';
+                if (methodName === 'gcash') detailsId = 'gcash-details';
+                else if (methodName === 'maya') detailsId = 'maya-details';
+                else detailsId = 'bank-details';
+
+                var detailBox = document.getElementById(detailsId);
+                if (detailBox) detailBox.classList.add('active');
+
+                checkPaymentReadiness();
+            });
+        });
+
+
+        document.querySelectorAll('.copy-btn').forEach(btn => {
+            btn.addEventListener('click', function (e) {
+
+                var text = this.previousSibling.textContent.trim();
+                navigator.clipboard.writeText(text).then(() => {
+                    var originalText = this.textContent;
+                    this.textContent = 'COPIED!';
+                    setTimeout(() => { this.textContent = originalText; }, 2000);
+                });
+            });
+        });
+
+
+        var proofZone = document.getElementById('proof-drop-zone');
+        var proofInput = document.getElementById('proof-file');
+        var proofStatus = document.getElementById('proof-file-status');
+        var proofError = document.getElementById('proof-upload-error');
+        var proofFiles = [];
+
+        function showProofError(msg) {
+            proofError.querySelector('span').innerHTML =
+                '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg> ' + msg;
+            proofError.style.display = 'block';
+            setTimeout(function () { proofError.style.display = 'none'; }, 3000);
+        }
+
+        proofZone.addEventListener('click', function () {
+            if (proofFiles.length >= 2) {
+                showProofError("Maximum of 2 files allowed. Remove one to add.");
+                return;
+            }
+            proofInput.click();
+        });
+
+        proofInput.addEventListener('change', function () {
+            handleFiles(this.files);
+            this.value = ''; // Reset
+        });
+
+
+        proofZone.addEventListener('dragover', function (e) { e.preventDefault(); this.style.borderColor = '#d9bb28'; });
+        proofZone.addEventListener('dragleave', function (e) { e.preventDefault(); this.style.borderColor = '#d1d5db'; });
+        proofZone.addEventListener('drop', function (e) {
+            e.preventDefault();
+            this.style.borderColor = '#d1d5db';
+            handleFiles(e.dataTransfer.files);
+        });
+
+        function handleFiles(files) {
+            // Allow images and PDFs
+            var newFiles = Array.from(files).filter(f => f.type.startsWith('image/') || f.type === 'application/pdf');
+
+            if (newFiles.length === 0) return;
+
+
+            var slotsLeft = 2 - proofFiles.length;
+
+            if (slotsLeft <= 0) {
+                showProofError("Limit reached (Max 2 files).");
+                return;
+            }
+
+            if (newFiles.length > slotsLeft) {
+                showProofError("Only " + slotsLeft + " more file(s) added. Max 2 allowed.");
+                newFiles = newFiles.slice(0, slotsLeft);
+            }
+
+            proofFiles = proofFiles.concat(newFiles);
+            proofError.style.display = 'none';
+            updateProofList();
+            checkPaymentReadiness();
+        }
+
+        function updateProofList() {
+            proofStatus.innerHTML = '';
+            if (proofFiles.length === 0) {
+                document.querySelector('.upload-text').innerHTML = '<strong>Click to upload</strong> or drag and drop<br>receipts or screenshots here (Max 2)';
+                return;
+            }
+
+            var listContainer = document.createElement('div');
+            listContainer.style.display = 'flex';
+            listContainer.style.flexDirection = 'column';
+            listContainer.style.gap = '5px';
+
+            proofFiles.forEach((file, index) => {
+                var item = document.createElement('div');
+                item.style.display = 'flex';
+                item.style.alignItems = 'center';
+                item.style.justifyContent = 'space-between';
+                item.style.gap = '10px';
+                item.style.fontSize = '12px';
+                item.style.background = '#f3f4f6';
+                item.style.padding = '8px 12px';
+                item.style.borderRadius = '6px';
+                item.style.border = '1px solid #e5e7eb';
+
+                var nameSpan = document.createElement('span');
+                nameSpan.textContent = file.name;
+                nameSpan.style.whiteSpace = 'nowrap';
+                nameSpan.style.overflow = 'hidden';
+                nameSpan.style.textOverflow = 'ellipsis';
+                nameSpan.style.maxWidth = '200px';
+
+                var del = document.createElement('span');
+                del.textContent = '✕';
+                del.style.cursor = 'pointer';
+                del.style.color = '#e74c3c';
+                del.style.fontWeight = 'bold';
+                del.style.fontSize = '14px';
+                del.title = 'Remove file';
+                del.onclick = function () {
+                    proofFiles.splice(index, 1);
+                    updateProofList();
+                    checkPaymentReadiness();
+                };
+
+                item.appendChild(nameSpan);
+                item.appendChild(del);
+                listContainer.appendChild(item);
+            });
+
+            proofStatus.appendChild(listContainer);
+            document.querySelector('.upload-text').innerHTML = '<strong>' + proofFiles.length + '/2 files</strong> selected';
+        }
+
+
+        var payAmountInput = document.getElementById('pay-amount');
+        var payNameInput = document.getElementById('pay-name');
+        var payEmailInput = document.getElementById('pay-email');
+        var payReferenceInput = document.getElementById('pay-reference');
+        var payPackageType = document.getElementById('pay-package-type');
+        var minAmountMsg = document.getElementById('min-amount-msg');
+        var minValSpan = document.getElementById('min-val');
+
+        var minAmount = 0;
+
+        if (payPackageType) {
+            payPackageType.addEventListener('change', function () {
+                var type = this.value;
+                if (type === 'standard') minAmount = 250;
+                else if (type === 'corporate') minAmount = 2500;
+                else if (type === 'premium') minAmount = 7500;
+                else minAmount = 1;
+
+                minValSpan.textContent = minAmount.toLocaleString();
+
+                // Update Summary Service Name
+                var typeName = this.options[this.selectedIndex].text;
+                document.getElementById('summary-service-name').textContent = typeName;
+
+                // Trigger check
+                payAmountInput.dispatchEvent(new Event('input'));
+                checkPaymentReadiness();
+            });
+        }
+
+        if (payAmountInput) {
+            payAmountInput.addEventListener('input', function () {
+                var val = parseFloat(this.value) || 0;
+                document.getElementById('summary-total-amount').textContent = '₱' + val.toFixed(2);
+
+
+                if (val < minAmount && minAmount > 0) {
+                    minAmountMsg.style.display = 'block';
+                } else {
+                    minAmountMsg.style.display = 'none';
+                }
+
+                checkPaymentReadiness();
+            });
+        }
+        if (payNameInput) {
+            payNameInput.addEventListener('input', function () {
+                document.getElementById('summary-customer-name').textContent = this.value || '-';
+                checkPaymentReadiness();
+            });
+        }
+        if (payEmailInput) {
+            payEmailInput.addEventListener('input', checkPaymentReadiness);
+        }
+
+        function checkPaymentReadiness() {
+            var amount = parseFloat(payAmountInput.value) || 0;
+            var isPackageSelected = payPackageType && payPackageType.value !== '';
+
+            // Strict Email Validation
+            var isNameValid = payNameInput && payNameInput.value.trim() !== '';
+            var isEmailValid = payEmailInput && validateEmail(payEmailInput.value);
+
+            if (selectedMethod && amount >= minAmount && amount > 0 && isPackageSelected && proofFiles.length > 0 && isNameValid && isEmailValid) {
+                confirmPaymentBtn.disabled = false;
+            } else {
+                confirmPaymentBtn.disabled = true;
+            }
+        }
+
+
+        function openPaymentModal(e) {
+            if (e) e.preventDefault();
+            paymentModal.classList.add('active');
+
+
+            if (payNameInput && !payNameInput.value) {
+                // Optionally prepopulate if main form has values (UX convenience, not forced)
+                if (nameInput.value) payNameInput.value = nameInput.value;
+                if (emailInput.value) payEmailInput.value = emailInput.value;
+            }
+
+            if (payNameInput) payNameInput.dispatchEvent(new Event('input'));
+            if (payAmountInput) payAmountInput.dispatchEvent(new Event('input'));
+        }
+
+
+        if (openPayModalBtn) {
+            openPayModalBtn.addEventListener('click', openPaymentModal);
+        }
+
+        function closePaymentModal() {
+            paymentModal.classList.remove('active');
+        }
+
+        closePaymentBtn.onclick = closePaymentModal;
+        cancelPaymentBtn.onclick = closePaymentModal;
+
+
+        confirmPaymentBtn.addEventListener('click', function () {
+            // 1. Prepare Data
+            var payerName = payNameInput.value || 'Customer';
+            var payerEmail = payEmailInput.value || '';
+            var amount = parseFloat(payAmountInput.value) || 0;
+            var formattedAmount = amount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            var reference = payReferenceInput.value || '-';
+            var packageType = payPackageType ? payPackageType.value : '-';
+            var method = selectedMethod ? selectedMethod.querySelector('span').textContent : 'Unknown';
+
+            // 2. Show Loading State
+            confirmPaymentBtn.disabled = true;
+            confirmPaymentBtn.innerHTML = '<span class="loading-spinner"></span> Processing...';
+
+            // Add spinner style if not present (simple inline override for safety)
+            // or rely on class. We can just use text for now to be safe or reuse existing loader styles logic.
+
+            // 3. Construct FormData
+            var formData = new FormData();
+            formData.append('name', payerName);
+            formData.append('email', payerEmail);
+            formData.append('amount', amount.toFixed(2));
+            formData.append('payment_method', method);
+            formData.append('package_type', packageType);
+            formData.append('reference_message', reference);
+
+            // Append Files
+            proofFiles.forEach(function (file, index) {
+                formData.append('proof_files[]', file);
+            });
+
+            // 4. Send Request
+            fetch('https://getform.io/f/agdvllkb', { // Using same endpoint as contact form for now
+                method: 'POST',
+                body: formData
+            })
+                .then(function (response) {
+                    confirmPaymentBtn.disabled = false;
+                    confirmPaymentBtn.textContent = 'Confirm Payment';
+
+                    if (response.ok) {
+                        // 5. Success Handling
+                        closePaymentModal();
+                        openModal(
+                            'success',
+                            'Payment Submitted!',
+                            payerName,
+                            payerEmail,
+                            'Your payment of ₱' + formattedAmount + ' and proof have been sent for verification.',
+                            '<span class="email-icon">✓</span> You will receive a confirmation email shortly.'
+                        );
+
+                        // Reset Payment Form
+                        payAmountInput.value = '';
+                        payReferenceInput.value = '';
+                        if (payNameInput) payNameInput.value = '';
+                        if (payEmailInput) payEmailInput.value = '';
+                        if (payPackageType) payPackageType.selectedIndex = 0;
+
+                        proofFiles = [];
+                        updateProofList();
+                        document.querySelector('.upload-text').innerHTML = '<strong>Click to upload</strong> or drag and drop<br>receipts or screenshots here (Max 2)';
+
+                        // Reset selection
+                        paymentMethods.forEach(c => c.classList.remove('selected'));
+                        document.querySelectorAll('.payment-details-box').forEach(b => b.classList.remove('active'));
+                        selectedMethod = null;
+                        document.getElementById('summary-total-amount').textContent = '₱0.00';
+                        document.getElementById('summary-customer-name').textContent = '-';
+
+                    } else {
+                        // Server Error
+                        openModal(
+                            'error',
+                            'Submission Failed',
+                            payerName,
+                            payerEmail,
+                            'Server returned an error. Please try again later.',
+                            '<span class="email-icon">⚠</span> Contact support if this persists.'
+                        );
+                    }
+                })
+                .catch(function (error) {
+                    confirmPaymentBtn.disabled = false;
+                    confirmPaymentBtn.textContent = 'Confirm Payment';
+
+                    // Network Error
+                    openModal(
+                        'error',
+                        'Connection Error',
+                        payerName,
+                        payerEmail,
+                        'Could not connect to the server. Please check your internet.',
+                        '<span class="email-icon">⚠</span> Check your connection and try again.'
+                    );
+                });
+        });
+
 
         function validateEmail(email) {
             var re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -2628,12 +3617,16 @@
             document.getElementById(errorId).classList.remove('show');
         }
 
-        function clearValidation(wrapperId, errorId) {
-            document.getElementById(wrapperId).classList.remove('error', 'success');
-            document.getElementById(errorId).classList.remove('show');
-        }
-
+        // Utility: Open Success/Error Modal (from existing code)
         function openModal(type, title, userName, userEmail, description, noteHtml) {
+            var iconWrapper = document.getElementById('iconWrapper');
+            var modalUserInfo = document.getElementById('modalUserInfo');
+            var modalUserName = document.getElementById('modalUserName');
+            var modalUserEmail = document.getElementById('modalUserEmail');
+            var modalTitle = document.getElementById('modalTitle');
+            var modalDescription = document.getElementById('modalDescription');
+            var modalNote = document.getElementById('modalNote');
+
             if (type === 'success') {
                 iconWrapper.innerHTML = '<div class="success-icon-circle animate"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></div>';
                 modalUserInfo.style.display = 'flex';
@@ -2649,20 +3642,13 @@
             modalNote.innerHTML = '<p>' + noteHtml + '</p>';
 
             modal.classList.add('active');
-            body.classList.add('modal-open');
-        }
-
-        function closeModal() {
-            modal.classList.remove('active');
-            body.classList.remove('modal-open');
+            document.body.classList.add('modal-open');
         }
 
         function resetForm() {
             form.reset();
-            fileInput.value = '';
-            fileName.textContent = 'No file chosen';
-            fileName.style.color = '#888';
-            fileClearBtn.classList.remove('show');
+            selectedFiles = [];
+            updateFileList();
             ['name-wrapper', 'email-wrapper', 'phone-wrapper', 'services-wrapper', 'message-wrapper'].forEach(function (id) {
                 var el = document.getElementById(id);
                 if (el) el.classList.remove('success', 'error');
@@ -2672,183 +3658,135 @@
             });
         }
 
+        // Validation Listeners
+        nameInput.addEventListener('blur', function () {
+            if (this.value.trim() === '') showError('name-wrapper', 'name-error');
+            else showSuccess('name-wrapper', 'name-error');
+        });
+        emailInput.addEventListener('blur', function () {
+            if (!validateEmail(this.value)) showError('email-wrapper', 'email-error');
+            else showSuccess('email-wrapper', 'email-error');
+        });
+        phoneInput.addEventListener('blur', function () {
+            if (!validatePhone(this.value)) showError('phone-wrapper', 'phone-error');
+            else showSuccess('phone-wrapper', 'phone-error');
+        });
+        servicesInput.addEventListener('change', function () {
+            if (this.value !== '') showSuccess('services-wrapper', 'services-error');
+        });
+
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            var isValid = true;
+            if (nameInput.value.trim() === '') { showError('name-wrapper', 'name-error'); isValid = false; }
+            if (!validateEmail(emailInput.value)) { showError('email-wrapper', 'email-error'); isValid = false; }
+            if (!validatePhone(phoneInput.value)) { showError('phone-wrapper', 'phone-error'); isValid = false; }
+            if (servicesInput.value === '') { showError('services-wrapper', 'services-error'); isValid = false; }
+
+            if (isValid) {
+
+                var fullName = nameInput.value;
+                var userEmail = emailInput.value;
+
+                openModal(
+                    'success',
+                    'Request Submitted!',
+                    fullName,
+                    userEmail,
+                    'We have received your service request.',
+                    '<span class="email-icon">✓</span> We will review your request and send a quote to your email shortly.'
+                );
+
+                resetForm();
+            }
+        });
+
+
+        var closeModalBtn = document.getElementById('closeModalBtn');
+        var btnDone = document.getElementById('btnDone');
+        var btnSendAnother = document.getElementById('btnSendAnother');
+
+        function closeModal() {
+            modal.classList.remove('active');
+            document.body.classList.remove('modal-open');
+        }
+
         closeModalBtn.addEventListener('click', closeModal);
         btnDone.addEventListener('click', closeModal);
-
         btnSendAnother.addEventListener('click', function () {
             closeModal();
             resetForm();
             nameInput.focus();
         });
 
-        modal.addEventListener('click', function (e) {
-            if (e.target === modal) {
-                closeModal();
-            }
-        });
 
-        document.addEventListener('keydown', function (e) {
-            if (e.key === 'Escape' && modal.classList.contains('active')) {
-                closeModal();
-            }
-        });
-
-        // Input validation on blur
-        nameInput.addEventListener('blur', function () {
-            if (this.value.trim() === '') {
-                showError('name-wrapper', 'name-error');
-            } else {
-                showSuccess('name-wrapper', 'name-error');
-            }
-        });
-
-        nameInput.addEventListener('input', function () {
-            if (this.value.trim() !== '') {
-                showSuccess('name-wrapper', 'name-error');
-            }
-        });
-
-        emailInput.addEventListener('blur', function () {
-            if (!validateEmail(this.value)) {
-                showError('email-wrapper', 'email-error');
-            } else {
-                showSuccess('email-wrapper', 'email-error');
-            }
-        });
-
-        emailInput.addEventListener('input', function () {
-            if (validateEmail(this.value)) {
-                showSuccess('email-wrapper', 'email-error');
-            }
-        });
-
-        phoneInput.addEventListener('blur', function () {
-            if (!validatePhone(this.value)) {
-                showError('phone-wrapper', 'phone-error');
-            } else {
-                showSuccess('phone-wrapper', 'phone-error');
-            }
-        });
-
-        phoneInput.addEventListener('input', function () {
-            if (validatePhone(this.value)) {
-                showSuccess('phone-wrapper', 'phone-error');
-            }
-        });
-
-        servicesInput.addEventListener('change', function () {
-            if (this.value !== '') {
-                showSuccess('services-wrapper', 'services-error');
-            }
-        });
-
-        // Form submission
-        form.addEventListener('submit', function (e) {
-            e.preventDefault();
-
-            var isValid = true;
-
-            if (nameInput.value.trim() === '') {
-                showError('name-wrapper', 'name-error');
-                isValid = false;
-            }
-
-            if (!validateEmail(emailInput.value)) {
-                showError('email-wrapper', 'email-error');
-                isValid = false;
-            }
-
-            if (!validatePhone(phoneInput.value)) {
-                showError('phone-wrapper', 'phone-error');
-                isValid = false;
-            }
-
-            if (servicesInput.value === '') {
-                showError('services-wrapper', 'services-error');
-                isValid = false;
-            }
-
-            if (!isValid) {
-                return;
-            }
-
-            submitBtn.classList.add('loading');
-            submitBtn.disabled = true;
-
-            var formData = new FormData(form);
-            var fullName = nameInput.value.trim();
-            var userEmail = emailInput.value.trim();
-
-            fetch('https://getform.io/f/agdvllkb', {
-                method: 'POST',
-                body: formData
-            })
-                .then(function (response) {
-                    submitBtn.classList.remove('loading');
-                    submitBtn.disabled = false;
-
-                    if (response.ok) {
-                        openModal(
-                            'success',
-                            'Order Request Received!',
-                            fullName,
-                            userEmail,
-                            'Your service request has been submitted successfully. We appreciate you choosing Printhada!',
-                            '<span class="email-icon">📧</span> We will review your request and send you a quote within <strong>24-48 hours</strong>. Please check your inbox for our response.'
-                        );
-                        resetForm();
-                    } else {
-                        response.json().then(function (data) {
-                            var errorMsg = 'Something went wrong. Please try again.';
-                            if (data.errors) {
-                                errorMsg = data.errors.map(function (error) { return error.message; }).join(' ');
-                            }
-                            openModal(
-                                'error',
-                                'Oops! Something Went Wrong',
-                                '',
-                                '',
-                                errorMsg,
-                                '<span class="email-icon">📞</span> You can also reach us directly at <strong>09174704724</strong> or email <strong>printhada.2009@gmail.com</strong>'
-                            );
-                        });
-                    }
-                })
-                .catch(function (error) {
-                    submitBtn.classList.remove('loading');
-                    submitBtn.disabled = false;
-                    openModal(
-                        'error',
-                        'Connection Error',
-                        '',
-                        '',
-                        'Unable to send your request. Please check your internet connection and try again.',
-                        '<span class="email-icon">📞</span> You can also reach us directly at <strong>09174704724</strong> or email <strong>printhada.2009@gmail.com</strong>'
-                    );
-                });
-        });
-        // ==================== SEARCH FUNCTIONALITY ====================
         var searchBtn = document.getElementById('searchBtn');
         var searchModal = document.getElementById('searchModal');
         var searchInput = document.getElementById('searchInput');
         var searchClose = document.getElementById('searchClose');
         var searchResults = document.getElementById('searchResults');
 
-        // Page data for search
+
         var pageData = [
-            { title: 'Home - Printhada', page: 'HOME.html', description: 'Welcome to Printhada, your one-stop printing solution', keywords: ['home', 'main', 'start', 'welcome'] },
-            { title: 'About Us', page: 'ABOUT.html', description: 'Learn about our company, mission, and team', keywords: ['about', 'company', 'team', 'mission', 'who we are'] },
-            { title: 'Our Services', page: 'SERVICES.html', description: 'Professional printing services including document printing, binding, and lamination', keywords: ['services', 'printing', 'binding', 'lamination', 'stamps', 'seals', 'photocopy'] },
-            { title: 'Pricing Packages', page: 'PRICING.html', description: 'Standard Prints (₱250), Corporate Package (₱2,500), Premium Fabrication (₱7,500)', keywords: ['pricing', 'price', 'cost', 'packages', 'standard', 'corporate', 'premium', 'cheap', 'affordable'] },
-            { title: 'Contact Us', page: 'CONTACTS.html', description: 'Get in touch - Location, phone, email, and business hours', keywords: ['contact', 'location', 'address', 'phone', 'email', 'hours', 'reach us'] },
-            { title: 'Standard Prints Package', page: 'PRICING.html#standard', description: 'Starting at ₱250 - High-quality sticker & document printing', keywords: ['standard', 'cheap', 'basic', 'sticker', 'document'] },
-            { title: 'Corporate Package', page: 'PRICING.html#corporate', description: 'Starting at ₱2,500 - Corporate apparel, tumblers, and gifts', keywords: ['corporate', 'business', 'bulk', 'shirts', 'apparel', 'uniforms'] },
-            { title: 'Premium Fabrication', page: 'PRICING.html#premium', description: 'Starting at ₱7,500 - Trophies, awards, exhibition booths', keywords: ['premium', 'trophies', 'awards', 'booth', 'exhibition'] }
+
+            { title: 'Home', page: 'index.html', description: 'Welcome to Printhada - Your trusted printing partner.', keywords: ['home', 'main', 'start', 'index', 'welcome'] },
+            { title: 'Hero Section', page: 'index.html#hero-section', description: 'Printhada top banner and featured slide.', keywords: ['banner', 'hero', 'slide', 'intro'] },
+            { title: 'About Us Section', page: 'index.html#about-section', description: 'Who we are and our story.', keywords: ['about', 'story', 'history', 'who we are'] },
+            { title: 'Our Mission', page: 'index.html#mission-section', description: 'Our goals and commitment to quality.', keywords: ['mission', 'vision', 'goal', 'commitment'] },
+            { title: 'Featured Projects', page: 'index.html#projects-section', description: 'Showcase of our recent work.', keywords: ['projects', 'work', 'showcase', 'portfolio'] },
+            { title: 'Our Team', page: 'index.html#team-section', description: 'Meet the people behind Printhada.', keywords: ['team', 'staff', 'members', 'people'] },
+
+
+            { title: 'About Page', page: 'ABOUT.html', description: 'Detailed information about our company.', keywords: ['about page', 'company info'] },
+
+
+            { title: 'Services Page', page: 'SERVICES.html', description: 'Overview of all our printing services.', keywords: ['services', 'all services', 'what we do'] },
+            { title: 'Document Printing', page: 'SERVICES.html#document-printing', description: 'High-quality document printing for students and businesses.', keywords: ['document', 'print', 'paper', 'thesis', 'modules', 'flyers'] },
+            { title: 'Large Format Printing', page: 'SERVICES.html#large-format', description: 'Tarpaulins, banners, and signage.', keywords: ['large', 'format', 'tarpaulin', 'banner', 'signage', 'billboard'] },
+            { title: 'Stickers & Labels', page: 'SERVICES.html#stickers', description: 'Custom stickers, product labels, and decals.', keywords: ['sticker', 'label', 'decal', 'adhesive', 'product label'] },
+            { title: 'Apparel Printing', page: 'SERVICES.html#apparel', description: 'T-shirt printing, sublimation, and uniforms.', keywords: ['t-shirt', 'shirt', 'sublimation', 'uniform', 'jersey', 'clothing'] },
+            { title: 'Personalized Gifts', page: 'SERVICES.html#gifts', description: 'Mugs, tumblers, keychains, and tokens.', keywords: ['gift', 'mug', 'tumbler', 'keychain', 'souvenir', 'giveaway'] },
+
+
+            { title: 'Pricing Page', page: 'PRICING.html', description: 'View our competitive pricing packages.', keywords: ['pricing', 'rates', 'cost', 'price list'] },
+            { title: 'Standard Prints Package', page: 'PRICING.html#standard', description: 'Starting at ₱250 - Affordable printing solutions.', keywords: ['standard', 'cheap', 'basic', 'budget', '250'] },
+            { title: 'Corporate Package', page: 'PRICING.html#corporate', description: 'Starting at ₱2,500 - For businesses and events.', keywords: ['corporate', 'business', 'bulk', '2500', 'event'] },
+            { title: 'Premium Fabrication', page: 'PRICING.html#premium', description: 'Starting at ₱7,500 - High-end trophies and booths.', keywords: ['premium', 'luxury', 'trophy', 'award', 'booth', '7500'] },
+
+
+            { title: 'Contact Us', page: 'CONTACTS.html', description: 'Get in touch with us.', keywords: ['contact', 'call', 'email', 'message', 'touch'] },
+            { title: 'Location Map', page: 'CONTACTS.html#contact-hero', description: 'Find our physical store.', keywords: ['map', 'location', 'address', 'where', 'find'] },
+            { title: 'Inquiry Form', page: 'CONTACTS.html#contact-form', description: 'Send us a direct message.', keywords: ['form', 'inquiry', 'message', 'quote', 'ask'] },
+            { title: 'FAQ', page: 'CONTACTS.html#faq-section', description: 'Frequently Asked Questions.', keywords: ['faq', 'question', 'answer', 'help'] }
         ];
+
+
+        function renderHelp() {
+            searchResults.innerHTML = `
+                <div class="search-help">
+                    <div class="help-section">
+                        <h4>Search Tips</h4>
+                        <p>Try searching for specific items like <span class="highlight-term">"stickers"</span>, <span class="highlight-term">"receipts"</span>, <span class="highlight-term">"map"</span>, or <span class="highlight-term">"corporate"</span>.</p>
+                    </div>
+                </div>
+                <style>
+                    .search-help { padding: 10px 20px; }
+                    .help-section { margin-bottom: 20px; }
+                    .help-section h4 { font-size: 14px; color: #999; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
+                    .help-section p { font-size: 14px; color: #666; line-height: 1.5; }
+                    .highlight-term { color: #d9bb28; font-weight: 600; }
+                    .no-results-help { padding: 20px; text-align: center; color: #666; }
+                    .no-results-help a { color: #d9bb28; text-decoration: underline; }
+                </style>
+            `;
+        }
 
         searchBtn.addEventListener('click', function () {
             searchModal.classList.add('active');
             searchInput.focus();
+            if (!searchInput.value.trim()) renderHelp();
         });
 
         searchClose.addEventListener('click', function () {
@@ -2868,19 +3806,35 @@
         searchInput.addEventListener('input', function () {
             var query = this.value.toLowerCase().trim();
 
-            if (query.length < 2) {
-                searchResults.innerHTML = '';
+            if (query.length === 0) {
+                renderHelp();
                 return;
             }
 
             var results = pageData.filter(function (item) {
-                return item.title.toLowerCase().includes(query) ||
-                    item.description.toLowerCase().includes(query) ||
-                    item.keywords.some(function (keyword) { return keyword.includes(query); });
+                var titleMatch = item.title.toLowerCase().includes(query);
+                var descMatch = item.description.toLowerCase().includes(query);
+                var keywordMatch = item.keywords.some(function (keyword) { return keyword.includes(query); });
+                return titleMatch || descMatch || keywordMatch;
+            });
+
+
+            results.sort(function (a, b) {
+                var aTitle = a.title.toLowerCase().includes(query);
+                var bTitle = b.title.toLowerCase().includes(query);
+                if (aTitle && !bTitle) return -1;
+                if (!aTitle && bTitle) return 1;
+                return 0;
             });
 
             if (results.length === 0) {
-                searchResults.innerHTML = '<div class="no-results">No results found for "' + query + '"</div>';
+                searchResults.innerHTML = `
+                    <div class="no-results">
+                        <p>No results found for "<strong>${query}</strong>"</p>
+                        <div class="no-results-help">
+                            <p>Need help? Visit our <a href="SERVICES.html">Services Page</a> or <a href="CONTACTS.html">Contact Us</a> directly.</p>
+                        </div>
+                    </div>`;
                 return;
             }
 
@@ -2891,7 +3845,6 @@
                     '</div>';
             }).join('');
 
-            // Add click handlers
             document.querySelectorAll('.search-result-item').forEach(function (item) {
                 item.addEventListener('click', function () {
                     window.location.href = this.getAttribute('data-page');
@@ -2899,7 +3852,7 @@
             });
         });
 
-        // ==================== TAWK.TO AI CHATBOT ====================
+
         var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
         (function () {
             var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
@@ -2910,7 +3863,7 @@
             s0.parentNode.insertBefore(s1, s0);
         })();
 
-        // Keep chat bubble visible even when closed
+
         Tawk_API.onLoad = function () {
             Tawk_API.showWidget();
         };
