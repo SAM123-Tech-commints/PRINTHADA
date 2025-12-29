@@ -404,15 +404,55 @@
 
         .hamburger {
             display: none;
-            font-size: 28px;
+            width: 30px;
+            height: 20px;
+            position: relative;
             cursor: pointer;
             background: none;
             border: none;
-            color: var(--text-dark);
             z-index: 10001;
-            padding: 5px;
-            font-family: var(--font-main);
-            transition: color 0.3s ease;
+            padding: 0;
+            transition: transform 0.3s ease;
+        }
+
+        .hamburger span {
+            display: block;
+            position: absolute;
+            height: 2px;
+            width: 100%;
+            background: var(--text-dark);
+            border-radius: 2px;
+            opacity: 1;
+            left: 0;
+            transform: rotate(0deg);
+            transition: .25s ease-in-out;
+        }
+
+        .hamburger span:nth-child(1) {
+            top: 0px;
+        }
+
+        .hamburger span:nth-child(2) {
+            top: 9px;
+        }
+
+        .hamburger span:nth-child(3) {
+            top: 18px;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            top: 9px;
+            transform: rotate(135deg);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+            left: -60px;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            top: 9px;
+            transform: rotate(-135deg);
         }
 
         .hamburger:hover {
@@ -1139,7 +1179,10 @@
             }
 
             .hamburger {
-                display: block;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                align-items: center;
             }
 
             .main-nav {
@@ -1441,7 +1484,11 @@
                     <path d="m21 21-4.35-4.35"></path>
                 </svg>
             </button>
-            <button class="hamburger" id="hamburger" aria-label="Toggle menu">☰</button>
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </header>
     </section>
 
@@ -1876,12 +1923,15 @@
 
         hamburger.addEventListener('click', function () {
             nav.classList.toggle('active');
+            hamburger.classList.toggle('active');
             if (nav.classList.contains('active')) {
-                hamburger.textContent = '✕';
                 body.style.overflow = 'hidden';
+                if (typeof Tawk_API !== 'undefined' && Tawk_API.hideWidget) Tawk_API.hideWidget();
+                if (backToTop) backToTop.style.visibility = 'hidden';
             } else {
-                hamburger.textContent = '☰';
                 body.style.overflow = '';
+                if (typeof Tawk_API !== 'undefined' && Tawk_API.showWidget) Tawk_API.showWidget();
+                if (backToTop) backToTop.style.visibility = 'visible';
             }
         });
 
@@ -1890,8 +1940,10 @@
         navLinks.forEach(function (link) {
             link.addEventListener('click', function () {
                 nav.classList.remove('active');
-                hamburger.textContent = '☰';
+                hamburger.classList.remove('active');
                 body.style.overflow = '';
+                if (typeof Tawk_API !== 'undefined' && Tawk_API.showWidget) Tawk_API.showWidget();
+                if (backToTop) backToTop.style.visibility = 'visible';
             });
         });
 
