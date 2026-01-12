@@ -1408,6 +1408,13 @@
         .back-to-top.show {
             display: flex;
         }
+
+        /* Robust UI Hiding Utility */
+        body.hide-ui .back-to-top {
+            display: none !important;
+            opacity: 0 !important;
+            visibility: hidden !important;
+        }
     </style>
 </head>
 
@@ -1921,17 +1928,30 @@
         var nav = document.getElementById('mainNav');
         var body = document.body;
 
+        // Centralized UI Hiding Logic
+        function toggleUI(show) {
+            if (show) {
+                document.body.classList.remove('hide-ui');
+                if (typeof Tawk_API !== 'undefined' && Tawk_API.showWidget) {
+                    try { Tawk_API.showWidget(); } catch (e) { }
+                }
+            } else {
+                document.body.classList.add('hide-ui');
+                if (typeof Tawk_API !== 'undefined' && Tawk_API.hideWidget) {
+                    try { Tawk_API.hideWidget(); } catch (e) { }
+                }
+            }
+        }
+
         hamburger.addEventListener('click', function () {
             nav.classList.toggle('active');
             hamburger.classList.toggle('active');
             if (nav.classList.contains('active')) {
                 body.style.overflow = 'hidden';
-                if (typeof Tawk_API !== 'undefined' && Tawk_API.hideWidget) Tawk_API.hideWidget();
-                if (backToTop) backToTop.style.visibility = 'hidden';
+                toggleUI(false);
             } else {
                 body.style.overflow = '';
-                if (typeof Tawk_API !== 'undefined' && Tawk_API.showWidget) Tawk_API.showWidget();
-                if (backToTop) backToTop.style.visibility = 'visible';
+                toggleUI(true);
             }
         });
 
@@ -1942,8 +1962,7 @@
                 nav.classList.remove('active');
                 hamburger.classList.remove('active');
                 body.style.overflow = '';
-                if (typeof Tawk_API !== 'undefined' && Tawk_API.showWidget) Tawk_API.showWidget();
-                if (backToTop) backToTop.style.visibility = 'visible';
+                toggleUI(true);
             });
         });
 
@@ -2114,6 +2133,18 @@
         lightboxNext.addEventListener('click', function () { navigateLightbox(1); });
         lightbox.addEventListener('click', function (e) {
             if (e.target === lightbox) closeLightbox();
+        });
+
+        document.addEventListener('keydown', function (e) {
+            if (!lightbox.classList.contains('active')) return;
+
+            if (e.key === 'ArrowLeft') {
+                navigateLightbox(-1);
+            } else if (e.key === 'ArrowRight') {
+                navigateLightbox(1);
+            } else if (e.key === 'Escape') {
+                closeLightbox();
+            }
         });
 
 
